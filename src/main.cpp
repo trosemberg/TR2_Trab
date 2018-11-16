@@ -2,6 +2,8 @@
 #include <iostream>
 #include <string>
 #include <stdlib.h>
+#include <servidor.hpp>
+
 #define PORTA 8228
 
 int main(int argc, char const *argv[]){
@@ -30,7 +32,8 @@ int main(int argc, char const *argv[]){
       exit(-1);
       break;
   }
-  std::cout<< "\nnice clan\n";
-
+  std::cout<<"\n\nConectando a porta:"<< porta<<"...";
+  Servidor server((long int)porta);
+  server.init();
   return 0;
 }

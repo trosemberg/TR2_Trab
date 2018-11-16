@@ -14,13 +14,12 @@ ObjDIR=./src/obj/
 CC=g++
 CFLAGS=-ansi -Wall -Wextra -std=c++0x -I$(IncludeDIR)
 CFLAGSTEST=-ansi -Wall -Wextra -I$(IncludeDIR)
-# LIBS=-lgtest
 
 # Vars:
 # -- ADAPT THIS IN YOUR PROGRAM --
-headers = 
+headers = servidor.hpp
 mainObject = main
-objects = 
+objects = servidor.o
 
 # Set of *.hpp on which the *.cpp depend
 _DEPS = $(headers)
