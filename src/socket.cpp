@@ -13,23 +13,23 @@ short Socket::SocketCreate()
     return hSocket;
 }
 
+
 //try to connect with server
 int Socket::SocketBind(int hSocket, int porta)
 {
     socklen_t size;
     struct sockaddr_in remote;
 
-    remote.sin_addr.s_addr = htons(INADDR_ANY); //Local Host
+    remote.sin_addr.s_addr = htonl(INADDR_ANY); /* Any incoming interface */
     remote.sin_family = AF_INET;
-    remote.sin_port = htons(static_cast<uint16_t>(porta));
-
+    remote.sin_port = htons(porta);
     
-    if(bind(hSocket, (struct sockaddr*)&remote, sizeof(remote)) < 0) {
-		printf("\nErro no bind do socket\n");
+    if(bind(hSocket , (struct sockaddr *)&remote , sizeof(struct sockaddr_in)) < 0) {
+		printf("\nErro no connect do socket\n");
 		return -1;
 	}
 
-	printf("\nSocket binded\n");
+	printf("\nSocket connected\n");
 	size = sizeof(remote);
 	printf("\nProcurando cliente...\n");
 
