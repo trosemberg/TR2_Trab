@@ -1,8 +1,6 @@
-// stringstreams
-#include <iostream>
-#include <string>
-#include <stdlib.h>
+#include <socket.hpp>
 #include <servidor.hpp>
+#include <util.hpp>
 
 #define PORTA 8228
 
