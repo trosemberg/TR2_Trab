@@ -5,11 +5,9 @@
 int Servidor::init(){
     Socket socket;
     int porta;
-    int hSocket, read_size;
+    int hSocket;
     struct sockaddr_in server;
-    char SendToServer[100] = {0};
-    char server_reply[200] = {0};
-    porta = this->porta;
+    porta = (int)this->porta;
     
     //Create socket
     hSocket = socket.SocketCreate();
@@ -29,10 +27,6 @@ int Servidor::init(){
     }
     
     printf("Sucessfully conected with server\n");
-        
-    
-    close(hSocket);
-    shutdown(hSocket,0);
     return 0;
 }
 

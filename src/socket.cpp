@@ -8,7 +8,7 @@ Socket::~Socket() = default;
 short Socket::SocketCreate()
 { 
     short hSocket;
-    printf("Create the socket\n");
+    printf("\nCreate the socket\n");
     hSocket = socket(AF_INET, SOCK_STREAM, 0);
     return hSocket;
 }
@@ -16,37 +16,26 @@ short Socket::SocketCreate()
 //try to connect with server
 int Socket::SocketConnect(int hSocket, int porta)
 {
+    socklen_t size;
+    struct sockaddr_in remote;
 
-    int iRetval=-1;
-    struct sockaddr_in remote={0};
-
-    remote.sin_addr.s_addr = inet_addr("127.0.0.1"); //Local Host
+    remote.sin_addr.s_addr = htons(INADDR_ANY); //Local Host
     remote.sin_family = AF_INET;
-    remote.sin_port = htons(porta);
+    remote.sin_port = htons(static_cast<uint16_t>(porta));
 
-    iRetval = connect(hSocket , (struct sockaddr *)&remote , sizeof(struct sockaddr_in));
+    
+    if(bind(hSocket, (struct sockaddr*)&remote, sizeof(remote)) < 0) {
+		printf("\nErro no bind do socket\n");
+		return -1;
+	}
+
+	printf("\nSocket binded\n");
+	size = sizeof(remote);
+	printf("\nProcurando cliente...\n");
+
+	listen(hSocket,10);
 
 
-    return iRetval;
+    return 0;
 }
 
-
-// Send the data to the server and set the timeout of 20 seconds
-int Socket::SocketSend(int hSocket,char* Rqst,short lenRqst)
-
-{
-
-    int shortRetval = -1;
-    struct timeval tv;
-    tv.tv_sec = 20;  /* 20 Secs Timeout */
-    tv.tv_usec = 0;  
-
-    if(setsockopt(hSocket, SOL_SOCKET, SO_SNDTIMEO, (char *)&tv,sizeof(tv)) < 0)
-    {
-        printf("Time Out\n");
-        return -1;
-    }
-    shortRetval = send(hSocket , Rqst , lenRqst , 0);
-
-    return shortRetval;
-}
