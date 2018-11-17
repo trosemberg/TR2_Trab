@@ -14,7 +14,7 @@ short Socket::SocketCreate()
 }
 
 //try to connect with server
-int Socket::SocketConnect(int hSocket, int porta)
+int Socket::SocketBind(int hSocket, int porta)
 {
     socklen_t size;
     struct sockaddr_in remote;

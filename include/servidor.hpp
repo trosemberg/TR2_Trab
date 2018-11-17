@@ -5,6 +5,7 @@
 class Servidor{
 private:
     long int porta;
+    Socket socket;
 public:
     Servidor(long int porta);
     int init();

@@ -6,8 +6,8 @@ class Socket{
 public:
     Socket();
     ~Socket();
-    int SocketConnect(int hSocket, int porta);
     short SocketCreate();
+    int SocketBind(int hSocket, int porta);
 };
 
 #endif

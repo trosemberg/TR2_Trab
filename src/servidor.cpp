@@ -3,7 +3,6 @@
 #include <util.hpp>
 
 int Servidor::init(){
-    Socket socket;
     int porta;
     int hSocket;
     struct sockaddr_in server;
@@ -20,7 +19,7 @@ int Servidor::init(){
     printf("Socket is created\n");
     
     //Connect to remote server
-    if (socket.SocketConnect(hSocket, porta) < 0)
+    if (socket.SocketBind(hSocket, porta) < 0)
     {
     perror("connect failed.\n");
     return 1;
