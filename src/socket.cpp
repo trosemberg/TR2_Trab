@@ -14,7 +14,7 @@ short Socket::SocketCreate()
 }
 
 
-//try to connect with server
+//try to bind socket with server
 int Socket::SocketBind(int hSocket, int porta)
 {
     socklen_t size;
@@ -25,11 +25,11 @@ int Socket::SocketBind(int hSocket, int porta)
     remote.sin_port = htons(porta);
     
     if(bind(hSocket , (struct sockaddr *)&remote , sizeof(struct sockaddr_in)) < 0) {
-		printf("\nErro no connect do socket\n");
+		printf("\nErro no bind do socket\n");
 		return -1;
 	}
 
-	printf("\nSocket connected\n");
+	printf("\nSocket binded\n");
 	size = sizeof(remote);
 	printf("\nProcurando cliente...\n");
 
@@ -39,3 +39,16 @@ int Socket::SocketBind(int hSocket, int porta)
     return 0;
 }
 
+int Socket::SocketConnect(int hSocket, int porta){
+    struct sockaddr_in remote={0};
+
+    remote.sin_addr.s_addr = inet_addr("127.0.0.1"); //Local Host
+    remote.sin_family = AF_INET;
+    remote.sin_port = htons(porta);
+    if(connect(hSocket , (struct sockaddr *)&remote , sizeof(struct sockaddr_in)) < 0) {
+		printf("\nErro no connect do socket\n");
+		return -1; 
+	}
+
+    return 0;
+}

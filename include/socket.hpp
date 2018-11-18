@@ -8,6 +8,7 @@ public:
     ~Socket();
     short SocketCreate();
     int SocketBind(int hSocket, int porta);
+    int SocketConnect(int hSocket, int porta);
 };
 
 #endif
