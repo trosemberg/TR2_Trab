@@ -51,6 +51,7 @@ prepareDIR:
 # Call for run
 .PHONY: run
 run:
+	clear
 	./aracne
 
 # Call for *.o clean up

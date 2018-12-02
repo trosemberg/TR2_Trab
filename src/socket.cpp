@@ -23,8 +23,8 @@ int Socket::SocketBind(int hSocket, int porta)
     remote.sin_addr.s_addr = htonl(INADDR_ANY); /* Any incoming interface */
     remote.sin_family = AF_INET;
     remote.sin_port = htons(porta);
-    
-    if(bind(hSocket , (struct sockaddr *)&remote , sizeof(struct sockaddr_in)) < 0) {
+    bind_socket = bind(hSocket , (struct sockaddr *)&remote , sizeof(struct sockaddr_in));
+    if( bind_socket < 0) {
 		printf("\nErro no bind do socket\n");
 		return -1;
 	}
@@ -34,7 +34,7 @@ int Socket::SocketBind(int hSocket, int porta)
 	printf("\nProcurando cliente...\n");
 
 
-    return 0;
+    return bind_socket;
 }
 
 int Socket::SocketConnect(int hSocket, int porta){
@@ -43,12 +43,13 @@ int Socket::SocketConnect(int hSocket, int porta){
     remote.sin_addr.s_addr = inet_addr("127.0.0.1"); //Local Host
     remote.sin_family = AF_INET;
     remote.sin_port = htons(porta);
-    if(connect(hSocket , (struct sockaddr *)&remote , sizeof(struct sockaddr_in)) < 0) {
+    connect_socket = connect(hSocket , (struct sockaddr *)&remote , sizeof(struct sockaddr_in));
+    if(connect_socket < 0) {
 		printf("\nErro no connect do socket\n");
 		return -1; 
 	}
 
-    return 0;
+    return connect_socket;
 }
 int Socket::SocketAccept(int socket_bind){
     inSocket = accept(socket_bind, nullptr, nullptr);

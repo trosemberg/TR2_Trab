@@ -5,6 +5,8 @@
 class Socket{
 public:
     int inSocket = -1;
+    int bind_socket = -1;
+    int connect_socket = -1;
     Socket();
     ~Socket();
     short SocketCreate();
