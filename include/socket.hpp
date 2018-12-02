@@ -9,9 +9,9 @@ public:
     int connect_socket = -1;
     Socket();
     ~Socket();
-    short SocketCreate();
-    int SocketBind(int hSocket, int porta);
-    int SocketConnect(int hSocket, int porta);
+    int SocketCreate();
+    int SocketBind(int porta);
+    int SocketConnect(int porta);
     int SocketAccept();
 };
 

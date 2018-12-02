@@ -4,44 +4,42 @@
 
 int Servidor::init(){
     int porta;
-    int socket_bind , socket_connect;
     int valread = 0;
 	std::string message;
     porta = this->porta;
     //Create socket
-    socket_bind = socket.SocketCreate();
-    if (socket_bind == -1){
+    socket.bind_socket = socket.SocketCreate();
+    if (socket.bind_socket == -1){
         printf("Could not create socket");
         return 1;
     }
     printf("Socket created\n");
     //Bind
-    socket_bind = socket.SocketBind(socket_bind, porta);
-    if( socket_bind < 0){
+    socket.SocketBind(porta);
+    if( socket.bind_socket < 0){
         //print the error message
         perror("bind failed.");
         return 1;
     }
+
     printf("bind done \n");
-    socket_connect = socket.SocketCreate();
-    if(socket_connect == -1){
+    socket.connect_socket = socket.SocketCreate();
+    if(socket.connect_socket == -1){
         printf("Could not create socket\n");
     return 1;
     }
     
     printf("Socket is created\n");
+
     
-    //Connect to remote server
-    socket_connect = socket.SocketConnect(socket_connect,porta);
-    if (socket_connect < 0){
-        perror("connect failed.\n");
-        return 1;
-    }
-    
-    printf("Sucessfully conected with server\n");
+    printf("Sucessfully conected with server\n\n");
     while(true){
-        socket.SocketAccept();
-        	std::string message;
+        socket.inSocket = accept(socket.bind_socket, nullptr, nullptr);
+	    if(socket.inSocket < 0) {
+		    perror("accept failed.");
+	    }
+        std::string message;
+        //Connect to remote server
 
         do {
             char buffer[1024];
@@ -55,6 +53,12 @@ int Servidor::init(){
             printf("\nNão há requests para serem lidos\n");
         } else {
             printf( "\nFalha na leitura de dados\n" );
+        }
+        std::cout<<"\n\n\n"<<message;
+        socket.SocketConnect(porta);
+        if (socket.connect_socket < 0){
+            perror("connect failed.\n");
+        return 1;
         }
     }
 }
