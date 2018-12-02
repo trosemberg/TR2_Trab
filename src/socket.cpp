@@ -51,8 +51,8 @@ int Socket::SocketConnect(int hSocket, int porta){
 
     return connect_socket;
 }
-int Socket::SocketAccept(int socket_bind){
-    inSocket = accept(socket_bind, nullptr, nullptr);
+int Socket::SocketAccept(){
+    inSocket = accept(bind_socket, nullptr, nullptr);
 	if(inSocket < 0) {
 		printf("\nErro na aceitação de conexão\n");
 		exit(1);

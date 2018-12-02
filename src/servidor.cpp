@@ -40,7 +40,7 @@ int Servidor::init(){
     
     printf("Sucessfully conected with server\n");
     while(true){
-        socket.SocketAccept(socket_bind);
+        socket.SocketAccept();
         	std::string message;
 
         do {
