@@ -13,6 +13,7 @@ public:
     int SocketBind(int porta);
     int SocketConnect(int porta);
     int SocketAccept();
+    ssize_t SendOut( HTTP::Header msg );
 };
 
 #endif

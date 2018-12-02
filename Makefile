@@ -17,7 +17,7 @@ CFLAGSTEST=-ansi -Wall -Wextra -I$(IncludeDIR)
 
 # Vars:
 # -- ADAPT THIS IN YOUR PROGRAM --
-headers = servidor.hpp util.hpp socket.hpp
+headers = servidor.hpp util.hpp socket.hpp dump.hpp header.hpp data.hpp
 mainObject = main
 objects = servidor.o socket.o
 
