@@ -35,6 +35,9 @@ int Servidor::init(){
     }
     
     printf("Sucessfully conected with server\n");
+    while(true){
+        socket.SocketAccept(socket_bind);
+    }
 }
 
 Servidor::Servidor( long int porta){
