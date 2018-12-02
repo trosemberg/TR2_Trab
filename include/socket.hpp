@@ -13,6 +13,8 @@ public:
     int SocketBind();
     int SocketConnect();
     int SocketAccept();
+    void GetRequest();
+    void AnswerRequest();
     ssize_t SendOut( HTTP::Header msg );
     ssize_t SendIn( HTTP::Header msg );
     std::vector< HTTP::Header > requestsRcv;

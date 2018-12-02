@@ -4,8 +4,6 @@
 #include <header.hpp>
 
 int Servidor::init(){
-    int valread = 0;
-	std::string message;
     //Create socket
     socket.bind_socket = socket.SocketCreate();
     if (socket.bind_socket == -1){
@@ -21,44 +19,50 @@ int Servidor::init(){
         return 1;
     }
 
-    printf("bind done \n");
-    socket.connect_socket = socket.SocketCreate();
-    if(socket.connect_socket == -1){
-        printf("Could not create socket\n");
-    return 1;
-    }
-    
-    printf("Socket is created\n");
-
-    
+    printf("bind done \n");    
     printf("Sucessfully conected with server\n\n");
-    while(true){
-        socket.inSocket = accept(socket.bind_socket, nullptr, nullptr);
-	    if(socket.inSocket < 0) {
-		    perror("accept failed.");
-	    }
+    while(1){
         std::string message;
         //Connect to remote server
+        socket.SocketAccept();
+        socket.GetRequest();
 
-        do {
-            char buffer[1024];
-            valread = static_cast<int>(read(socket.inSocket, buffer, sizeof( buffer ) ));
-            message += std::string(buffer, static_cast<unsigned long>(valread));
-	    } while (valread == 1024);
+        if(!requestsRcv.empty())
+			std::swap( requestsRcv, toSendRqst );
 
-	    if(valread > 0) { 
-		    requestsRcv.push_back(HTTP::Header(message));
-	    } else if( 0 == valread ) {
-		    printf("\nNão há requests para serem lidos\n");
-	    } else {
-		    printf( "\nFalha na leitura de dados\n" );
-	    }
-        std::cout<<"\n\n\n"<<message;
-        socket.SocketConnect();
-        if (socket.connect_socket < 0){
-            perror("connect failed.\n");
-        return 1;
-        }
+		if(!toSendRqst.empty()) {
+			printf("\nEnviando %d request(s)...\n", (int) toSendRqst.size());
+
+			for (auto &i : toSendRqst) {
+				printf("\nEnviando request para %s:%s\n", i.host.c_str(), i.port.c_str());
+				printf("\n%s\n", i.to_string().c_str());
+				if(socket.SendOut(i) == -1){
+					printf("\nNão foi possível enivar request\n");
+					exit(1);
+				}
+			}
+			
+			toSendRqst.clear();
+		}
+		
+		socket.AnswerRequest();
+
+		if(!responsesRcv.empty())
+			std::swap(responsesRcv, toSendRsp);
+
+		if(!toSendRsp.empty()) {
+			printf("\nEnviando %d response(s)...\n", (int) toSendRsp.size());
+
+			for(auto &i : toSendRsp) {
+				printf("\nResponse: \n%s\n", i.to_string().c_str());
+				if(socket.SendIn(i) == -1){
+					printf("\nNão foi possível enivar response\n");
+					exit(1);
+				}
+			}
+
+			toSendRsp.clear();
+		}
     }
 }
 
