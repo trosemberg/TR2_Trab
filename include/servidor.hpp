@@ -2,10 +2,8 @@
 #define SERVIDOR 
 #include <util.hpp>
 
+
 class Servidor{
-private:
-    long int porta;
-    Socket socket;
 public:
     Servidor(long int porta);
     int init();
@@ -14,6 +12,8 @@ public:
 	std::vector< HTTP::Header > toSendRqst;
 	std::vector< HTTP::Header > &responsesRcv;
 	std::vector< HTTP::Header > toSendRsp;
+private:
+    Socket socket;
 };
 
 #endif

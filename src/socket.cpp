@@ -1,7 +1,9 @@
 #include <socket.hpp>
 #include <servidor.hpp>
 #include <util.hpp>
-Socket::Socket() = default;
+Socket::Socket(long int porta) {
+    this->porta = porta;
+}
 Socket::~Socket() = default;
 
 //Create a Socket for server communication
@@ -15,7 +17,7 @@ int Socket::SocketCreate()
 
 
 //try to bind socket with server
-int Socket::SocketBind(int porta)
+int Socket::SocketBind()
 {
     struct sockaddr_in remote;
 
@@ -34,7 +36,7 @@ int Socket::SocketBind(int porta)
     return bind_socket;
 }
 
-int Socket::SocketConnect(int porta){
+int Socket::SocketConnect(){
     struct sockaddr_in remote;
 
     remote.sin_addr.s_addr = inet_addr("127.0.0.1"); //Local Host

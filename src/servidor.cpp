@@ -1,12 +1,11 @@
 #include <socket.hpp>
 #include <servidor.hpp>
 #include <util.hpp>
+#include <header.hpp>
 
 int Servidor::init(){
-    int porta;
     int valread = 0;
 	std::string message;
-    porta = this->porta;
     //Create socket
     socket.bind_socket = socket.SocketCreate();
     if (socket.bind_socket == -1){
@@ -15,7 +14,7 @@ int Servidor::init(){
     }
     printf("Socket created\n");
     //Bind
-    socket.SocketBind(porta);
+    socket.SocketBind();
     if( socket.bind_socket < 0){
         //print the error message
         perror("bind failed.");
@@ -45,17 +44,17 @@ int Servidor::init(){
             char buffer[1024];
             valread = static_cast<int>(read(socket.inSocket, buffer, sizeof( buffer ) ));
             message += std::string(buffer, static_cast<unsigned long>(valread));
-        } while (valread == 1024);
+	    } while (valread == 1024);
 
-        if(valread > 0) {
-            std::cout<< message;
-        } else if( 0 == valread ) {
-            printf("\nNão há requests para serem lidos\n");
-        } else {
-            printf( "\nFalha na leitura de dados\n" );
-        }
+	    if(valread > 0) { 
+		    requestsRcv.push_back(HTTP::Header(message));
+	    } else if( 0 == valread ) {
+		    printf("\nNão há requests para serem lidos\n");
+	    } else {
+		    printf( "\nFalha na leitura de dados\n" );
+	    }
         std::cout<<"\n\n\n"<<message;
-        socket.SocketConnect(porta);
+        socket.SocketConnect();
         if (socket.connect_socket < 0){
             perror("connect failed.\n");
         return 1;
@@ -63,8 +62,8 @@ int Servidor::init(){
     }
 }
 
-Servidor::Servidor(long int portNum) :  requestsRcv(socket.requestsRcv),
+Servidor::Servidor(long int porta) :  requestsRcv(socket.requestsRcv),
 							        responsesRcv(socket.responsesRcv),
-                                    socket() {}
+                                    socket(porta) {}
                             
 Servidor::~Servidor()= default;
