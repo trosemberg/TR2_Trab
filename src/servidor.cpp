@@ -63,7 +63,8 @@ int Servidor::init(){
     }
 }
 
-Servidor::Servidor( long int porta){
-    this->porta = porta;
-}
+Servidor::Servidor(long int portNum) :  requestsRcv(socket.requestsRcv),
+							        responsesRcv(socket.responsesRcv),
+                                    socket() {}
+                            
 Servidor::~Servidor()= default;
