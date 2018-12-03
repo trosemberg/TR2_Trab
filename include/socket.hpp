@@ -13,8 +13,6 @@ public:
     int SocketBind();
     int SocketConnect();
     int SocketAccept();
-    void GetRequest();
-    void AnswerRequest();
 private:
     int porta;
 };
