@@ -224,7 +224,7 @@ int HTTP::Analise_do_pedido(struct PedidoAnalisado *p, const char *buffer, int s
      }
      
      const char *rem = full_addr + strlen(p->protocol) + strlen("://");
-     size_t abs_uri_len = strlen(rem);
+     std::size_t abs_uri_len = strlen(rem);
 
      p->host = strtok_r(NULL, "/", &saveptr);
      if (p->host == NULL) {
@@ -312,12 +312,12 @@ int HTTP::Analise_do_pedido(struct PedidoAnalisado *p, const char *buffer, int s
      return ret;
 }
 
-size_t HTTP::PedidoAnalisado_requestLineLen(struct PedidoAnalisado *pr)
+std::size_t HTTP::PedidoAnalisado_requestLineLen(struct PedidoAnalisado *pr)
 {
      if (!pr || !pr->buf)
 	  return 0;
 
-     size_t len =  
+     std::size_t len =  
 	  strlen(pr->method) + 1 + strlen(pr->protocol) + 3 + 
 	  strlen(pr->host) + 1 + strlen(pr->version) + 2;
      if(pr->port != NULL)
@@ -355,7 +355,7 @@ struct PedidoAnalisado* PedidoAnalisado_create()
 static const char *root_abs_path = "/";
 
 /* declaração de funcoes privadas*/
-int PedidoAnalisado_printRequestLine(struct PedidoAnalisado *pr, char * buf, size_t buflen, size_t *tmp);
+int PedidoAnalisado_printRequestLine(struct PedidoAnalisado *pr, char * buf, std::std::std::size_t buflen, std::size_t *tmp);
 size_t PedidoAnalisado_requestLineLen(struct PedidoAnalisado *pr);
 
 /*
@@ -405,7 +405,7 @@ int CabecalhoDoPedido_set(struct PedidoAnalisado *pr, const char * key, const ch
 /* pega o CabecalhoDoPedido com uma chave especifica ou NULL*/
 struct CabecalhoDoPedido* CabecalhoDoPedido_get(struct PedidoAnalisado *pr, const char * key)
 {
-     size_t i = 0;
+    std::size_t i = 0;
      struct CabecalhoDoPedido * tmp;
      while(pr->headersused > i)
      {
@@ -454,7 +454,7 @@ size_t CabecalhoDoPedido_size(struct PedidoAnalisado *p)
      if (!p || !p->buf)
 	  return 0;
 
-     size_t i = 0;
+    std::size_t i = 0;
      int len = 0;
      while(p->headersused > i)
      {
@@ -465,11 +465,11 @@ size_t CabecalhoDoPedido_size(struct PedidoAnalisado *p)
      return len;
 }
 
-int CabecalhoDoPedido_printHeaders(struct PedidoAnalisado * pr, char * buf, size_t len)
+int CabecalhoDoPedido_printHeaders(struct PedidoAnalisado * pr, char * buf,std::size_t len)
 {
      char * current = buf;
      struct CabecalhoDoPedido * ph;
-     size_t i = 0;
+    std::size_t i = 0;
 
      if(len < CabecalhoDoPedido_size(pr))
      {
@@ -509,7 +509,7 @@ void CabecalhoDoPedido_destroyOne(struct CabecalhoDoPedido * ph)
 
 void CabecalhoDoPedido_destroy(struct PedidoAnalisado * pr)
 {
-     size_t i = 0;
+    std::size_t i = 0;
      while(pr->headersused > i)
      {
 	  CabecalhoDoPedido_destroyOne(pr->headers + i);
@@ -570,12 +570,12 @@ void PedidoAnalisado_destroy(struct PedidoAnalisado *p)
 /* 
    Recupera o buffer inteiro de um objeto do tipo  PedidoAnalisado. 
 */
-int recuperaPedidoHTTP(struct PedidoAnalisado *p, char *buffer, size_t size_buffer)
+int recuperaPedidoHTTP(struct PedidoAnalisado *p, char *buffer,std::size_t size_buffer)
 {
      if (!p || !p->buf)
 	  return -1;
 
-     size_t tmp;
+    std::size_t tmp;
      if (PedidoAnalisado_printRequestLine(p, buffer, size_buffer, &tmp) < 0)
 	  return -1;
      if (CabecalhoDoPedido_printHeaders(p, buffer+tmp, size_buffer-tmp) < 0)
@@ -587,7 +587,7 @@ int recuperaPedidoHTTP(struct PedidoAnalisado *p, char *buffer, size_t size_buff
    Recria os cabeçalhos HTTP a partir de um objeto do tipo pedido analisado(onde é armazenado o os dados depois do parser)
    buffer deve ser alocado previamente
 */
-int recupera_cabecalho_PedidoHTTP(struct PedidoAnalisado *p, char *buffer,  size_t size_buffer)
+int recupera_cabecalho_PedidoHTTP(struct PedidoAnalisado *p, char *buffer, std::size_t size_buffer)
 {
      if (!p || !p->buf)
 	  return -1;
@@ -703,7 +703,7 @@ int Analise_do_pedido(struct PedidoAnalisado *p, const char *buffer, int size_bu
      }
      
      const char *rem = full_addr + strlen(p->protocol) + strlen("://");
-     size_t abs_uri_len = strlen(rem);
+    std::size_t abs_uri_len = strlen(rem);
 
      p->host = strtok_r(NULL, "/", &saveptr);
      if (p->host == NULL) {
@@ -795,7 +795,7 @@ size_t PedidoAnalisado_requestLineLen(struct PedidoAnalisado *pr)
      if (!pr || !pr->buf)
 	  return 0;
 
-     size_t len =  
+    std::size_t len =  
 	  strlen(pr->method) + 1 + strlen(pr->protocol) + 3 + 
 	  strlen(pr->host) + 1 + strlen(pr->version) + 2;
      if(pr->port != NULL)
@@ -807,7 +807,7 @@ size_t PedidoAnalisado_requestLineLen(struct PedidoAnalisado *pr)
      return len;
 }
 
-int PedidoAnalisado_printRequestLine(struct PedidoAnalisado *pr, char * buf, size_t buflen, size_t *tmp)
+int PedidoAnalisado_printRequestLine(struct PedidoAnalisado *pr, char * buf,std::size_t buflen,std::size_t *tmp)
 {
      char * current = buf;
 
