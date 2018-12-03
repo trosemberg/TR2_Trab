@@ -3,7 +3,7 @@
 #include <util.hpp>
 
 Socket::Socket(long int porta) {
-    this->porta = porta;
+    this->porta = (int)porta;
 }
 Socket::~Socket() = default;
 

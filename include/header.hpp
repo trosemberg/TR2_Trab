@@ -5,7 +5,7 @@
 
 class HTTP{
 public:
-	HTTP();
+	HTTP(long int porta);
 	~HTTP();
 	void* getRequestHTTP(void*);
      int PedidoAnalisado_printRequestLine(struct PedidoAnalisado *pr, char * buf, std::size_t buflen, std::size_t *tmp);
@@ -17,10 +17,12 @@ public:
      std::size_t PedidoAnalisado_sizeTotal(struct PedidoAnalisado *p);
      int CabecalhoDoPedido_set(struct PedidoAnalisado *p, const char * key, const char * value);
      struct CabecalhoDoPedido* CabecalhoDoPedido_get(struct PedidoAnalisado *p, const char * key);
-     std::size_t CabecalhoDoPedido_size(struct PedidoAnalisado *p);
      int CabecalhoDoPedido_remove (struct PedidoAnalisado *p, const char * key);
      char* converte_Request_to_string(struct PedidoAnalisado *pedido);
 	struct PedidoAnalisado* PedidoAnalisado_create();
+     size_t CabecalhoDoPedido_size(struct PedidoAnalisado *p);
+private:
+     int porta;
 };
 
 struct PedidoAnalisado {

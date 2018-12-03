@@ -29,6 +29,7 @@ int Servidor::init(){
  	close(socket.bind_socket);
 }
 
-Servidor::Servidor(long int porta) :socket(porta) {}
+Servidor::Servidor(long int porta) :socket(porta),
+                                    http(porta){}
                             
 Servidor::~Servidor()= default;
