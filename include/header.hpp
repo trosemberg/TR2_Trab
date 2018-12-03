@@ -1,5 +1,6 @@
 #ifndef HEADER_H
 #define HEADER_H
+#include <util.hpp>
 #include <cstdio>
 
 
@@ -22,7 +23,7 @@ public:
 	struct PedidoAnalisado* PedidoAnalisado_create();
      size_t CabecalhoDoPedido_size(struct PedidoAnalisado *p);
 private:
-     int porta;
+     Socket socket;
 };
 
 struct PedidoAnalisado {

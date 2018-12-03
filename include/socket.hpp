@@ -1,7 +1,7 @@
 #ifndef SOCKET
 #define SOCKET 
 #include <util.hpp>
-#include <header.hpp>
+
 class Socket{
 public:
     int inSocket = -1;

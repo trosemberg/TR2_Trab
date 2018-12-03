@@ -8,9 +8,7 @@
 
 
 HTTP::~HTTP()= default;
-HTTP::HTTP(long int porta) {
-    this->porta = (int)porta;
-}
+HTTP::HTTP(long int porta) : socket(porta){}
 
 void* HTTP::getRequestHTTP(void* socketid)
 {
