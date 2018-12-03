@@ -13,6 +13,10 @@ public:
     int SocketBind();
     int SocketConnect();
     int SocketAccept();
+    int createServerSocket(char *requestHost, char *requestPort);
+    void sendToServerSocket(const char* bufferServer,int socketfd,int sizeBuffer);
+    void sendToClientSocket(const char* bufferServer,int socketfd,int sizeBuffer);
+    void receiveFromServer (int Clientfd, int Serverfd);
 private:
     int porta;
 };
