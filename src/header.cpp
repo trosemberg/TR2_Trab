@@ -1,63 +1,98 @@
 #include "header.hpp"
+#include <util.hpp>
 
-namespace HTTP {
-Header::Header(std::string& msg) {
-	if(!msg.empty()){
-		unsigned int start = 0;
-        auto end = static_cast<unsigned int>(msg.find("\r\n"));
-		startLine = msg.substr(start, end);
+HTTP::~HTTP()= default;
+HTTP::HTTP() = default;
 
-		start = end + 2;
+void* HTTP::getRequestHTTP(void* socketid)
+{
+	int sizeBuffer = 5000;
+	int opcao;
+	char buffer[sizeBuffer];
 
-		while((end = static_cast<unsigned int>(msg.find("\r\n", start)), end) > start){
-			std::string linha = msg.substr(start, end-start);
-			std::string hostName = linha.substr(0, (linha.find(':')));
-			std::string valor = linha.substr((linha.find(':')) + 2);
+	int newsockfd = *((int*)socketid);
 
-			if(hostName == "Host"){
-				host = valor.substr(0, (valor.find(':')));
-				if(valor.size() > (valor.find(':')))
-					port = valor.substr((valor.find(':')) + 2);
+	int total_de_bits_recebidos = 0, recvd;
+
+	int iServerfd;
+
+	char *mensagem;  // armazena a mensagem da URL
+
+	char *browser_request;
+
+	mensagem = (char *) malloc(sizeBuffer); 
+
+	mensagem[0] = '\0';
+
+	while (strstr(mensagem, "\r\n\r\n") == NULL) {  // determines end of request
+
+	  recvd = recv(newsockfd, buffer, sizeBuffer, 0) ;
+
+	  if(recvd < 0 ){
+	  	fprintf(stderr," Erro ao receber mensagem do cliente!\n");
+		exit (1);
+	  				
+	  }else if(recvd == 0) {
+	  		break;
+	  } else {
+	  	total_de_bits_recebidos += recvd;
+	  	//Se o taman ho da mensagem for maior que o tamanho da string buffer, dobra o tamanho da string
+	  	buffer[recvd] = '\0';
+	  	if (total_de_bits_recebidos > sizeBuffer) {
+			sizeBuffer *= 2;
+			mensagem = (char *) realloc(mensagem, sizeBuffer);
+			if (mensagem == NULL) {
+				fprintf(stderr," Erro durante a realocação de memoria!\n");
+				exit (1);
 			}
-
-			fields.push_back(std::make_tuple(hostName, valor));
-			
-			start = end + 2;
 		}
+	  }
+	  strcat(mensagem, buffer);
+	}
+	if(strlen(mensagem) > 0)
+	{
+		char what[5000];
+		struct PedidoAnalisado *pedido;    // contem o pedido analisado
+		printf("----------------------------------------------------\n");
+		printf("Resquisicao HTTP do browser:\n");
+		printf("%s\n", mensagem);
+		printf("1 - Spider \n2-Apenas responder o browser\nDigite a opcao >> ");
+		scanf("%d", &opcao);
+		switch(opcao)
+		{
+			case 1:  
+				pedido = PedidoAnalisado_create();
+				Analise_do_pedido(pedido, mensagem, strlen(mensagem));
+			    memset(what,'\0',5000);
+			    strcpy(what,"./spider ");
+			    strcat(what,pedido->host);
+			    system(what);
+				break;
+			default:
 
-		if(host.empty()){
-            auto init = static_cast<unsigned int>(startLine.find("//") + 2);
-            auto fim = static_cast<unsigned int>(startLine.find("//", init));
-			std::string valor = startLine.substr(init, fim - init);
-			host = valor.substr(0, (valor.rfind(':')));
-			if(valor.size() > (valor.rfind(':')))
-				port = valor.substr((valor.rfind(':')) + 2);
-		}
+				pedido = PedidoAnalisado_create();
 
-		if(host[0] == '[')
-			host = host.substr(1, host.size() - 2);
+				Analise_do_pedido(pedido, mensagem, strlen(mensagem));
+				//Se a porta não foi setada na mensagem URL, coloquei como padrao a porta 80
+				if (pedido->port == NULL) pedido->port = (char *) "80";
+				
+				int pid = fork();
 
-		if(port.empty())
-			port = "80";
-
-		body = msg.substr(start + 2);
-
-		if(!body.empty()){
-			Dump::DumpHTML( body );
+		 		if(pid == 0)	//processo filho
+		 		{
+		 			browser_request  = converte_Request_to_string(pedido);		
+					iServerfd = createServerSocket(pedido->host, pedido->port);
+					sendToServerSocket(browser_request, iServerfd, total_de_bits_recebidos);
+					receiveFromServer(newsockfd, iServerfd);
+					PedidoAnalisado_destroy(pedido);	
+					close(newsockfd);   
+					close(iServerfd);
+					_exit(0);
+		 		}
+				break;
 		}
 	}
-}
-
-std::string Header::to_string(bool include){
-	std::string msg;
-
-	msg += startLine + "\r\n";
-	for (auto &i : fields)
-        msg += std::get<0>(i) + ": " + std::get<1>(i) + "\r\n";
-	msg +="\r\n";
-	msg += include? body : "";
-
-	return msg;
-}
-
+	int y = 3;
+	int *p = &y;
+	return p;
 }
