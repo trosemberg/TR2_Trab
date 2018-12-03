@@ -22,48 +22,11 @@ int Servidor::init(){
     printf("bind done \n");    
     printf("Sucessfully conected with server\n\n");
     while(1){
-        std::string message;
-        //Connect to remote server
         socket.SocketAccept();
-        socket.GetRequest();
-
-        if(!requestsRcv.empty())
-			std::swap( requestsRcv, toSendRqst );
-
-		if(!toSendRqst.empty()) {
-			printf("\nEnviando %d request(s)...\n", (int) toSendRqst.size());
-
-			for (auto &i : toSendRqst) {
-				printf("\nEnviando request para %s:%s\n", i.host.c_str(), i.port.c_str());
-				printf("\n%s\n", i.to_string().c_str());
-				if(socket.SendOut(i) == -1){
-					printf("\nNão foi possível enivar request\n");
-					exit(1);
-				}
-			}
-			
-			toSendRqst.clear();
-		}
-		
-		socket.AnswerRequest();
-
-		if(!responsesRcv.empty())
-			std::swap(responsesRcv, toSendRsp);
-
-		if(!toSendRsp.empty()) {
-			printf("\nEnviando %d response(s)...\n", (int) toSendRsp.size());
-
-			for(auto &i : toSendRsp) {
-				printf("\nResponse: \n%s\n", i.to_string().c_str());
-				if(socket.SendIn(i) == -1){
-					printf("\nNão foi possível enivar response\n");
-					exit(1);
-				}
-			}
-
-			toSendRsp.clear();
-		}
+		getRequestHTTP((void*)&socket.inSocket);        
     }
+	close(socket.inSocket);
+ 	close(socket.bind_socket);
 }
 
 Servidor::Servidor(long int porta) :  requestsRcv(socket.requestsRcv),
