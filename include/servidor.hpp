@@ -10,6 +10,7 @@ public:
     ~Servidor();
 private:
     Socket socket;
+    HTTP http;
 };
 
 #endif
