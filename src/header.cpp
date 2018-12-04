@@ -64,7 +64,7 @@ void* HTTP::RequestHTTP(void* socketid)
 		printf("----------------------------------------------------\n");
 		printf("Resquisicao HTTP do browser:\n");
 		printf("%s\n", mensagem);
-		printf("1 - Spider \n2-Apenas responder o browser\nDigite a opcao >> ");
+		printf("1 - Spider \n2 - QUIT\n3 - >Browser\nDigite a opcao >> ");
 		scanf("%d", &opcao);
 		Analise_do_pedido(pedido, mensagem, strlen(mensagem));
 		
@@ -73,7 +73,18 @@ void* HTTP::RequestHTTP(void* socketid)
 			case 1:  
 				crawler.wget(pedido->host);
 				crawler.spider(pedido->host);
+				
 				break;
+
+			case 2:
+				close(newsockfd);   
+				close(iServerfd);
+				close(socket.inSocket);
+ 				close(socket.bind_socket);
+				std::cout<<"\n\t FIM :)";
+				exit(-1);
+				break;
+
 			default:
 				int pid = fork();
 				if (pedido->port == NULL) pedido->port = (char *) "80";

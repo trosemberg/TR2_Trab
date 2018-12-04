@@ -281,4 +281,5 @@ void Crawler::spider(char *host)
     printf("-- %s %s-- ", __DATE__,__TIME__);
     cout << host;cout << " >> ";cout << '\n';
     showq(auxiliar);
+    std::cout<<"Fim spider";
 }
