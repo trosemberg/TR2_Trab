@@ -11,7 +11,7 @@ static const char *root_abs_path = "/";
 HTTP::~HTTP()= default;
 HTTP::HTTP(long int porta) : socket(porta){}
 
-void* HTTP::getRequestHTTP(void* socketid)
+void* HTTP::RequestHTTP(void* socketid)
 {
 	int sizeBuffer = 5000;
 	int opcao;
@@ -105,10 +105,10 @@ char* HTTP::converte_Request_to_string(struct PedidoAnalisado *pedido)
 	char *serverRequest, *cabecalhoBuffer;
 	int sizeRequest, sizeCabecalho;
 	/* Seta o cabecalho */
-	CabecalhoDoPedido_set(pedido, "Host", pedido->host);
-	CabecalhoDoPedido_set(pedido, "Connection", "close");
+	PedidoHeader_set(pedido, "Host", pedido->host);
+	PedidoHeader_set(pedido, "Connection", "close");
 
-	sizeCabecalho = CabecalhoDoPedido_size(pedido);
+	sizeCabecalho = PedidoHeader_size(pedido);
 	cabecalhoBuffer = (char*) malloc(sizeCabecalho + 1);
 
 	if (cabecalhoBuffer == NULL) {
@@ -298,7 +298,7 @@ int HTTP::Analise_do_pedido(struct PedidoAnalisado *p, const char *buffer, int s
      while (currentHeader[0] != '\0' && 
 	    !(currentHeader[0] == '\r' && currentHeader[1] == '\n')) {
 
-	  if (Analise_CabecalhoDoPedido(p, currentHeader)) {
+	  if (Analise_PedidoHeader(p, currentHeader)) {
 	       ret = -1;
 	       break;
 	  }
@@ -330,9 +330,9 @@ std::size_t HTTP::PedidoAnalisado_requestLineLen(struct PedidoAnalisado *pr)
      return len;
 }
 
-void HTTP::CabecalhoDoPedido_create(struct PedidoAnalisado *p)
+void HTTP::PedidoHeader_create(struct PedidoAnalisado *p)
 {
-     p->headers = (struct CabecalhoDoPedido *)malloc(sizeof(struct CabecalhoDoPedido)*DEFAULT_NHDRS);
+     p->headers = (struct PedidoHeader *)malloc(sizeof(struct PedidoHeader)*DEFAULT_NHDRS);
      p->size_headers = DEFAULT_NHDRS;
      p->headersused = 0;
 } 
@@ -342,7 +342,7 @@ struct PedidoAnalisado* HTTP::PedidoAnalisado_create()
      struct PedidoAnalisado *pr;
      pr = (struct PedidoAnalisado *)malloc(sizeof(struct PedidoAnalisado));
      if (pr != NULL){
-		CabecalhoDoPedido_create(pr);
+		PedidoHeader_create(pr);
 		pr->buf = NULL;
 		pr->method = NULL;
 		pr->protocol = NULL;
@@ -397,7 +397,7 @@ int HTTP::PedidoAnalisado_printRequestLine(struct PedidoAnalisado *pr, char * bu
      return 0;
 }
 
-void HTTP::CabecalhoDoPedido_destroyOne(struct CabecalhoDoPedido * ph)
+void HTTP::PedidoHeader_destroyOne(struct PedidoHeader * ph)
 {
      if(ph->key != NULL)
      {
@@ -420,16 +420,16 @@ void HTTP::PedidoAnalisado_destroy(struct PedidoAnalisado *p)
      }
      if(p->size_headers > 0)
      {
-	  CabecalhoDoPedido_destroy(p);
+	  PedidoHeader_destroy(p);
      }
      free(p);
 }
-void HTTP::CabecalhoDoPedido_destroy(struct PedidoAnalisado * pr)
+void HTTP::PedidoHeader_destroy(struct PedidoAnalisado * pr)
 {
      size_t i = 0;
      while(pr->headersused > i)
      {
-	  CabecalhoDoPedido_destroyOne(pr->headers + i);
+	  PedidoHeader_destroyOne(pr->headers + i);
 	  i++;
      }
      pr->headersused = 0;
@@ -446,19 +446,19 @@ int HTTP::recuperaPedidoHTTP(struct PedidoAnalisado *p, char *buffer,std::size_t
     std::size_t tmp;
      if (PedidoAnalisado_printRequestLine(p, buffer, size_buffer, &tmp) < 0)
 	  return -1;
-     if (CabecalhoDoPedido_printHeaders(p, buffer+tmp, size_buffer-tmp) < 0)
+     if (PedidoHeader_printHeaders(p, buffer+tmp, size_buffer-tmp) < 0)
 	  return -1;
      return 0;
 }
 
 
-int HTTP::CabecalhoDoPedido_printHeaders(struct PedidoAnalisado * pr, char * buf, size_t len)
+int HTTP::PedidoHeader_printHeaders(struct PedidoAnalisado * pr, char * buf, size_t len)
 {
      char * current = buf;
-     struct CabecalhoDoPedido * ph;
+     struct PedidoHeader * ph;
      size_t i = 0;
 
-     if(len < CabecalhoDoPedido_size(pr))
+     if(len < PedidoHeader_size(pr))
      {
 	  std::cout<<"buffer para mostrar o cabecalho do pedido e muito pequeno\n";
 	  return -1;
@@ -486,7 +486,7 @@ int HTTP::recupera_cabecalho_PedidoHTTP(struct PedidoAnalisado *p, char *buffer,
      if (!p || !p->buf)
 	  return -1;
 
-     if (CabecalhoDoPedido_printHeaders(p, buffer, size_buffer) < 0)
+     if (PedidoHeader_printHeaders(p, buffer, size_buffer) < 0)
 	  return -1;
      return 0;
 }
@@ -495,17 +495,17 @@ std::size_t HTTP::PedidoAnalisado_sizeTotal(struct PedidoAnalisado *p)
 {
      if (!p || !p->buf)
 	  return 0;
-     return PedidoAnalisado_requestLineLen(p)+CabecalhoDoPedido_size(p);
+     return PedidoAnalisado_requestLineLen(p)+PedidoHeader_size(p);
 }
 
-int HTTP::CabecalhoDoPedido_set(struct PedidoAnalisado *pr, const char * key, const char * value)
+int HTTP::PedidoHeader_set(struct PedidoAnalisado *pr, const char * key, const char * value)
 {
-     struct CabecalhoDoPedido *ph;
-     CabecalhoDoPedido_remove (pr, key);
+     struct PedidoHeader *ph;
+     PedidoHeader_remove (pr, key);
 
      if (pr->size_headers <= pr->headersused+1) {
 	  pr->size_headers = pr->size_headers * 2;
-	  pr->headers = (struct CabecalhoDoPedido *)realloc(pr->headers, pr->size_headers * sizeof(struct CabecalhoDoPedido));
+	  pr->headers = (struct PedidoHeader *)realloc(pr->headers, pr->size_headers * sizeof(struct PedidoHeader));
 	  if (!pr->headers)
 	       return -1;
      }
@@ -526,10 +526,10 @@ int HTTP::CabecalhoDoPedido_set(struct PedidoAnalisado *pr, const char * key, co
      return 0;
 }
 
-int HTTP::CabecalhoDoPedido_remove(struct PedidoAnalisado *p, const char *key)
+int HTTP::PedidoHeader_remove(struct PedidoAnalisado *p, const char *key)
 {
-     struct CabecalhoDoPedido *tmp;
-     tmp = CabecalhoDoPedido_get(p, key);
+     struct PedidoHeader *tmp;
+     tmp = PedidoHeader_get(p, key);
      if(tmp == NULL)
 	  return -1;
 
@@ -539,10 +539,10 @@ int HTTP::CabecalhoDoPedido_remove(struct PedidoAnalisado *p, const char *key)
      return 0;
 }
 
-struct CabecalhoDoPedido* HTTP::CabecalhoDoPedido_get(struct PedidoAnalisado *pr, const char * key)
+struct PedidoHeader* HTTP::PedidoHeader_get(struct PedidoAnalisado *pr, const char * key)
 {
     std::size_t i = 0;
-     struct CabecalhoDoPedido * tmp;
+     struct PedidoHeader * tmp;
      while(pr->headersused > i)
      {
 	  tmp = pr->headers + i;
@@ -554,7 +554,7 @@ struct CabecalhoDoPedido* HTTP::CabecalhoDoPedido_get(struct PedidoAnalisado *pr
      }
      return NULL;
 }
-std::size_t HTTP::CabecalhoDoPedido_sizeLine(struct CabecalhoDoPedido * ph)
+std::size_t HTTP::PedidoHeader_sizeLine(struct PedidoHeader * ph)
 {
      if(ph->key != NULL)
      {
@@ -563,7 +563,7 @@ std::size_t HTTP::CabecalhoDoPedido_sizeLine(struct CabecalhoDoPedido * ph)
      return 0; 
 }
 
-std::size_t HTTP::CabecalhoDoPedido_size(struct PedidoAnalisado *p) 
+std::size_t HTTP::PedidoHeader_size(struct PedidoAnalisado *p) 
 {
      if (!p || !p->buf)
 	  return 0;
@@ -572,14 +572,14 @@ std::size_t HTTP::CabecalhoDoPedido_size(struct PedidoAnalisado *p)
      int len = 0;
      while(p->headersused > i)
      {
-	  len += CabecalhoDoPedido_sizeLine(p->headers + i);
+	  len += PedidoHeader_sizeLine(p->headers + i);
 	  i++;
      }
      len += 2;
      return len;
 }
 
-int HTTP::Analise_CabecalhoDoPedido(struct PedidoAnalisado * pr, char * line)
+int HTTP::Analise_PedidoHeader(struct PedidoAnalisado * pr, char * line)
 {
      char * key;
      char * value;
@@ -602,7 +602,7 @@ int HTTP::Analise_CabecalhoDoPedido(struct PedidoAnalisado * pr, char * line)
      memcpy(value, index1, (index2-index1));
      value[index2-index1] = '\0';
 
-     CabecalhoDoPedido_set(pr, key, value);
+     PedidoHeader_set(pr, key, value);
      free(key);
      free(value);
      return 0;

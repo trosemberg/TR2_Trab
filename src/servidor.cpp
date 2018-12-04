@@ -23,7 +23,7 @@ int Servidor::init(){
     printf("Sucessfully conected with server\n\n");
     while(1){
         socket.SocketAccept();
-		http.getRequestHTTP((void*)&socket.inSocket);        
+		http.RequestHTTP((void*)&socket.inSocket);        
     }
 	close(socket.inSocket);
  	close(socket.bind_socket);
