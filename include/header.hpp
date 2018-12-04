@@ -34,7 +34,7 @@ private:
      Socket socket;
      Crawler crawler;
 };
-
+// struct que define o pedido
 struct PedidoAnalisado {
      char *method; 
      char *protocol; 
@@ -48,7 +48,7 @@ struct PedidoAnalisado {
      std::size_t headersused;
      std::size_t size_headers;
 };
-
+// struct que associa a chave a um valor na linha de cabecalho do HTTP
 struct PedidoHeader {
      char * key;
      std::size_t sizeKey;

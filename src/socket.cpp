@@ -57,6 +57,7 @@ int Socket::SocketAccept(){
 	}
     return 0;
 }
+// cria socket de server
 int Socket::createServerSocket(char *requestHost, char *requestPort) {
   
   struct addrinfo host_info;
@@ -85,7 +86,7 @@ int Socket::createServerSocket(char *requestHost, char *requestPort) {
   freeaddrinfo(host_info_list);
   return idSocket;
 }
-
+// envia a request por meio do socket criado
 void Socket::sendToServerSocket(const char* bufferServer,int socketfd,int sizeBuffer)
 {
 
@@ -107,6 +108,7 @@ void Socket::sendToServerSocket(const char* bufferServer,int socketfd,int sizeBu
 	}	
 
 }
+// enfia a http recebida para o browser
 void Socket::sendToClientSocket(const char* bufferServer,int socketfd,int sizeBuffer)
 {
 	std::string temp;
@@ -126,21 +128,15 @@ void Socket::sendToClientSocket(const char* bufferServer,int socketfd,int sizeBu
 
 	}	
 }
+
+// recebe de volta do servidor a resposta
 void Socket::receiveFromServer (int Clientfd, int Serverfd) 
 {
 	int sizeBuffer = 5000;
 	int iRecv;
 	char buffer[sizeBuffer];
-	/**
-		para receber a resposta HTTP do servidor remoto eu 
-		crio um laço while que verifica se a quantidade de 
-		bytes recebidos é maior que zero
-			caso em que iRecv > 0, armazeno o que eu recebi em um buffer
-								   e repasso imediatamente para o browser
-			caso em que o iRecv == 0, significa que o servidor remoto
-									  terminou de enviar toda a resposta HTTP
-			caso em que o iRecv < 0, significa um erro e o programa é encerrado
-	**/
+		// while de verificacao se o recebido e maior que 0 bits
+		// iRecv > 0 armazena o buffer e =0 terminou de enviar
 	while ((iRecv = recv(Serverfd, buffer, sizeBuffer, 0)) > 0) {
 	    sendToClientSocket(buffer, Clientfd,iRecv);         // writing to client	  
 		memset(buffer,0,sizeof (buffer));	

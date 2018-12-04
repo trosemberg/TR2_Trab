@@ -31,8 +31,8 @@ void* HTTP::RequestHTTP(void* socketid)
 	mensagem = (char *) malloc(sizeBuffer); 
 
 	mensagem[0] = '\0';
-
-	while (strstr(mensagem, "\r\n\r\n") == NULL) {  // determines end of request
+	// determina onde é o fim da request
+	while (strstr(mensagem, "\r\n\r\n") == NULL) {  
 
 	  recvd = recv(newsockfd, buffer, sizeBuffer, 0) ;
 
@@ -59,23 +59,26 @@ void* HTTP::RequestHTTP(void* socketid)
 	}
 	if(strlen(mensagem) > 0)
 	{
-		struct PedidoAnalisado *pedido;    // contem o pedido analisado
+		// cria o pedido analisado, struct com as informacoes das requests
+		struct PedidoAnalisado *pedido;
 		pedido = PedidoAnalisado_create();
 		printf("----------------------------------------------------\n");
 		printf("Resquisicao HTTP do browser:\n");
 		printf("%s\n", mensagem);
 		printf("1 - Spider \n2 - QUIT\n3 - >Browser\nDigite a opcao >> ");
 		scanf("%d", &opcao);
+		// analisa a request
 		Analise_do_pedido(pedido, mensagem, strlen(mensagem));
 		
 		switch(opcao)
 		{
+			// caso escolhido 1, faz o wget + crawler
 			case 1:  
 				crawler.wget(pedido->host);
 				crawler.spider(pedido->host);
 				
 				break;
-
+			// caso escolhido 2, termina a execucao do programa
 			case 2:
 				close(newsockfd);   
 				close(iServerfd);
@@ -84,12 +87,12 @@ void* HTTP::RequestHTTP(void* socketid)
 				std::cout<<"\n\t FIM :)";
 				exit(-1);
 				break;
-
+			// caso escolhido 3, passar info pro navegador
 			default:
 				int pid = fork();
 				if (pedido->port == NULL) pedido->port = (char *) "80";
 				
-				//Se a porta não foi setada na mensagem URL, coloquei como padrao a porta 8
+				//Se a porta não foi setada na mensagem URL é por padrao 80
 		 		if(pid == 0)	//processo filho
 		 		{
 		 			browser_request  = converte_Request_to_string(pedido);		
@@ -108,7 +111,7 @@ void* HTTP::RequestHTTP(void* socketid)
 	int *p = &y;
 	return p;
 }
-
+// converte a request feita toda em uma string para ser enviada
 char* HTTP::converte_Request_to_string(struct PedidoAnalisado *pedido)
 {
 	char *serverRequest, *cabecalhoBuffer;
@@ -147,7 +150,8 @@ char* HTTP::converte_Request_to_string(struct PedidoAnalisado *pedido)
 	return serverRequest;
 }
 
-
+// Responsavel por analisar a request feita com base na struct Pedido Analisado
+// checa as informacoes do Analise pedido, se batem com o desejado
 int HTTP::Analise_do_pedido(struct PedidoAnalisado *p, const char *buffer, int size_buffer)
 {
      char *full_addr;
@@ -418,6 +422,7 @@ void HTTP::PedidoHeader_destroyOne(struct PedidoHeader * ph)
 	  ph->sizeValue = 0;
      }
 }
+// limpa memoria alocada dinamicamente
 void HTTP::PedidoAnalisado_destroy(struct PedidoAnalisado *p)
 {
      if(p->buf != NULL)

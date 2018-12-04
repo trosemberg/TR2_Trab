@@ -6,7 +6,7 @@ char *raiz;
 
 Crawler::Crawler() = default;
 Crawler::~Crawler() = default;
-/* Get the web page and print it to standard output. */
+//  escreve no arquivo a resposta da request
 int Crawler::wget (char *host)
 {  
     char buffer[65535];
