@@ -227,7 +227,7 @@ int HTTP::Analise_do_pedido(struct PedidoAnalisado *p, const char *buffer, int s
      std::size_t abs_uri_len = strlen(rem);
 
      p->host = strtok_r(NULL, "/", &saveptr);
-	 std::cout<<"\n\n\t\t"<<p->host;
+
      if (p->host == NULL) {
 	  std::cout<< "linha de solicitacao invalida, nao possui host:\n";
 	  free(tmp_buf);
