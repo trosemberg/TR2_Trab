@@ -5,6 +5,7 @@
 #define DEFAULT_NHDRS 8
 #define MAX_REQ_LEN 65535
 #define MIN_REQ_LEN 4
+static const char *root_abs_path = "/";
 
 
 HTTP::~HTTP()= default;
@@ -151,7 +152,7 @@ int HTTP::Analise_do_pedido(struct PedidoAnalisado *p, const char *buffer, int s
      }
    
      if (size_buffer < MIN_REQ_LEN || size_buffer > MAX_REQ_LEN) {
-	  std::cout<<"tamanho do buffer e invalido %d", size_buffer;
+	  std::cout<<"tamanho do buffer e invalido"<< size_buffer;
 	  return -1;
      }
    
@@ -206,7 +207,7 @@ int HTTP::Analise_do_pedido(struct PedidoAnalisado *p, const char *buffer, int s
 	  return -1;
      }
      if (strncmp (p->version, "HTTP/", 5)) {
-	  std::cout<< "linha de solicitacao invalida, versao nao suportada %s\n", p->version;
+	  std::cout<< "linha de solicitacao invalida, versao nao suportada"<< p->version<<"\n";
 	  free(tmp_buf);
 	  free(p->buf);
 	  p->buf = NULL;
@@ -278,7 +279,7 @@ int HTTP::Analise_do_pedido(struct PedidoAnalisado *p, const char *buffer, int s
      if (p->port != NULL) {
 	  int port = strtol (p->port, (char **)NULL, 10);
 	  if (port == 0 && errno == EINVAL) {
-	       std::cout<<"linha de solicitacao invalida, porta incorreta: %s\n", p->port;
+	       std::cout<<"linha de solicitacao invalida, porta incorreta:"<<p->port<<"\n";
 	       free(tmp_buf);
 	       free(p->buf);
 	       free(p->path);
@@ -327,6 +328,13 @@ std::size_t HTTP::PedidoAnalisado_requestLineLen(struct PedidoAnalisado *pr)
      return len;
 }
 
+void HTTP::CabecalhoDoPedido_create(struct PedidoAnalisado *p)
+{
+     p->headers = (struct CabecalhoDoPedido *)malloc(sizeof(struct CabecalhoDoPedido)*DEFAULT_NHDRS);
+     p->size_headers = DEFAULT_NHDRS;
+     p->headersused = 0;
+} 
+
 struct PedidoAnalisado* PedidoAnalisado_create()
 {
      struct PedidoAnalisado *pr;
@@ -352,7 +360,7 @@ int HTTP::PedidoAnalisado_printRequestLine(struct PedidoAnalisado *pr, char * bu
 
      if(buflen < PedidoAnalisado_requestLineLen(pr))
      {
-	  debug("memoria insuficiente para a primeira linha\n");
+	  std::cout<<"memoria insuficiente para a primeira linha\n";
 	  return -1; 
      }
      memcpy(current, pr->method, strlen(pr->method));
@@ -388,6 +396,18 @@ int HTTP::PedidoAnalisado_printRequestLine(struct PedidoAnalisado *pr, char * bu
      return 0;
 }
 
+void HTTP::CabecalhoDoPedido_destroyOne(struct CabecalhoDoPedido * ph)
+{
+     if(ph->key != NULL)
+     {
+	  free(ph->key);
+	  ph->key = NULL;
+	  free(ph->value);
+	  ph->value = NULL;
+	  ph->sizeKey = 0;
+	  ph->sizeValue = 0;
+     }
+}
 void HTTP::PedidoAnalisado_destroy(struct PedidoAnalisado *p)
 {
      if(p->buf != NULL)
@@ -403,6 +423,19 @@ void HTTP::PedidoAnalisado_destroy(struct PedidoAnalisado *p)
      }
      free(p);
 }
+void HTTP::CabecalhoDoPedido_destroy(struct PedidoAnalisado * pr)
+{
+     size_t i = 0;
+     while(pr->headersused > i)
+     {
+	  CabecalhoDoPedido_destroyOne(pr->headers + i);
+	  i++;
+     }
+     pr->headersused = 0;
+
+     free(pr->headers);
+     pr->size_headers = 0;
+}
 
 int HTTP::recuperaPedidoHTTP(struct PedidoAnalisado *p, char *buffer,std::size_t size_buffer)
 {
@@ -417,6 +450,36 @@ int HTTP::recuperaPedidoHTTP(struct PedidoAnalisado *p, char *buffer,std::size_t
      return 0;
 }
 
+
+int HTTP::CabecalhoDoPedido_printHeaders(struct PedidoAnalisado * pr, char * buf, size_t len)
+{
+     char * current = buf;
+     struct CabecalhoDoPedido * ph;
+     size_t i = 0;
+
+     if(len < CabecalhoDoPedido_size(pr))
+     {
+	  std::cout<<"buffer para mostrar o cabecalho do pedido e muito pequeno\n";
+	  return -1;
+     }
+  
+     while(pr->headersused > i)
+     {
+	  ph = pr->headers+i;
+	  if (ph->key) {
+	       memcpy(current, ph->key, strlen(ph->key));
+	       memcpy(current+strlen(ph->key), ": ", 2);
+	       memcpy(current+strlen(ph->key) +2 , ph->value, strlen(ph->value));
+	       memcpy(current+strlen(ph->key) +2+strlen(ph->value) , "\r\n", 2);
+	       current += strlen(ph->key)+strlen(ph->value)+4;
+	  }
+	  i++;
+     }
+     memcpy(current, "\r\n",2);
+     return 0;
+}
+
+
 int HTTP::recupera_cabecalho_PedidoHTTP(struct PedidoAnalisado *p, char *buffer, std::size_t size_buffer)
 {
      if (!p || !p->buf)
@@ -427,7 +490,7 @@ int HTTP::recupera_cabecalho_PedidoHTTP(struct PedidoAnalisado *p, char *buffer,
      return 0;
 }
 
-size_t HTTP::PedidoAnalisado_sizeTotal(struct PedidoAnalisado *p)
+std::size_t HTTP::PedidoAnalisado_sizeTotal(struct PedidoAnalisado *p)
 {
      if (!p || !p->buf)
 	  return 0;
@@ -478,8 +541,16 @@ struct CabecalhoDoPedido* HTTP::CabecalhoDoPedido_get(struct PedidoAnalisado *pr
      }
      return NULL;
 }
+std::size_t HTTP::CabecalhoDoPedido_sizeLine(struct CabecalhoDoPedido * ph)
+{
+     if(ph->key != NULL)
+     {
+	  return strlen(ph->key)+strlen(ph->value)+4;
+     }
+     return 0; 
+}
 
-size_t HTTP::CabecalhoDoPedido_size(struct PedidoAnalisado *p) 
+std::size_t HTTP::CabecalhoDoPedido_size(struct PedidoAnalisado *p) 
 {
      if (!p || !p->buf)
 	  return 0;
@@ -493,6 +564,35 @@ size_t HTTP::CabecalhoDoPedido_size(struct PedidoAnalisado *p)
      }
      len += 2;
      return len;
+}
+
+int HTTP::Analise_CabecalhoDoPedido(struct PedidoAnalisado * pr, char * line)
+{
+     char * key;
+     char * value;
+     char * index1;
+     char * index2;
+
+     index1 = index(line, ':');
+     if(index1 == NULL)
+     {
+	  std::cout<<"Dois pontos nao encontrado\n";
+	  return -1;
+     }
+     key = (char *)malloc((index1-line+1)*sizeof(char));
+     memcpy(key, line, index1-line);
+     key[index1-line]='\0';
+
+     index1 += 2;
+     index2 = strstr(index1, "\r\n");
+     value = (char *) malloc((index2-index1+1)*sizeof(char));
+     memcpy(value, index1, (index2-index1));
+     value[index2-index1] = '\0';
+
+     CabecalhoDoPedido_set(pr, key, value);
+     free(key);
+     free(value);
+     return 0;
 }
 
 

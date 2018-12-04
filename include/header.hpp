@@ -1,6 +1,7 @@
 #ifndef HEADER_H
 #define HEADER_H
 #include <util.hpp>
+#include <socket.hpp>
 #include <cstdio>
 
 
@@ -20,8 +21,14 @@ public:
      struct CabecalhoDoPedido* CabecalhoDoPedido_get(struct PedidoAnalisado *p, const char * key);
      int CabecalhoDoPedido_remove (struct PedidoAnalisado *p, const char * key);
      char* converte_Request_to_string(struct PedidoAnalisado *pedido);
+     void CabecalhoDoPedido_create(struct PedidoAnalisado *p);
+     int CabecalhoDoPedido_printHeaders(struct PedidoAnalisado * pr, char * buf, std::size_t len);
 	struct PedidoAnalisado* PedidoAnalisado_create();
-     size_t CabecalhoDoPedido_size(struct PedidoAnalisado *p);
+     std::size_t CabecalhoDoPedido_size(struct PedidoAnalisado *p);
+     int Analise_CabecalhoDoPedido(struct PedidoAnalisado * pr, char * line);
+     std::size_t CabecalhoDoPedido_sizeLine(struct CabecalhoDoPedido * ph);
+     void CabecalhoDoPedido_destroyOne(struct CabecalhoDoPedido * ph);
+     void CabecalhoDoPedido_destroy(struct PedidoAnalisado * pr);
 private:
      Socket socket;
 };
