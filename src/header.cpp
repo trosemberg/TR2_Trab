@@ -147,7 +147,7 @@ int HTTP::Analise_do_pedido(struct PedidoAnalisado *p, const char *buffer, int s
      char *currentHeader;
 
      if (p->buf != NULL) {
-	  std::cout<<"pobjeto de análise já atribuído a uma solicitação\n";
+	  std::cout<<"objeto de análise já atribuído a uma solicitação\n";
 	  return -1;
      }
    
@@ -170,6 +170,7 @@ int HTTP::Analise_do_pedido(struct PedidoAnalisado *p, const char *buffer, int s
    
      /* Copy request line into parse->buf */
      index = strstr(tmp_buf, "\r\n");
+
      if (p->buf == NULL) {
 	  p->buf = (char *) malloc((index-tmp_buf)+1);
 	  p->buflen = (index-tmp_buf)+1;
@@ -226,6 +227,7 @@ int HTTP::Analise_do_pedido(struct PedidoAnalisado *p, const char *buffer, int s
      std::size_t abs_uri_len = strlen(rem);
 
      p->host = strtok_r(NULL, "/", &saveptr);
+	 std::cout<<"\n\n\t\t"<<p->host;
      if (p->host == NULL) {
 	  std::cout<< "linha de solicitacao invalida, nao possui host:\n";
 	  free(tmp_buf);
@@ -335,21 +337,20 @@ void HTTP::CabecalhoDoPedido_create(struct PedidoAnalisado *p)
      p->headersused = 0;
 } 
 
-struct PedidoAnalisado* PedidoAnalisado_create()
+struct PedidoAnalisado* HTTP::PedidoAnalisado_create()
 {
      struct PedidoAnalisado *pr;
      pr = (struct PedidoAnalisado *)malloc(sizeof(struct PedidoAnalisado));
-     if (pr != NULL)
-     {
-	  CabecalhoDoPedido_create(pr);
-	  pr->buf = NULL;
-	  pr->method = NULL;
-	  pr->protocol = NULL;
-	  pr->host = NULL;
-	  pr->path = NULL;
-	  pr->version = NULL;
-	  pr->buf = NULL;
-	  pr->buflen = 0;
+     if (pr != NULL){
+		CabecalhoDoPedido_create(pr);
+		pr->buf = NULL;
+		pr->method = NULL;
+		pr->protocol = NULL;
+		pr->host = NULL;
+		pr->path = NULL;
+		pr->version = NULL;
+		pr->buf = NULL;
+		pr->buflen = 0;
      }
      return pr;
 }
@@ -525,6 +526,18 @@ int HTTP::CabecalhoDoPedido_set(struct PedidoAnalisado *pr, const char * key, co
      return 0;
 }
 
+int HTTP::CabecalhoDoPedido_remove(struct PedidoAnalisado *p, const char *key)
+{
+     struct CabecalhoDoPedido *tmp;
+     tmp = CabecalhoDoPedido_get(p, key);
+     if(tmp == NULL)
+	  return -1;
+
+     free(tmp->key);
+     free(tmp->value);
+     tmp->key = NULL;
+     return 0;
+}
 
 struct CabecalhoDoPedido* HTTP::CabecalhoDoPedido_get(struct PedidoAnalisado *pr, const char * key)
 {
