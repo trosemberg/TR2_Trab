@@ -17,9 +17,9 @@ CFLAGSTEST=-ansi -Wall -Wextra -I$(IncludeDIR)
 
 # Vars:
 # -- ADAPT THIS IN YOUR PROGRAM --
-headers = util.hpp servidor.hpp socket.hpp header.hpp
+headers = util.hpp servidor.hpp socket.hpp header.hpp crawler.hpp
 mainObject = main
-objects = servidor.o socket.o header.o
+objects = servidor.o socket.o header.o crawler.o
 
 # Set of *.hpp on which the *.cpp depend
 _DEPS = $(headers)
