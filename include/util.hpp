@@ -1,6 +1,9 @@
 #ifndef UTIL
 #define UTIL
 
+// define bibliotecas padroes para serem usadas pelo codigo
+
+
 #include <cstdio>
 #include <stdio.h>
 #include <stdlib.h>

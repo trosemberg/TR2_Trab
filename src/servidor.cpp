@@ -3,15 +3,17 @@
 #include "util.hpp"
 #include "header.hpp"
 
+// funcao responsavel por rodar o programa todo
+
 int Servidor::init(){
-    //Create socket
+    //Cria socket
     socket.bind_socket = socket.SocketCreate();
     if (socket.bind_socket == -1){
         printf("Could not create socket");
         return 1;
     }
     printf("Socket created\n");
-    //Bind
+    //Faz o Bind e o Listen do socket
     socket.SocketBind();
     if( socket.bind_socket < 0){
         //print the error message
@@ -19,8 +21,8 @@ int Servidor::init(){
         return 1;
     }
 
-    printf("bind done \n");    
-    printf("Sucessfully conected with server\n\n");
+    printf("Bind e Listen feito \n");
+    // roda o programa, fazendo o accept e toda a parte de manipulacacao HTTP e Spider
     while(1){
         socket.SocketAccept();
 		http.RequestHTTP((void*)&socket.inSocket);        

@@ -4,6 +4,8 @@
 
 #define PORTA 8228
 
+// caso seja fornecida uma porta, usa ela, caso nao usar porta padrao 8228
+
 int main(int argc, char const *argv[]){
   long int porta = 0;
   std::string flag,porta_escolhida;
@@ -31,6 +33,7 @@ int main(int argc, char const *argv[]){
       break;
   }
   std::cout<<"\n\nConectando a porta:"<< porta<<"...";
+  // cria servidor e inicializa ele com porta escolhida
   Servidor server((long int)porta);
   server.init();
   return 0;

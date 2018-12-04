@@ -3,6 +3,9 @@
 #include "util.hpp"
 #include "header.hpp"
 
+// classe Servidor, responsavel po rodar o programa
+// baseando se na classe socket e http
+
 class Servidor{
 public:
     Servidor(long int porta);
