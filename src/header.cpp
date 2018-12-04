@@ -1,6 +1,7 @@
 #include "header.hpp"
 #include "util.hpp"
 #include "socket.hpp"
+#include "crawler.hpp"
 
 #define DEFAULT_NHDRS 8
 #define MAX_REQ_LEN 65535
@@ -58,7 +59,6 @@ void* HTTP::RequestHTTP(void* socketid)
 	}
 	if(strlen(mensagem) > 0)
 	{
-		char what[5000];
 		struct PedidoAnalisado *pedido;    // contem o pedido analisado
 		pedido = PedidoAnalisado_create();
 		printf("----------------------------------------------------\n");
@@ -67,20 +67,18 @@ void* HTTP::RequestHTTP(void* socketid)
 		printf("1 - Spider \n2-Apenas responder o browser\nDigite a opcao >> ");
 		scanf("%d", &opcao);
 		Analise_do_pedido(pedido, mensagem, strlen(mensagem));
+		
 		switch(opcao)
 		{
 			case 1:  
-			    memset(what,'\0',5000);
-			    strcpy(what,"./spider ");
-			    strcat(what,pedido->host);
-			    system(what);
+				crawler.wget(pedido->host);
+				crawler.spider(pedido->host);
 				break;
 			default:
-				//Se a porta não foi setada na mensagem URL, coloquei como padrao a porta 80
+				int pid = fork();
 				if (pedido->port == NULL) pedido->port = (char *) "80";
 				
-				int pid = fork();
-
+				//Se a porta não foi setada na mensagem URL, coloquei como padrao a porta 8
 		 		if(pid == 0)	//processo filho
 		 		{
 		 			browser_request  = converte_Request_to_string(pedido);		

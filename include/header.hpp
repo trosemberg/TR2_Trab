@@ -2,6 +2,7 @@
 #define HEADER_H
 #include "util.hpp"
 #include "socket.hpp"
+#include "crawler.hpp"
 #include <cstdio>
 
 
@@ -31,6 +32,7 @@ public:
      void PedidoHeader_destroy(struct PedidoAnalisado * pr);
 private:
      Socket socket;
+     Crawler crawler;
 };
 
 struct PedidoAnalisado {
