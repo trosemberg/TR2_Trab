@@ -14,6 +14,8 @@ HTTP::HTTP(long int porta) : socket(porta){}
 
 void* HTTP::RequestHTTP(void* socketid)
 {
+	std::fstream request;
+	request.open("request",std::ios::out | std::ios::in);
 	int sizeBuffer = 5000;
 	int opcao;
 	char buffer[sizeBuffer];
@@ -57,6 +59,7 @@ void* HTTP::RequestHTTP(void* socketid)
 	  }
 	  strcat(mensagem, buffer);
 	}
+	request << mensagem;
 	if(strlen(mensagem) > 0)
 	{
 		// cria o pedido analisado, struct com as informacoes das requests
@@ -108,6 +111,7 @@ void* HTTP::RequestHTTP(void* socketid)
 	}
 	int y = 3;
 	int *p = &y;
+	request.close();
 	return p;
 }
 // converte a request feita toda em uma string para ser enviada

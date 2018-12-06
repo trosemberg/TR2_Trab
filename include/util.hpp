@@ -27,5 +27,6 @@
 #include <stdarg.h>
 #include <queue>
 #include <sstream>
+#include <fstream>
 
 #endif

@@ -25,7 +25,8 @@ int Servidor::init(){
     // roda o programa, fazendo o accept e toda a parte de manipulacacao HTTP e Spider
     while(1){
         socket.SocketAccept();
-		http.RequestHTTP((void*)&socket.inSocket);        
+		http.RequestHTTP((void*)&socket.inSocket);
+        std::cout<<"keep using";       
     }
 	close(socket.inSocket);
  	close(socket.bind_socket);
