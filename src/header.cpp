@@ -62,9 +62,9 @@ void* HTTP::RequestHTTP(void* socketid)
 		// cria o pedido analisado, struct com as informacoes das requests
 		struct PedidoAnalisado *pedido;
 		pedido = PedidoAnalisado_create();
-		printf("----------------------------------------------------\n");
-		printf("Resquisicao HTTP do browser:\n");
-		printf("%s\n", mensagem);
+		std::cout<<"\n----------------------------------------------------\n";
+		std::cout<<"\e[93mResquisicao HTTP do browser:\n";
+		std::cout<<mensagem<<"\n\e[0m";
 		printf("1 - Spider \n2 - QUIT\n3 - >Browser\nDigite a opcao >> ");
 		scanf("%d", &opcao);
 		// analisa a request
@@ -95,6 +95,7 @@ void* HTTP::RequestHTTP(void* socketid)
 					iServerfd = socket.createServerSocket(pedido->host, pedido->port);
 					socket.sendToServerSocket(browser_request, iServerfd, total_de_bits_recebidos);
 					socket.receiveFromServer(newsockfd, iServerfd);
+					std::cout<<"\e[0m\n";
 					PedidoAnalisado_destroy(pedido);	
 					close(newsockfd);   
 					close(iServerfd);

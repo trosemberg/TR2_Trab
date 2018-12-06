@@ -105,7 +105,7 @@ void Socket::sendToServerSocket(const char* bufferServer,int socketfd,int sizeBu
 	}	
 
 }
-// enfia a http recebida para o browser
+// envia a http recebida para o browser
 void Socket::sendToClientSocket(const char* bufferServer,int socketfd,int sizeBuffer)
 {
 	std::string temp;
@@ -123,7 +123,8 @@ void Socket::sendToClientSocket(const char* bufferServer,int socketfd,int sizeBu
 		}
 		totalSent += numSent;
 
-	}	
+	}
+	std::cout<<temp;	
 }
 
 // recebe de volta do servidor a resposta
@@ -134,10 +135,11 @@ void Socket::receiveFromServer (int Clientfd, int Serverfd)
 	char buffer[sizeBuffer];
 		// while de verificacao se o recebido e maior que 0 bits
 		// iRecv > 0 armazena o buffer e =0 terminou de enviar
+		std::cout<<"\n\e[92mResposta do servidor:\n";
 	while ((iRecv = recv(Serverfd, buffer, sizeBuffer, 0)) > 0) {
 	    sendToClientSocket(buffer, Clientfd,iRecv);         // writing to client	  
 		memset(buffer,0,sizeof (buffer));	
-	}      
+	}     
 	if (iRecv < 0) {
 	  throw("Erro enquanto recebia do servidor!\n");
 	}
