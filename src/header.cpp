@@ -17,7 +17,7 @@ void* HTTP::RequestHTTP(void* socketid)
 	int sizeBuffer = 5000;
 	int opcao;
 	char buffer[sizeBuffer];
-
+	std::string vamos;
 	int newsockfd = *((int*)socketid);
 
 	int total_de_bits_recebidos = 0, recvd;
@@ -89,21 +89,19 @@ void* HTTP::RequestHTTP(void* socketid)
 				break;
 			// caso escolhido 3, passar info pro navegador
 			default:
-				int pid = fork();
 				if (pedido->port == NULL) pedido->port = (char *) "80";
-				
-				//Se a porta não foi setada na mensagem URL é por padrao 80
-		 		if(pid == 0)	//processo filho
-		 		{
-		 			browser_request  = converte_Request_to_string(pedido);		
+				try{
+				 	browser_request  = converte_Request_to_string(pedido);
 					iServerfd = socket.createServerSocket(pedido->host, pedido->port);
 					socket.sendToServerSocket(browser_request, iServerfd, total_de_bits_recebidos);
 					socket.receiveFromServer(newsockfd, iServerfd);
 					PedidoAnalisado_destroy(pedido);	
 					close(newsockfd);   
 					close(iServerfd);
-					_exit(0);
-		 		}
+				}
+				catch(char const* erro){
+					std::cout<<"\n"<<erro<<"\n";
+				}
 				break;
 		}
 	}
@@ -124,8 +122,7 @@ char* HTTP::converte_Request_to_string(struct PedidoAnalisado *pedido)
 	cabecalhoBuffer = (char*) malloc(sizeCabecalho + 1);
 
 	if (cabecalhoBuffer == NULL) {
-		fprintf(stderr," Erro na alocacao do cabecalhoBuffer! \n");
-		exit (1);
+		throw( " Erro na alocacao do cabecalhoBuffer! \n");
 	}
 
 	recupera_cabecalho_PedidoHTTP(pedido, cabecalhoBuffer, sizeCabecalho);
@@ -135,8 +132,7 @@ char* HTTP::converte_Request_to_string(struct PedidoAnalisado *pedido)
 	serverRequest = (char *) malloc(sizeRequest + 1);
 
 	if(serverRequest == NULL){
-		fprintf(stderr," Erro na alocacao do serverRequest!\n");
-		exit (1);
+		throw(" Erro na alocacao do serverRequest!\n");
 	}
 	serverRequest[0] = '\0';
 	strcpy(serverRequest, pedido->method);

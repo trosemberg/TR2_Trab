@@ -68,19 +68,17 @@ int Socket::createServerSocket(char *requestHost, char *requestPort) {
   host_info.ai_family = AF_UNSPEC;
   host_info.ai_socktype = SOCK_STREAM;
   if (getaddrinfo(requestHost, requestPort, &host_info, &host_info_list) != 0) {
-   		fprintf(stderr," Erro no formato do endereco do servidor!\n");
-		exit (1);
+   		throw(" Erro no formato do endereco do servidor!\n");
   }
   //cria um socket
   if ((idSocket = socket(host_info_list->ai_family, host_info_list->ai_socktype, host_info_list->ai_protocol)) < 0) 
   {
-    	fprintf(stderr," Erro ao criar socket para o servidor!\n");
-		exit (1);
+    	throw(" Erro ao criar socket para o servidor!\n");
   }
   //faz a conecção
   if (connect(idSocket, host_info_list->ai_addr, host_info_list->ai_addrlen) < 0)
   {
-    	fprintf(stderr," Erro ao tentar conectar o servidor!\n");
+    	throw(" Erro ao tentar conectar o servidor!\n");
 		exit (1);
   }
   freeaddrinfo(host_info_list);
@@ -100,8 +98,7 @@ void Socket::sendToServerSocket(const char* bufferServer,int socketfd,int sizeBu
 
 	while (totalSent < sizeBuffer) {
 		if ((numSent = send(socketfd, (void *) (bufferServer + totalSent), sizeBuffer - totalSent, 0)) < 0) {
-			fprintf(stderr," Erro ao enviar para o servidor!\n");
-			exit (1);
+			throw(" Erro ao enviar para o servidor!\n");
 		}
 		totalSent += numSent;
 
@@ -142,7 +139,6 @@ void Socket::receiveFromServer (int Clientfd, int Serverfd)
 		memset(buffer,0,sizeof (buffer));	
 	}      
 	if (iRecv < 0) {
-	  fprintf(stderr,"Erro enquanto recebia do servidor!\n");
-	  exit (1);
+	  throw("Erro enquanto recebia do servidor!\n");
 	}
 }
