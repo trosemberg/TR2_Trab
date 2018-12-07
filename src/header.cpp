@@ -21,7 +21,6 @@ void* HTTP::RequestHTTP(void* socketid)
 	char buffer[sizeBuffer];
 	std::string go;
 	int newsockfd = *((int*)socketid);
-	std::string msg;
 	int total_de_bits_recebidos = 0, recvd;
 
 	int iServerfd;
@@ -59,8 +58,8 @@ void* HTTP::RequestHTTP(void* socketid)
 	  }
 	  strcat(mensagem, buffer);
 	}
-	msg = mensagem;
-	request << msg;
+	std::string msg(mensagem);
+	request << mensagem;
 	request.close();
 	std::cout<<"\nA requisição esta salva no arquivo request\n";
 	std::cout<<"para continuar basta apertar qualquer botao\n";
@@ -120,7 +119,7 @@ void* HTTP::RequestHTTP(void* socketid)
 	}
 	int y = 3;
 	int *p = &y;
-	
+	free(mensagem);
 	return p;
 }
 // converte a request feita toda em uma string para ser enviada
