@@ -40,10 +40,14 @@ int Crawler::wget (char *host, char *path)
 
     /* "format" is the format of the HTTP request we send to the web
        server. */
-    char format[1000];
+    char format[2000];
     memset(format,0,sizeof (format));
-    strcpy(format,"GET / HTTP/1.1\r\nHost:");
+    strcpy(format,"GET http://");
     strcat(format,host);
+    strcat(format,path);
+    strcat(format," HTTP/1.1\r\nHost:");
+    strcat(format,host);
+    // strcat(format,"\r\nAccept: text/html");
     strcat(format,"\r\nConnection: close\r\n\r\n");
     /* Send the request. */
     int bytesSend;
@@ -113,7 +117,7 @@ int Crawler::compara(queue <string> gq, string name)
 }
 
 
-void Crawler::spider(char *host)
+void Crawler::spider(char *host,char *path)
 {   raiz = host;
     FILE *fp1;
     char dados[5000];
@@ -292,5 +296,5 @@ void Crawler::spider(char *host)
 
 void Crawler::run(char *host,char *path){
     wget(host,path);
-    spider(host);
+    spider(host,path);
 }

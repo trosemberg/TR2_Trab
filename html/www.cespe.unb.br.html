@@ -1,875 +1,511 @@
 HTTP/1.1 200 OK
 Cache-Control: private
-Content-Length: 25143
-Content-Type: text/html; Charset=utf-8
+Content-Length: 27910
+Content-Type: text/html; Charset=UTF-8
 Server: Microsoft-IIS/7.5
-Set-Cookie: ASPSESSIONIDASCQBRQD=ADNNKFDBBGKKAHPIICJKBDMO; path=/
+Set-Cookie: ASPSESSIONIDQSQQDDSB=NONBCHEBOEPOMNFMEKCINLFG; path=/
 X-Powered-By: ASP.NET
-Date: Fri, 07 Dec 2018 20:15:41 GMT
+Date: Fri, 07 Dec 2018 22:10:26 GMT
 Connection: close
-Set-Cookie: cebraspe=637534218.20480.0000; path=/; Httponly
-Set-Cookie: f5avrbbbbbbbbbbbbbbbb=DNBJNHBGMDJCFIADFLLMPOLLKIALCKFJGHNBKCALPFNMKGIMPMKNOLPGDNBHMBMFFAKOLLDHKMGDFJHLDAOLJJHECHCACENBCEHHPLMKDECNKKNJKNOKCAGCLIPHJLGG; HttpOnly
-Set-Cookie: f5_cspm=1234;
+Set-Cookie: cebraspe=536870922.20480.0000; path=/; Httponly
+Set-Cookie: f5avrbbbbbbbbbbbbbbbb=CBDPEIHPFNLPEIBHGMJEOBDCOHKLIMBMBEOFNFPFEOJIMLMPAANHBBIMKPJPANIMKDNLHFHMGCDDKNOMDAHMGLPEAKNAGBHGHPLCPAOJPNOLIKJLIOOGIIAEGJAHHJHB; HttpOnly
 Vary: Accept-Encoding
 
-
-
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt-BR" lang="pt-BR">
 <head>
-    <link rel="shortcut icon" type="image/x-icon" href="http://www.cespe.unb.br/imagens/favicon.ico" />
-    <link href="estilos.css" rel="stylesheet" />
-    <link href="NoticiasHTML/noticias.css" rel="stylesheet" />
-    <script type="text/javascript">
-        //function centerpopup(url, height, width, name, scrollbars)
-        //{
-        //	var str = "height=" + height;//+",innerHeight="+height;
-        //	str += ",width=" + width;//+",innerWidth="+width;
-        //	if (window.screen)
-        //	{
-        //		var ah = screen.availHeight - 30;
-        //		var aw = screen.availWidth - 10;
-
-        //		var xc = (aw - width) / 2;
-        //		var yc = (ah - height) / 2;
-
-        //		str += ",left=" + xc + ",screenX=" + xc;
-        //		str += ",top=" + yc + ",screenY=" + yc;
-        //		str_scroll = (scrollbars != null) ? scrollbars : "auto";
-        //	}
-        //	str += ",toolbar=no,location=no,status=no,menubar=no,scrollbars=" + str_scroll + ",resizable=yes";
-
-        //	var janela = window.open(url, name, str);
-        //	janela.focus();
-        //}
-        //function breakout_of_frame()
-        //{
-        //	// see http://www.thesitewizard.com/archive/framebreak.shtml
-        //	// for an explanation of this script and how to use it on your
-        //	// own website
-        //	if (top.location != location)
-        //	{
-        //		top.location.href = document.location.href;
-        //	}
-        //}
-    </script>
-
-    <title>CESPE / UnB</title>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8;">
-    <meta name="description" content="CESPE - Centro de Seleção e de Promoção de Eventos (CESPE), órgão que integra a Fundação Universidade de Brasília, realiza concursos públicos e concursos internos, processos seletivos, vestibulares, PAS, cursos de capacitação, treinamentos, pesquisa em avaliação e eventos.">
-    <meta name="keywords" content="concurso, concursos, concurso publico, edital, editais, concursos publicos, emprego, empregos, curriculo, inss, ibama, trf, trt, tre, tribunal, regional, analista, processos seletivos, vestibulares, vestibular, tecnico, agente, policia, rodoviaria, federal, civil, militar, oficial, justica, prova, provas">
+    <title>CESPE/UnB</title>
+    <meta http-equiv="Content-Type" content="text/html;" />
+    <link rel="stylesheet" href="../stiles/EstiloWeb.css" type="text/css" />
     <style type="text/css">
-        #linkNews {
-            text-align: left;
-            font-size: 12px;
-            font-weight: bold;
-            text-decoration: none;
+        <!--
+        .style2 {
+            color: #000000;
         }
 
-        #selo20Anos {
-            width: 130px;
-            height: 130px;
-            display: block;
-            position: absolute;
-            top: 0px;
-            left: 20px;
-            background: url(imagens/Selo20anos.png);
-            background-repeat: no-repeat;
-            background-size: 130px 130px;
+        legend .l1 {
+            background-color: #e8ecf9;
         }
 
-        .linkStyle {
-            background: none;
-            border: none;
-            color: rgb(0, 0, 51);
-            outline: none;
-            cursor: pointer;
-            text-decoration: underline;
-            font-family: Verdana, Arial, Helvetica, sans-serif;
-            font-size: 9px;
-            display: inline;
-            text-align: left;
-            font-weight: normal;
-            line-height: normal;
-            white-space: normal;
+        legend .l2 {
         }
-
-            .linkStyle:hover {
-                text-decoration: none;
-            }
-
-
-        #bloqueiaTudo {
-            width: 100%;
-            height: 100%;
-            display: block;
-            opacity: 0.65;
-            -moz-opacity: 0.65;
-            filter: alpha(opacity=1);
-            background-color: #000000;
-            position: absolute;
-            z-index: 1000;
-            top: 0;
-            left: 0;
-        }
-
-        #AvisoConsulta {
-            margin-left: auto;
-            margin-right: auto;
-            top: 10%;
-            left: 50%;
-            width: 400px;
-            margin-left: -200px;
-            position: absolute;
-            z-index: 10000;
-            font-family: Arial;
-            font-size: 14px;
-            font-weight: 500;
-            color: #003366;
-            border-radius: 15px !important;
-        }
-
-            #AvisoConsulta p {
-                /*border: 1px solid black;*/
-                background-color: white;
-                padding: 0.8em;
-                text-align: center;
-            }
-
-            #AvisoConsulta span {
-                text-align: center;
-                width: 100%;
-                display: block;
-            }
-
-            #AvisoConsulta input {
-                border: 2px solid #003366;
-                /*width: 100px;*/
-                height: 30px;
-                font-size: 20px;
-            }
-
-        .auto-style1 {
-            left: 112;
-            top: -15;
-        }
+        -->
     </style>
-    <script type="text/javascript">
-        //function VaiURL() {
-        //	location.href = "http://164.41.144.149:8080/pas";
-        //}
-
-        function FechaAviso() {
-            document.getElementById("bloqueiaTudo").style.display = 'none';
-            document.getElementById("AvisoConsulta").style.display = 'none';
-        }
-    </script>
 </head>
-<body leftmargin="0" topmargin="0"  text="#000033" vlink="#000033" alink="#000033" bgcolor="#ffffff" link="#000033" marginheight="0" marginwidth="0">
-    <table width="100%" border="0" cellpadding="0" cellspacing="0">
-        <tbody>
-            <tr bgcolor="#000066" style="height: 100px;">
-                <td class="TituloTopo">&nbsp;
-					<img src="imagens/default/Logo.jpg">
-                </td>
-            </tr>
-
-            <tr>
-                <td colspan="2" style="padding: 25px;">
-                    <table width="100%">
-                        <tbody>
-                            <tr>
-                                <td width="50%" align="left" valign="top">
-                                    <br />
-                                    <h5>Notícias</h5>
-                                    
-
-                                    <table width="100%" border="0" cellspacing="0" cellpadding="0" id="noticias">
-                                        
-
-                                        <tr>
-                                            <td align="left" valign="top">
-                                                <p class="titulos">Polícia Rodoviária Federal abre 500 vagas</p>
-                                                <form action="NoticiasHTML/LerNoticia.asp" method="get">
-                                                    <input class="linkStyle" type="submit" value='São oportunidades para nível superior. Remuneração alcança R$ 9 mil ' />
-                                                    <input type="hidden" name="IdNoticia" value='2190' />
-                                                </form>
-                                            </td>
-                                        </tr>
-                                        
-
-                                        <tr>
-                                            <td align="left" valign="top">
-                                                <p class="titulos">Cebraspe Notícias 686</p>
-                                                <form action="NoticiasHTML/LerNoticia.asp" method="get">
-                                                    <input class="linkStyle" type="submit" value='Boletim informativo semanal - 4 a 10 de dezembro' />
-                                                    <input type="hidden" name="IdNoticia" value='2193' />
-                                                </form>
-                                            </td>
-                                        </tr>
-                                        
-
-                                        <tr>
-                                            <td align="left" valign="top">
-                                                <p class="titulos">Controladoria Geral do Ceará publica edital com 25 oportunidades</p>
-                                                <form action="NoticiasHTML/LerNoticia.asp" method="get">
-                                                    <input class="linkStyle" type="submit" value='Certame oferece vagas para Auditor de Controle Interno. Inscrições iniciam em 17 de dezembro' />
-                                                    <input type="hidden" name="IdNoticia" value='2192' />
-                                                </form>
-                                            </td>
-                                        </tr>
-                                        
-
-                                        <tr>
-                                            <td align="left" valign="top">
-                                                <p class="titulos">Procuradoria-Geral de Pernambuco lança concurso público</p>
-                                                <form action="NoticiasHTML/LerNoticia.asp" method="get">
-                                                    <input class="linkStyle" type="submit" value='Seleção abriu 88 oportunidades para nível superior e médio' />
-                                                    <input type="hidden" name="IdNoticia" value='2189' />
-                                                </form>
-                                            </td>
-                                        </tr>
-                                        
-
-                                        <tr>
-                                            <td align="left" valign="top">
-                                                <p class="titulos">Universidade Estadual de Ciências da Saúde de Alagoas abre processo seletivo </p>
-                                                <form action="NoticiasHTML/LerNoticia.asp" method="get">
-                                                    <input class="linkStyle" type="submit" value='Instituição disponibiliza 490 vagas. Inscrições estão abertas' />
-                                                    <input type="hidden" name="IdNoticia" value='2191' />
-                                                </form>
-                                            </td>
-                                        </tr>
-                                        
-                                        <tr>
-                                            <td align="right" valign="top">
-                                                <p><a href="NoticiasHTML/ListagemNoticias.asp">Mais notícias</a></p>
-                                            </td>
-                                        </tr>
-                                    </table>
-
-                                    <br />
-                                    <a href="http://www.cespe.unb.br/CONcursos" style="text-decoration: none;">
-                                        <img src="imagens/novos_concursos.png" alt="Concursos novos" /></a>
-                                    <a href="https://www.security.cespe.unb.br/securitypass/SendPass.aspx" target="_blank" style="text-decoration: none; margin-left: 10px;">
-                                        <img src="imagens/link_atualizar_senha.png" alt="Atualize sua senha" /></a>
-                                </td>
-                                <td width="11%">&nbsp;</td>
-                                <td width="39%" align="left" valign="top">
-                                    <table width="100%" border="0" cellpadding="0" cellspacing="0">
-                                        <tbody>
-                                            <tr>
-                                                <td align="right">
-                                                    <img src="imagens/default/ultima_01.jpg"></td>
-                                                <td background="imagens/default/ultima_02.jpg"></td>
-                                                <td>
-                                                    <img src="imagens/default/ultima_03.jpg"></td>
-                                            </tr>
-                                            <tr>
-                                                <td background="imagens/default/ultima_04.jpg"></td>
-                                                <td width="100%">
-                                                    <table width="100%">
-                                                        <tr>
-                                                            <td align="center" class="TituloUltimas">&Uacute;ltimas informa&ccedil;&otilde;es</td>
-                                                        </tr>
-                                                        <!--   <tr>
-                                                            <td align="left" class="Txts">Atualizado em:<br />
-                                                                31/10/2016 17:42:49
-                                                            </td>
-                                                        </tr>-->
-                                                        <tr>
-                                                            <td nowrap="yes">
-                                                                <p align="justify">
-                                                                    <ul>
-                                                                        
-                                                                        <li class="Ultimas"><a href="concursos\agu_15_adv\" class="Links" target="_blank">AGU_15_ADV - Edital nº 19, 20 e 21</a></li>
-                                                                        
-                                                                        <li class="Ultimas"><a href="concursos\pref_saoluis_16\" class="Links" target="_blank">PREF_SAOLUIS_16 - Edital nº 2 </a></li>
-                                                                        
-                                                                        <li class="Ultimas"><a href="concursos\pge_am_16_procurador\" class="Links" target="_blank">PGE_AM_16_PROCURADOR - Relação final isenção de taxa</a></li>
-                                                                        
-                                                                        <li class="Ultimas"><a href="concursos\sds_pe_16_civil\" class="Links" target="_blank">SDS_PE_16_CIVIL - Comunicado </a></li>
-                                                                        
-                                                                        <li class="Ultimas"><a href="concursos\sds_pe_16_cientifica\" class="Links" target="_blank">SDS_PE_16_CIENTIFICA - Comunicado </a></li>
-                                                                        
-                                                                        <li class="Ultimas"><a href="concursos\sds_pe_16_civil\" class="Links" target="_blank">SDS_PE_16_CIVIL - Edital nº 20</a></li>
-                                                                        
-                                                                        <li class="Ultimas"><a href="concursos\sds_pe_16_cientifica\" class="Links" target="_blank">SDS_PE_16_CIENTIFICA - Edital nº 14</a></li>
-                                                                        
-                                                                    </ul>
-                                                                    
-                                                                    <!--
-																		<li class="Ultimas"></li>
-																		<li class="Ultimas"></li>
-																		<li class="Ultimas"></li>
-																		<li class="Ultimas"></li>
-																		<li class="Ultimas"></li>
-																		<li class="Ultimas"></li>
-																		<li class="Ultimas"></li>
-																	-->
-                                                                </p>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                                <td background="imagens/default/ultima_05.jpg"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <img src="imagens/default/ultima_06.jpg"></td>
-                                                <td background="imagens/default/ultima_07.jpg"></td>
-                                                <td>
-                                                    <img src="imagens/default/ultima_08.jpg"></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <!--
-									<br />
-									<table width="100%" border="0" cellpadding="0" cellspacing="0">
-										<tbody>
-											<tr>
-												<td align="right">
-													<img src="imagens/default/ultima_01.jpg"></td>
-												<td background="imagens/default/ultima_02.jpg"></td>
-												<td>
-													<img src="imagens/default/ultima_03.jpg"></td>
-											</tr>
-											<tr>
-												<td background="imagens/default/ultima_04.jpg"></td>
-												<td width="100%">
-													<table width="100%">
-														<tr>
-															<td align="center" class="TituloUltimas"><h1 style="color:red">Atenção</h1></td>
-														</tr>
-														<tr>
-															<td align="left" class="Txts" style="font-size:medium; color:darkred">
-																<br />
-																<b>O Cespe informa que o atendimento aos candidatos está indisponível no momento e deverá ser normalizado a partir das 13h30 desta quinta-feira (16).</b>
-															</td>
-														</tr>
-														<tr>
-															<td nowrap="yes">
-																<p align="justify">
-																	
-																</p>
-															</td>
-														</tr>
-													</table>
-												</td>
-												<td background="imagens/default/ultima_05.jpg"></td>
-											</tr>
-											<tr>
-												<td>
-													<img src="imagens/default/ulti                                      <form action="NoticiasHTML/LerNoticia.asp" method="get">
-                                                    <input class="linkStyle" type="submit" value='Certame oferece vagas para Auditor de Controle Interno. Inscrições iniciam em 17 de dezembro' />
-                                                    <input type="hidden" name="IdNoticia" value='2192' />
-                                                </form>
-                                            </td>
-                                        </tr>
-                                        
-
-                                        <tr>
-                                            <td align="left" valign="top">
-                                                <p class="titulos">Procuradoria-Geral de Pernambuco lança concurso público</p>
-                                                <form action="NoticiasHTML/LerNoticia.asp" method="get">
-                                                    <input class="linkStyle" type="submit" value='Seleção abriu 88 oportunidades para nível superior e médio' />
-                                                    <input type="hidden" name="IdNoticia" value='2189' />
-                                                </form>
-                                            </td>
-                                        </tr>
-                                        
-
-                                        <tr>
-                                            <td align="left" valign="top">
-                                                <p class="titulos">Universidade Estadual de Ciências da Saúde de Alagoas abre processo seletivo </p>
-                                                <form action="NoticiasHTML/LerNoticia.asp" method="get">
-              ma_06.jpg"></td>
-												<td background="imagens/default/ultima_07.jpg"></td>
-												<td>
-													<img src="imagens/default/ultima_08.jpg"></td>
-											</tr>
-										</tbody>
-									</table>
-									-->
-                                    <!--
-				<table width="100%">
-					<tr>
-					  <td colspan="2" bgcolor="#D6E0FF" class="TituloUltimas">
-						Jornal do CESPE/UnB: Edi&ccedil;&atilde;o n.&ordm; 23
-					</td>
-					</tr>
-					<tr>
-						<td>
-							<div class="Links" style="cursor:pointer;" onclick="centerpopup('JornalCESPE/PDFs/023.pdf', 600, 800, '', 'yes')">
-								<img src="JornalCESPE/Capas/023.jpg" border="0">							</div>
-					  </td>
-						<td style="padding-left:10px; padding-right:10px;">
-							<strong>A aplica&ccedil;&atilde;o de provas em computador</strong><br>
-							<span style="font-size: 10px;" class="Ultimas">O Cespe/UnB desenvolveu uma plataforma tecnol&oacute;gica mais robusta para rodar o software de Testagem Adaptativa Computadorizada &ndash; a sigla em ingl&ecirc;s &eacute; CAT, abrindo caminho para a aplica&ccedil;&atilde;o de provas em computador em escala nacional e para o aperfei&ccedil;oamento do uso da Teoria de Resposta ao Item (TRI).<br>
-								</span>
-						  <div class="Links" style="cursor:pointer;" onclick="centerpopup('JornalCESPE/PDFs/023.pdf', 600, 800, '', 'yes')"><span style="font-size: 10px;" class="Ultimas">Clique aqui e baixetd>
-                                <td width="11%">&nbsp;</td>
-                                <td width="39%" align="left" valign="top">
-                                    <table width="100%" border="0" cellpadding="0" cellspacing="0">
-                                        <tbody>
-                                            <tr>
-                                                <td align="right">
-                                                    <img src="imagens/default/ultima_01.jpg"></td>
-                                                <td background="imagens/default/ultima_02.jpg"></td>
-                                                <td>
-                                                    <img src="imagens/default/ultima_03.jpg"></td>
-                                            </tr>
-                                            <tr>
-                                                <td background="imagens/default/ultima_04.jpg"></td>
-                                                <td width="100%">
-                                                    <table width="100%">
-                                                        <tr>
-                                                            <td align="center" class="TituloUltimas">&Uacute;ltimas informa&ccedil;&otilde;es</td>
-                                                        </tr>
-                                                        <!--   <tr>
-                                                            <td align="left" class="Txts">Atualizado em:<br />
-                                                                31/10/2016 17:42:49
-                                                            </td>
-                                                        </tr>-->
-                                                        <tr>
-                                                            <td nowrap="yes">
-                                                                <p align="justify">
-                                                                    <ul>
-                                                                        
-                                                                        <li class="Ultimas"><a href="concursos\agu_15_adv\" class="Links" target="_blank">AGU_15_ADV - Edital nº 19, 20 e 21</a></li>
-                                                                        
-                                                                        <li class="Ultimas"><a href="concursos\pref_saoluis_16\" class="Links" target="_blank">PREF_SAOLUIS_16 - Edital nº 2 </a></li>
-                                                                        
-                                                                        <li class="Ultimas"><a href="concursos\pge_am_16_procurador\" class="Links" target="_blank">PGE_AM_16_PROCURADOR - Relação final isenção de taxa</a></li>
-                                                                        
-                                                                        <li class="Ultimas"><a href="concursos\sds_pe_16_civil\" class="Links" target="_blank">SDS_PE_16_CIVIL - Comunicado </a></li>
-                                                                        
-                                                                        <li class="Ultimas"><a href="concursos\sds_pe_16_cientifica\" class="Links" target="_blank">SDS_PE_16_CIENTIFICA - Comunicado </a></li>
-                                                                        
-                                                                        <li class="Ultimas"><a href="concursos\sds_pe_16_civil\" class="Links" target="_blank">SDS_PE_16_CIVIL - Edital nº 20</a></li>
-                                                                        
-                                                                        <li class="Ultimas"><a href="concursos\sds_pe_16_cientifica\" class="Links" target="_blank">SDS_PE_16_CIENTIFICA - Edital nº 14</a></li>
-                                                                        
-                                                                    </ul>
-                                                                    
-                                                                    <!--
-																		<li class="Ultimas"></li>
-																		<li class="Ultimas"></li>
-																		<li class="Ultimas"></li>
-																		<li class="Ultimas"></li>
-																		<li class="Ultimas"></li>
-																		<li class="Ultimas"></li>
-																		<li class="Ultimas"></li>
-																	-->
-                                                                </p>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                                <td background="imagens/default/ultima_05.jpg"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <img src="imagens/default/ultima_06.jpg"></td>
-                                                <td background="imagens/default/ultima_07.jpg"></td>
-                                                <td>
-                                                    <img src="imagens/default/ultima_08.jpg"></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <!--
-									<br />
-									<table width="100%" border="0" cellpadding="0" cellspacing="0">
-										<tbody>
-											<tr>
-												<td align="right">
-													<img src="imagens/default/ultima_01.jpg"></td>
-												<td background="imagens/default/ultima_02.jpg"></td>
-												<td>
-													<img src="imagens/default/ultima_03.jpg"></td>
-											</tr>
-											<tr>
-												<td background="imagens/default/ultima_04.jpg"></td>
-												<td width="100%">
-													<table width="100%">
-														<tr>
-															<td align="center" class="TituloUltimas"><h1 style="color:red">Atenção</h1></td>
-														</tr>
-														<tr>
-															<td align="left" class="Txts" style="font-size:medium; color:darkred">
-																<br />
-																<b>O Cespe informa que o atendimento aos candidatos está indisponível no momento e deverá ser normalizado a partir das 13h30 desta quinta-feira (16).</b>
-															</td>
-														</tr>
-														<tr>
-															<td nowrap="yes">
-																<p align="justify">
-																	
-																</p>
-															</td>
-														</tr>
-													</table>
-												</td>
-												<td background="imagens/default/ultima_05.jpg"></td>
-											</tr>
-											<tr>
-												<td>
-													<img src="imagens/default/ulti                                      <form action="NoticiasHTML/LerNoticia.asp" method="get">
-                                                    <input class="linkStyle" type="submit" value='Certame oferece vagas para Auditor de Controle Interno. Inscrições iniciam em 17 de dezembro' />
-                                                    <input type="hidden" name="IdNoticia" value='2192' />
-                                                </form>
-                                            </td>
-                                        </tr>
-                                        
-
-                                        <tr>
-                                            <td align="left" valign="top">
-                                                <p class="titulos">Procuradoria-Geral de Pernambuco lança concurso público</p>
-                                                <form action="NoticiasHTML/LerNoticia.asp" method="get">
-                                                    <input class="linkStyle" type="submit" value='Seleção abriu 88 oportunidades para nível superior e médio' />
-                                                    <input type="hidden" name="IdNoticia" value='2189' />
-                                                </form>
-                                            </td>
-                                        </tr>
-                                        
-
-                                        <tr>
-                                            <td align="left" valign="top">
-                                                <p class="titulos">Universidade Estadual de Ciências da Saúde de Alagoas abre processo seletivo </p>
-                                                <form action="NoticiasHTML/LerNoticia.asp" method="get">
-               o .pdf  (3MB)</span></div>
-						</td>
-                  </tr>
-				</table>
--->
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2" style="padding: 25px;"></td>
-            </tr>
-            <tr align="center" bgcolor="#000066">
-                <td colspan="2" bgcolor="#000066" height="60"><font color="#ffffff">
-                    <a href="http://www.cespe.unb.br/cespe/" class="MENU">CESPE</a>&nbsp;|&nbsp;
-				<a href="http://www.cespe.unb.br/cebraspe/" class="MENU">Cebraspe</a>&nbsp;|&nbsp;
-				<a href="http://www.cespe.unb.br/avaliacao/" class="MENU">Avaliações</a>&nbsp;|&nbsp;
-				<a href="http://www.cespe.unb.br/colaboradores/" class="MENU">Colaboradores</a>&nbsp;|&nbsp;
-				<a href="http://www.cespe.unb.br/concursos/" class="MENU">Concursos e Seleções</a>&nbsp;|&nbsp;
-				<a href="http://www.cespe.unb.br/interacao/" class="MENU">Interação</a>&nbsp;|&nbsp;
-				<a href="http://www.cespe.unb.br/pas/" class="MENU">PAS</a>&nbsp;|&nbsp;
-				<a href="http://www.cespe.unb.br/vestibular/" class="MENU">Transferência Facultativa</a>&nbsp;|&nbsp;
-				<a href="http://www.cespe.unb.br/vestibular/" class="MENU">Vestibulares / Acesso UnB</a>&nbsp;|&nbsp;
-				<a href="http://www.unb.br/" class="MENU" target="_blank">UnB</a>&nbsp;<br>
-                    <a href="http://www.cespe.unb.br/profissiografia_e_mapeamento/" class="MENU">Profissiografia e Mapeamento</a>&nbsp;|&nbsp;
-				<a href="https://www.security.cespe.unb.br/cadastro/" class="MENU">Página de Inscrição</a>&nbsp;|&nbsp;
-				<a href="https://www.security.cespe.unb.br/acompanhamento/" class="MENU">Página de Acompanhamento </a>&nbsp;|&nbsp;
-				<a href="http://www.cespe.unb.br/perguntasFrequentes/" class="MENU">Perguntas Freqüentes </a>&nbsp;|&nbsp;
-                    <a href="https://www.canalintegro.com.br/cebraspe/" class="MENU">Canal de Ética On-line </a>&nbsp;|&nbsp;
-                </font></td>
-            </tr>
-            <tr align="center">
-                <td colspan="2" class="Txts">
-                    <br />
-                    <p>
-                        <strong><em>Fone</em>: 61 3448-0100</strong>
-                        <br />
-                        <br />
-                        <a href="http://www.cespe.unb.br/faq/default.htm">FALE CONOSCO</a>
-                    </p>
-                    <p>
-                        Visualização:  a partir de 800x600<br />
-                        Nossos arquivos estão disponibilizados em formato PDF<br />
-                        © CT - Coordenadoria de Tecnologia
-						<br />
-                        <br />
-                        <span class="TituloPagina"><a href="http://www.cespe.unb.br/CESPE/clientes/">Como nos Contratar</a></span><br />
-
-                    </p>
-                </td>
-            </tr>
-        </tbody>
+<body bgcolor="#ffffff" text="#000066" link="#000066" vlink="#000066" alink="#000066" style="margin: 0px; padding: 0px; background-color: white;">
+    <table width="80%" border="0" cellspacing="0" cellpadding="0">
+        <tr bgcolor="#000033" height="70">
+            <td valign="middle" background="../imagens/internas/fundo_01.jpg" width="60%" bgcolor="#000033">&nbsp;<a href="../default.asp"><img src="../imagens/internas/Logo.jpg" alt="CESPE/UnB" /></a>
+            </td>
+            <td width="40%" align="right" valign="middle" bgcolor="#000066">&nbsp;&nbsp;
+            </td>
+        </tr>
     </table>
-    
-  <!-- 
-    <div id="bloqueiaTudo" onclick="FechaAviso();" class="auto-style1">
-    </div>
-    <div id="AvisoConsulta">
-        <div style="background-color: transparent; text-align: center; width: 100%;" onclick="FechaAviso();">
-            <br />
-            
-            
-                    <img src="Pop-Up_Site_expediente-Copa.png" /><br />
+    <table width="80%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+            <td align="right" valign="top" nowrap="nowrap" bgcolor="#000066" width="20%">
+                <table width="100%" border="1" cellpadding="4" cellspacing="0" bordercolor="#333366">
+                    <tr>
+                        <td align="right" height="25"><a href="http://www.cespe.unb.br/cespe" class="MenuLadoLinks">&nbsp;CESPE&nbsp;</a></td>
+                    </tr>
+                    <tr>
+                        <td align="right" height="25"><a href="http://www.cespe.unb.br/cebraspe" class="MenuLadoLinks">&nbsp;Cebraspe&nbsp;</a></td>
+                    </tr>
+                    <tr>
+                        <td align="right" height="25"><a href="../avaliacao" target="_blank" class="MenuLadoLinks">&nbsp;Avaliação Educacional&nbsp;</a></td>
+                    </tr>
+                    <tr>
+                        <td align="right" height="25"><a href="../colaboradores/default.asp" class="MenuLadoLinks">&nbsp;Colaboradores&nbsp;</a></td>
+                    </tr>
+                    <tr>
+                        <td align="right" height="25"><a href="../concursos" class="MenuLadoLinks">&nbsp;Concursos e Seleções&nbsp;</a></td>
+                    </tr>
+                    <tr>
+                        <td align="right" height="25"><a href="../interacao" class="MenuLadoLinks">&nbsp;Interação&nbsp;</a></td>
+                    </tr>
+                    <tr>
+                        <td align="right" height="25"><a href="../profissiografia_e_mapeamento" class="MenuLadoLinks">Profissiografia e Mapeamento</a></td>
+                    </tr>
+                    <tr>
+                        <td align="right" height="25"><a href="../pas" class="MenuLadoLinks">&nbsp;PAS&nbsp;</a></td>
+                    </tr>
+                    <tr>
+                        <td align="right" height="25"><a href="../vestibular" class="MenuLadoLinks">&nbsp;Vestibular / Acesso UnB&nbsp;</a></td>
+                    </tr>
+                    <tr>
+                        <td align="right" height="25"><a href="http://www.unb.br" target="_blank" class="MenuLadoLinks">&nbsp;UnB&nbsp;</a></td>
+                    </tr>
+                </table>
+            </td>
+            <td rowspan="2" align="center" valign="top" width="100%">
+                <table width="100%" border="0" cellspacing="0" cellpadding="4" align="center">
+                    <tr>
+                        <td height="27" align="right">
+                            <table border="0" cellpadding="5" cellspacing="0">
+                                <tr>
+                                    <td height="27" align="right">
+                                        <table border="0" cellpadding="5" cellspacing="0">
+                                            <tr>
+                                                <td>
+                                                    <table border="0" cellpadding="0" cellspacing="0">
+                                                        <tr align="center" valign="bottom">
+                                                            <td><a href="../../../" class="MenuCimaLinks">&nbsp;&nbsp;Início&nbsp;&nbsp;</a></td>
+                                                            <td height="15" bgcolor="#000066" class="Linha"><font color="#ffffff" size="1" face="Verdana, Arial, Helvetica, sans-serif"><strong>&nbsp;&nbsp;Vestibulares&nbsp;&nbsp;</strong></font></td>
+                                                            <td><a href="antigos.asp" class="MenuCimaLinks">&nbsp;&nbsp;Antigos&nbsp;&nbsp;</a></td>
+                                                            <td><a href="transferencias.asp" class="MenuCimaLinks">&nbsp;&nbsp;Transferências Facultativas&nbsp;&nbsp;</a></td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <!--<tr><td align="right" bgcolor="#000033" class="TituloPagina">Vestibulares</td></tr>-->
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            
+                            <fieldset>
+                                <legend class="l1 ConteudoTitulo_ Conteudo">Novos</legend>
+                                <div class="ConteudoTitulo_">
+                                    <ul>
+                                        <!--<li><a href="VESTUNB_19_1_INDIGENA" class="Links">VESTUNB_19_1_INDIGENA</a></li>-->
+                                         <li><a href="ACESSOSISU_19_1" class="Links">SISU 2019</a></li> 
+                                     
+                                    </ul>
+                                </div>
+                            </fieldset>
+                            <!--
+							<table width="90%" border="1" align="center" cellpadding="5" cellspacing="0" bordercolor="#d6e0ff">
+								<tr bgcolor="#e8ecf9" class="Conteudo">
+									<td class="ConteudoTitulo_">&nbsp;Novos</td>
+								</tr>
+								<tr class="Conteudo">
+									<td class="ConteudoTitulo_">
+										<ul>
+										</ul>
+									</td>
+								</tr>
+							</table>
+							-->
 
-            
+                            <!--
+							<table width="90%" border="1" align="center" cellpadding="5" cellspacing="0" bordercolor="#d6e0ff">
+								<tr bgcolor="#e8ecf9" class="Conteudo">
+									<td class="ConteudoTitulo_">&nbsp;SISU</td>
+								</tr>
+								<tr class="Conteudo">
+									<td class="ConteudoTitulo_">
+										<ul>
+											<li><a href="ACESSOSISU_14_1" class="Links">SISU 2014</a></li>
+											<li><a href="ACESSOSISU_15_1" class="Links">SISU 2015</a></li>
+										</ul>
+									</td>
+								</tr>
+							</table>
+							-->
+                            <br />
+                            <br />
+                            <fieldset>
+                                <legend class="l1 ConteudoTitulo_ Conteudo">Inscri&ccedil;&otilde;es abertas</legend>
+                                <div class="ConteudoTitulo_">
+                                    <ul>
+                                        <li><a href="VESTUNB_19_1_INDIGENA" class="Links">VESTUNB_19_1_INDIGENA</a></li>
+                                        <li><a href="UNCISAL_19" class="Links">PROCESSO SELETIVO VESTIBULAR DE 2019 (PROSEL/UNCISAL)</a></li>  
+                                    </ul>
+                                </div>
+                            </fieldset>
+                            <br />
+                            <br />
+                            <!--
+							<table width="90%" border="1" align="center" cellpadding="5" cellspacing="0" bordercolor="#d6e0ff">
+								<tr bgcolor="#e8ecf9" class="Conteudo">
+									<td class="ConteudoTitulo_">Inscri&ccedil;&otilde;es abertas</td>
+								</tr>
+								<tr class="Conteudo">
+									<td class="ConteudoTitulo_">
+										<ul>
+											<li><a href="DCS_16_1" class="Links">1.ª Admissão para portador de diploma de curso superior de 2016 - DCS 2016</a></li>
+										</ul>
+									</td>
+								</tr>
+							</table>
+							-->
+                            <fieldset style="padding: 0.4em;">
+                                <legend class="l1 ConteudoTitulo_ Conteudo">Outras Fases</legend>
+                                <div class="ConteudoTitulo_">
+                                    <fieldset>
+                                        <legend>DCS</legend>
+                                        <ul>
+                                            <li><a href="DCS_18_1_2" class="Links">Admissão para portador de diploma de curso superior de 2018 - DCS 2018</a></li>
+                                            <li><a href="http://www.cespe.unb.br/Vestibular/DCS_17_1/" class="Links">1ª ADMISSÃO PARA PORTADOR DE DIPLOMA DE CURSO SUPERIOR DE 2017 – Seleção de candidatos avaliados no ENEM 2011, 2012, 2013, 2014 ou 2015</a></li>
+                                            <li><a href="DCS_16_1" class="Links">1.ª Admissão para portador de diploma de curso superior de 2016 - DCS 2016</a></li>
+                                            <li><a href="DCS_15_2" class="Links">2ª Admissão para portador de diploma de curso superior 2015</a> - DCS 2015</li>
+                                            <li><a href="DCS_15_1" class="Links">1.ª Admissão para portador de diploma de curso superior de 2015 - DCS 2015</a></li>
+                                            <li><a href="DCS_14_2" class="Links">2.ª Admissão para Portador de Diploma de Curso Superior – DCS 2014</a></li>
+                                            <li><a href="DCS_14_1" class="Links">1.ª Admissão para Portador de Diploma de Curso Superior – DCS 2014</a></li>
 
-            <a style="cursor:pointer; padding:10px 20px; background-color:white; z-index:9999;" >[x] Fechar</a>
-            <br />
-            <br />
-        </div>
-    </div>
-   -->
+                                        </ul>
+                                    </fieldset>
+                                    <fieldset>
+                                        <legend>Habilidade Específica</legend>
+                                        <ul>
+                                            <li><a href="HE_18_2" class="Links">2ª Certificação de Habilidade Específica de 2018</a></li>
+                                            <li><a href="HE_18_1" class="Links">1ª Certificação de Habilidade Específica de 2018</a></li>
+                                            <li><a href="CURSOS_HE_18_1" class="Links">Vestibular para ingresso nos cursos que exigem certificação de habilidade específica 2018_1 – Seleção de candidatos avaliados pelo ENEM 2017</a></li>
+                                            <li><a href="HE_17_2" class="Links">2ª Certificação de Habilidade Específica de 2017</a></li>
+                                            <li><a href="HE_17_1 " class="Links">1ª Certificação de Habilidade Específica de 2017</a></li>
+                                            <li><a href="CURSOS_HE_17_1" class="Links">CURSOS HE 2017</a></li>
+                                            <li><a href="http://www.cespe.unb.br/vestibular/HE_16_2/" class="Links">2ª Certificação de Habilidade Específica de 2016</a></li>
+                                            <li><a href="HE_16_1" class="Links">1ª Certificação de Habilidade Específica de 2016</a></li>
+                                            <li><a href="CURSOS_HE_16_1" class="Links">Vestibular para cursos que exigem certificação de habilidade específica_16_1</a></li>
+                                            <li><a href="HE_15_2" class="Links">2ª Certificação de Habilidade Específica de 2015 - HE 2/2015</a></li>
+                                            <li><a href="CURSOS_HE_15_1" class="Links">CURSOS HE 2015</a></li>
+                                            <li><a href="HE_14_3" class="Links">3ª Certific</a></li>
+                                            <li><a href="DCS_16_1" class="Links">1.ª Admissão para portador de diploma de curso superior de 2016 - DCS 2016</a></li>
+                                            <li><a href="DCS_15_2" class="Links">2ª Admissão para portador de diploma de curso superior 2015</a> - DCS 2015</li>
+                                            <li><a href="DCS_15_1" class="Links">1.ª Admissão para portador de diploma de curso superior de 2015 - DCS 2015</a></li>
+                                            <li><a href="DCS_14_2" class="Links">2.ª Admissão para Portador de Diploma de Curso Superior – DCS 2014</a></li>
+                                            <li><a href="DCS_14_1" class="Links">1.ª Admissão para Portador de Diploma de Curso Superior – DCS 2014</a></li>
 
+                                        </ul>
+                                    </fieldset>
+                                    <fieldset>
+                                        <legend>Habilidade Específica</legend>
+                                        <ul>
+                                            <li><a href="HE_18_2" class="Links">2ª Certificação de Habilidade Específica de 2018</a></li>
+                                            <li><a href="HE_18_1" class="Links">1ª Certificação de Habilidade Específica de 2018</a></li>
+                                            <li><a hreação de Habilidade Específica de 2014</a></li>
+                                            <li><a href="HE_14_2" class="Links">2ª Certificação de Habilidade Específica de 2014</a></li>
+                                            <li><a href="HE_14_1" class="Links">1ª Certificação de Habilidade Específica de 2014</a></li>
+                                            <li><a href="CURSOS_HE_14_1" class="Links">CURSOS HE 2014</a></li>
+                                            <li><a href="HE_13_2" class="Links">2ª Certificação de Habilidade Específica de 2013</a></li>
+                                            <li><a href="http://www.cespe.unb.br/Vestibular/HE_15_1/" class="Links">1ª Certificação de habilidade específica de 2015</a></li>
+                                        </ul>
+                                    </fieldset>
+                                    <fieldset>
+                                        <legend>UAB</legend>
+                                        <ul>
+                                            <li><a href="UAB_17_LICENCIATURA/" class="Links">Programa Universidade Aberta do Brasil 2017 (UAB)</a></li>
+                                            <li><a href="UAB_15_LICENCIATURA" class="Links">Programa Universidade Aberta do Brasil 2015 (UAB)</a></li>
+                                            <li><a href="UAB_13_LICENCIATURA" class="Links">Programa Universidade Aberta</a></li>
+                                            <li><a href="DCS_16_1" class="Links">1.ª Admissão para portador de diploma de curso superior de 2016 - DCS 2016</a></li>
+                                            <li><a href="DCS_15_2" class="Links">2ª Admissão para portador de diploma de curso superior 2015</a> - DCS 2015</li>
+                                            <li><a href="DCS_15_1" class="Links">1.ª Admissão para portador de diploma de curso superior de 2015 - DCS 2015</a></li>
+                                            <li><a href="DCS_14_2" class="Links">2.ª Admissão para Portador de Diploma de Curso Superior – DCS 2014</a></li>
+                                            <li><a href="DCS_14_1" class="Links">1.ª Admissão para Portador de Diploma de Curso Superior – DCS 2014</a></li>
 
+                                        </ul>
+                                    </fieldset>
+                                    <fieldset>
+                                        <legend>Habilidade Específica</legend>
+                                        <ul>
+                                            <li><a href="HE_18_2" class="Links">2ª Certificação de Habilidade Específica de 2018</a></li>
+                                            <li><a href="HE_18_1" class="Links">1ª Certificação de Habilidade Específica de 2018</a></li>
+                                            <li><a hre do Brasil 2013 (UAB)</a></li>
+
+                                        </ul>
+                                    </fieldset>
+                                    <fieldset>
+                                        <legend class="l1 ConteudoTitulo_ Conteudo">SISU</legend>
+                                        <div class="ConteudoTitulo_">
+                                            <ul>
+
+                                                <li><a href="ACESSOSISU_18_1" class="Links">SISU 2018</a></li>
+                                                <li><a href="ACESSOSISU_17_1" class="Links">SISU 2017</a></li>
+                                                <li><a href="ACESSOSISU_16_1" class="Links">SISU 2016</a></li>
+                                                <li><a href="ACESSOSISU_15_1" class="Links">SISU 2015</a></li>
+                                                <li><a href="ACESSOSISU_14_1" class="Links">SISU 2014</a></li>
+
+                                            </ul>
+                                        </div>
+                                    </fieldset>
+                                    <fieldset>
+                                        <legend>Transferência Facultativa</legend>
+                                        <ul>
+                                            <li><a href="TRFAC_18_1_2" class="Links">1ª Admissão por transferência facultativa de 2018</a></li>
+                                            <li><a href="http://www.cespe.unb.br/Vestibular/TRFAC_17_1/" class="Links">1ª ADMISSÃO POR TRANSFERÊNCIA FACULTATIVA DE 2017 – Seleção de Candidatos avaliados no ENEM 2011, 2012, 2013, 2014 ou 2015</a></li>
+                                            <li><a href="TRFAC_16_1" class="Links">1° Admissão por transferência facultativa de 2016</a></li>
+                                            <li><a href="TRFAC_15_2" class="Links">2° Admissão por transferência facultativa de 2015</a></li>
+                                            <li><a href="TRFAC_15_1" class="Links">1° Admissão por transferência facultativa de 2015</a></li>
+                                            <li><a href="TRFAC_14_2" class="Links">2ª Transferência Facultativa de 2014</a></li>
+                                            <li><a href="TRFAC_14_1" class="Links">1ª Transferência Facultativa de 2014</a></li>
+                                        </ul>
+                                    </fieldset>
+                                    <fieldset>
+                                        <legend>Vestibular</legend>
+                                        <ul>
+                                               <li><a href="  http://www.cespe.unb.br/Vestibular/VESTUNB_19_1_LIBRAS/" class="Links">Vestibular 2019 Licenciatura em Língua de Sinais Brasileira/Português como Segunda Língua</a></li>
+                                            <li><a href="VESTUNB_18_2" class="Links">Vestibular UnB de 2018</a></li>
+                                            <li><a href="VESTDIST_18_2_EDUCAMPO" class="Links">Vestibular para ingresso no curso de graduação: Licenciatura em Educação do Campo 2018_2 – Seleção de candidatos avaliados no ENEM 2015, 2016, ou 2017</a></li>
+                                            <li><a href="VESTUNB_18_1_REMANESCENTES" class="Links">Vestibular UnB de 2018 - Vagas Remanescentes 1º semestre de 2018</a></li>
+                                            <li><a href="http://www.cespe.unb.br/vestibular/VESTUNB_18_1_LIBRAS/" class="Links">Vestibular 2018 Licenciatura em Língua de Sinais Brasileira/Português como Segunda Língua</a></li>
+                                            <li><a href="VESTUNB_18_1_2_INDIGENA" class="Links">VESTIBULAR INDÍGENA UnB/FUNAI 2017</a></li>
+                                            <li><a href="VESTDIST_18_1_EDUCAMPO" class="Links">Vestibular para ingresso no curso de graduação: Licenciatura em Educação do Campo 2018</a></li>
+                                            <li><a href="VESTUNB_17_2" class="Links">Vestibular UnB de 2017</a></li>
+                                            <li><a href="VESTUNB_17_2_REMANESCENTES" class="Links">Seleção para vagas remanescentes do 2º vestibular de 2017</a></li>
+                                            <li><a href="VESTUNB_17_1_REMANESCENTES" class="Links">Seleção para vagas remanescentes do 1º vestibular de 2017</a></li>
+                                            <li><a href="http://www.cespe.unb.br/Vestibular/VESTUNB_17_1_LIBRAS/" class="Links">Vestibular 2017 Licenciatura em Língua de Sinais Brasileira/Português como segunda Língua</a></li>
+                                            <li><a href="VESTUNB_16_2_REMANESCENTES" class="Links">Vestibular UnB de 2016 - Vagas Remanescentes 2º semestre de 2016</a></li>
+                                            <li><a href="VESTUNB_16_2" class="Links">Vestibular UnB de 2016</a></li>
+                                            <li><a href="VESTDIST_16_2_EDUCAMPO" class="Links">Vestibular para ingresso no curso de graduação: Licenciatura em Educação do Campo 2016</a></li>
+                                            <li><a href="VESTUNB_16_1_REMANESCENTES" class="Links">Vestibular UnB de 2016 - Vagas Remanescentes</a></li>
+                                            <li><a href="VESTUNB_16_1_LIBRAS" class="Links">Vestibular 2016 Licenciatura em Língua de Sinais Brasileira/Português como segunda Língua</a></li>
+                                            <li><a href="VESTUNB_15_2_REMANESCENTES" class="Links">Vestibular UnB de 2015 - Vagas Remanescentes</a></li>
+                                            <li><a href="VESTUNB_15_2" class="Links">Vestibular UnB de 2015</a></li>
+                                            <li><a href="VESTUNB_15_1_REMANESCENTES" class="Links">Seleção para vagas remanescentes do 1º semestre de 2015</a></li>
+                                            <li><a href="VESTUNB_15_1_LIBRAS" class="Links">Vestibular 2015 Licenciatura em Língua de Sinais Brasileira/Português como segunda Língua</a></li>
+                                            <li><a href="VEST_ESCS_15" class="Links">Vestibular ESCS 2015</a></li>
+                                            <li><a href="VEST_ESCS_14" class="Links">Vestibular ESCS 2014</a></li>
+                                            <li><a href="VESTUNB_14_2" class="Links">Vestibular UnB de 2014</a></li>
+                                            <li><a href="VESTDIST_14_1_EDUCAMPO" class="Links">Vestibular para ingresso no curso de graduação: Licenciatura em Educação do Campo 2014</a></li>
+                                            <li><a href="VESTDIST_13_1_EDUCAMPO" class="Links">Vestibular para ingresso no curso de graduação: Licenciatura em Educação do Campo 2013</a></li>
+                                            <li><a href="VESTUNB_14_1_REMANESCENTES" class="Links">Seleção para vagas remanescentes do 1º vestibular de 2014</a></li>
+                                            <li><a href="VESTUNB_14_2_REMANESCENTES" class="Links">Seleção para vagas remanescentes do 2º semest       <li><a href="VESTUNB_17_1_REMANESCENTES" class="Links">Seleção para vagas remanescentes do 1º vestibular de 2017</a></li>
+                                            <li><a href="http://www.cespe.unb.br/Vestibular/VESTUNB_17_1_LIBRAS/" class="Links">Vestibular 2017 Licenciatura em Língua de Sinais Brasileira/Português como segunda Língua</a></li>
+                                            <li><a href="VESTUNB_16_2_REMANESCENTES" class="Links">Vestibular UnB de 2016 - Vagas Remanescentes 2º semestre de 2016</a></li>
+                                            <li><a href="VESTUNB_16_2" class="Links">Vestibular UnB de 2016</a></li>
+                                            <li><a href="VESTDIST_16_2_EDUCAMPO" class="Links">Vestibular para ingresso no curso de graduação: Licenciatura em Educação do Campo 2016</a></li>
+                                            <li><a href="VESTUNB_16_1_REMANESCENTES" class="Links">Vestibular UnB de 2016 - Vagas Remanescentes</a></li>
+                                            <li><a href="VESTUNB_16_1_LIBRAS" class="Links">Vestibular 2016 Licenciatura em Língua de Sinais Brasileira/Português como segunda Língua</a></li>
+                                            <li><a href="VESTUNB_15_2_REMANESCENTES" class="Links">Vestibular UnB de 2015 - Vagas Remanescentes</a></li>
+                                            <li><a href="VESTUNB_15_2" class="Links">Vestibure de 2014</a></li>
+                                        </ul>
+                                    </fieldset>
+                                </div>
+                            </fieldset>
+                            <br />
+                            <br />
+                            <!--
+							<table width="90%" border="1" align="center" cellpadding="5" cellspacing="0" bordercolor="#d6e0ff">
+								<tr bgcolor="#e8ecf9" class="Conteudo">
+									<td height="26" class="ConteudoTitulo_">&nbsp;Outras Fases</td>
+								</tr>
+								<tr class="Conteudo">
+									<td class="ConteudoTitulo_">
+										<fieldset>
+											<legend>DCS</legend>
+											<ul>
+												<li><a href="DCS_15_2" class="Links">2ª Admissão para portador de diploma de curso superior 2015</a> - DCS 2015</li>
+												<li><a href="DCS_15_1" class="Links">1.ª Admissão para portador de diploma de curso superior de 2015 - DCS 2015</a></li>
+												<li><a href="DCS_14_2" class="Links">2.ª Admissão para Portador de Diploma de Curso Superior – DCS 2014</a></li>
+												<li><a href="DCS_14_1" class="Links">1.ª Admissão para Portador de Diploma de Curso Superior – DCS 2014</a></li>
+											</ul>
+										</fieldset>
+										<fieldset>
+											<legend>Habilitade Específica</legend>
+											<ul>
+												<li><a href="HE_15_2" class="Links">2ª Certificação de Habilidade Específica de        <li><a href="VESTUNB_17_1_REMANESCENTES" class="Links">Seleção para vagas remanescentes do 1º vestibular de 2017</a></li>
+                                            <li><a href="http://www.cespe.unb.br/Vestibular/VESTUNB_17_1_LIBRAS/" class="Links">Vestibular 2017 Licenciatura em Língua de Sinais Brasileira/Português como segunda Língua</a></li>
+                                            <li><a href="VESTUNB_16_2_REMANESCENTES" class="Links">Vestibular UnB de 2016 - Vagas Remanescentes 2º semestre de 2016</a></li>
+                                            <li><a href="VESTUNB_16_2" class="Links">Vestibular UnB de 2016</a></li>
+                                            <li><a href="VESTDIST_16_2_EDUCAMPO" class="Links">Vestibular para ingresso no curso de graduação: Licenciatura em Educação do Campo 2016</a></li>
+                                            <li><a href="VESTUNB_16_1_REMANESCENTES" class="Links">Vestibular UnB de 2016 - Vagas Remanescentes</a></li>
+                                            <li><a href="VESTUNB_16_1_LIBRAS" class="Links">Vestibular 2016 Licenciatura em Língua de Sinais Brasileira/Português como segunda Língua</a></li>
+                                            <li><a href="VESTUNB_15_2_REMANESCENTES" class="Links">Vestibular UnB de 2015 - Vagas Remanescentes</a></li>
+                                            <li><a href="VESTUNB_15_2" class="Links">Vestibu2015 - HE 2/2015</a></li>
+												<li><a href="CURSOS_HE_15_1" class="Links">CURSOS HE 2015</a></li>
+												<li><a href="HE_14_3" class="Links">3ª Certificação de Habilidade Específica de 2014</a></li>
+												<li><a href="HE_14_2" class="Links">2ª Certificação de Habilidade Específica de 2014</a></li>
+												<li><a href="HE_14_1" class="Links">1ª Certificação de Habilidade Específica de 2014</a></li>
+												<li><a href="CURSOS_HE_14_1" class="Links">CURSOS HE 2014</a></li>
+												<li><a href="HE_13_2" class="Links">2ª Certificação de Habilidade Específica de 2013</a></li>
+												<li><a href="http://www.cespe.unb.br/Vestibular/HE_15_1/" class="Links">1ª Certificação de habilidade específica de 2015</a></li>
+											</ul>
+										</fieldset>
+										<fieldset>
+											<legend>UAB</legend>
+											<ul>
+												<li><a href="UAB_13_LICENCIATURA" class="Links">Programa Universidade Aberta do Brasil 2013 (UAB)</a></li>
+												<li><a href="UAB_15_LICENCIATURA" class="Links">Programa Universidade Aberta do Brasil 2015 (UAB)</a></li>
+											</ul>
+										</fieldset>
+										<fieldset>
+											<legend>Transferência Facultativa</legend>
+											<ul>
+												<li><a href="TRFAC_16_1" class="Links">1° Admissão por transferência facultativa de 2016</a></li>
+												<li><a href="TRFAC_15_2" class="Links">2° Admissão por transferência facultativa de 2015</a></li>
+												<li><a href="TRFAC_15_1" class="Links">1° Admissão por transferência facultativa de 2015</a></li>
+												<li><a href="TRFAC_14_2" class="Links">2ª Transferência Facultativa de 2014</a></li>
+												<li><a href="TRFAC_14_1" class="Links">1ª Transferência Facultativa de 2014</a></li>
+											</ul>
+										</fieldset>
+										<fieldset>
+											<legend>Vestibular</legend>
+											<ul>
+												<li><a href="VESTUNB_15_2_REMANESCENTES" class="Links">Vestibular UnB de 2015 - Vagas Remanescentes</a></li>
+												<li><a href="VESTUNB_15_2" class="Links">Vestibular UnB de 2015</a></li>
+												<li><a href="VESTUNB_15_1_REMANESCENTES" class="Links">Seleção para vagas remanescentes do 1º semestre de 2015</a></li>
+												<li><a href="VESTUNB_15_1_LIBRAS" class="Links">Vestibular 2015 Licenciatura em Língua de Sinais Brasileira/Português como segunda Língua</a></li>
+												<li><a href="VEST_ESCS_15" class="Links">Vestibular ESCS 2015</a></li>
+												<li><a href="VEST_ESCS_14" class="Links">Vestibular ESCS 2014</a></li>
+												<li><a href="VESTUNB_14_2" class="Links">Vestibular UnB de 2014</a></li>
+												<li><a href="VESTDIST_14_1_EDUCAMPO" class="Links">Vestibular para ingresso no curso de graduação: Licenciatura em Educação do Campo 2014</a></li>
+												<li><a href="VESTDIST_13_1_EDUCAMPO" class="Links">Vestibular para ingresso no curso de graduação: Licenciatura em Educação do Campo 2013</a></li>
+											E_14_3" class="Links">3ª Certificação de Habilidade Específica de 2014</a></li>
+												<li><a href="HE_14_2" class="Links">2ª Certificação de Habilidade Específica de 2014</a></li>
+												<li><a href="HE_14_1" class="Links">1ª Certificação de Habilidade Específica de 2014</a></li>
+												<li><a href="CURSOS_HE_14_1" class="Links">CURSOS HE 2014</a></li>
+												<li><a href="HE_13_2" class="Links">2ª Certificação de Habilidade Específica de 2013</a></li>
+												<li><a href="http://www.cespe.unb.br/Vestibular/HE_15_1/" class="Links">1ª Certificação de habilidade específica de 2015</a></li>
+											</ul>
+										</fieldset>
+										<fieldset>
+											<legend>UAB</legend>
+											<ul>
+												<li><a href="UAB_13_LICENCIATURA" class="Links">Programa Universidade Aberta do Brasil 2013 (UAB)</a></li>
+												<li><a href="UAB_15_LICENCIATURA" class="Links">Programa Universidade Aberta do Brasil 2015 (UAB)</a></li>
+											</ul>
+										</fieldset>
+										<fieldset>
+											<legend>Transferência Facultativa</legend>
+											<ul>
+												<li><a href="TRFAC_16_1" class="Links">1° Admissão por transferência facultativa de 2016</a></li>
+												<li><a href="TRFAC_15_2" class="Links">2° Admissão por transferência facultativa de 2015</a></li>
+												<li><a href="TRFAC_15_1" class="Links">1° Admissão por transferência facultativa de 2015</a></li>
+												<li><a href="TRFAC_14_2" class="Links">2ª Transferência Facultativa de 2014</a></li>
+												<li><a href="TRFAC_14_1" class="Links">1ª Transferência Facultativa de 2014</a></li>
+											</ul>
+										</fieldset>
+										<fieldset>
+											<legend>Vestibular</legend>
+											<ul>
+												<li><a href="VESTUNB_15_2_REMANESCENTES" class="Links">Vestibular UnB de 2015 - Vagas Remanescentes</a></li>
+												<li><a href="VESTUNB_15_2" class="Links">Vestibular UnB de 2015</a></li>
+												<li><a href="VESTUNB_15_1_REMANESCENTES" class="Links">Seleção para vagas remanescentes do 1º semestre de 2015</a></li>
+												<li><a href="VESTUNB_15_1_LIBRAS" class="Links">Vestibular 2015 Licenciatura em Língua de Sinais Brasileira/Português como segunda Língua</a></li>
+												<li><a href="VEST_ESCS_15" class="Links">Vestibular ESCS 2015</a></li>
+												<li><a href="VEST_ESCS_14" class="Links">Vestibular ESCS 2014</a></li>
+												<li><a href="VESTUNB_14_2" class="Links">Vestibular UnB de 2014</a></li>
+												<li><a href="VESTDIST_14_1_EDUCAMPO" class="Links">Vestibular para ingresso no curso de graduação: Licenciatura em Educação do Campo 2014</a></li>
+												<li><a href="VESTDIST_13_1_EDU	<li><a href="VESTUNB_14_1_REMANESCENTES" class="Links">Seleção para vagas remanescentes do 1º vestibular de 2014</a></li>
+												<li><a href="VESTUNB_14_2_REMANESCENTES" class="Links">Seleção para vagas remanescentes do 2º semestre de 2014</a></li>
+											</ul>
+										</fieldset>
+									</td>
+								</tr>
+							</table>
+							-->
+                        </td>
+                    </tr>
+                </table>
+                <br />
+            </td>
+        </tr>
+        <tr>
+            <td bgcolor="#000066" valign="bottom">
+                <table width="100%" valign="bottom" border="0" cellpadding="0" cellspacing="0" bordercolor="#000066" id="Table6">
+                    <tr>
+                        <td align="right" valign="bottom" class="MenuLadoLinks">CESPE/UnB&nbsp;<br />
+                            &nbsp;Fale Conosco&nbsp;<br />
+                            &nbsp;Fone: 61 3448-0100&nbsp;<br />
+                            &nbsp;Fax: 61 3448-0110&nbsp;<br />
+                            <em>e-mail</em>: <a class="MenuLadoLinks" href="mailto:sac@cespe.unb.br">sac@cespe.unb.br</a><font face="Verdana" color="#ffffff" size="1">&nbsp;</font><br />
+                            <a href="http://www.adobe.com.br/products/acrobat/readstep.html" target="_blank">
+                                <img src="../imagens/getacro.gif" width="100" height="31" border="0" alt="Adobe Acrobat Readerr transferência facultativa de 2015</a></li>
+												<li><a href="TRFAC_15_1" class="Links">1° Admissão por transferência facultativa de 2015</a></li>
+												<li><a href="TRFAC_14_2" class="Links">2ª Transferência Facultativa de 2014</a></li>
+												<li><a href="TRFAC_14_1" class="Links">1ª Transferência Facultativa de 2014</a></li>
+											</ul>
+										</fieldset>
+										<fieldset>
+											<legend>Vestibular</legend>
+											<ul>
+												<li><a href="VESTUNB_15_2_REMANESCENTES" class="Links">Vestibular UnB de 2015 - Vagas Remanescentes</a></li>
+												<li><a href="VESTUNB_15_2" class="Links">Vestibular UnB de 2015</a></li>
+												<li><a href="VESTUNB_15_1_REMANESCENTES" class="Links">Seleção para vagas remanescentes do 1º semestre de 2015</a></li>
+												<li><a href="VESTUNB_15_1_LIBRAS" class="Links">Vestibular 2015 Licenciatura em Língua de Sinais Brasileira/Português como segunda Língua</a></li>
+												<li><a href="VEST_ESCS_15" class="Links">Vestibular ESCS 2015</a></li>
+												<li><a href="VEST_ESCS_14" class="Links">Vestibular ESCS 2014</a></li>
+												<li><a href="VESTUNB_14_2" class="Links">Vestibular UnB de 2014</a></li>
+												<li><a href="VESTDIST_14_1_EDUCAMPO" class="Links">Vestibular para ingresso no curso de graduação: Licenciatura em Educação do Campo 2014</a></li>
+												<li><a href="VESTDIST_13_1_EDU" /></a>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    <!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//_analytics.cebraspe.org.br/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//_analytics.cebraspe.org.br/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
 </body>
 </html>
-<script id="f5_cspm">(function(){var f5_cspm={f5_p:'IPIMJLBFMDJNNOICJCDJIJLLLIDKOAEJLLIBICALOFNMGGIMOCONOJNGDNBHMBMFHAKOLLDHKMGBFJHLDBOLJJHECHCACENBAANLGNGGPJNEJGAIAAOPDNGHMLIMEFDM',setCharAt:function(str,index,chr){if(index>str.length-1)return str;return str.substr(0,index)+chr+str.substr(index+1);},get_byte:function(str,i){var s=(i/16)|0;i=(i&15);s=s*32;return((str.charCodeAt(i+16+s)-65)<<4)|(str.charCodeAt(i+s)-65);},set_byte:function(str,i,b){var s=(i/16)|0;i=(i&15);s=s*32;str=f5_cspm.setCharAt(str,(i+16+s),String.fromCharCode((b>>4)+65));str=f5_cspm.setCharAt(str,(i+s),String.fromCharCode((b&15)+65));return str;},set_latency:function(str,latency){latency=latency&0xffff;str=f5_cspm.set_bytROCURADOR - Relação final isenção de taxa</a></li>
-                                                                        
-                                                                        <li class="Ultimas"><a href="concursos\sds_pe_16_civil\" class="Links" target="_blank">SDS_PE_16_CIVIL - Comunicado </a></li>
-                                                                        
-                                                                        <li class="Ultimas"><a href="concursos\sds_pe_16_cientifica\" class="Links" target="_blank">SDS_PE_16_CIENTIFICA - Comunicado </a></li>
-                                                                        
-                                                                        <li class="Ultimas"><a href="concursos\sds_pe_16_civil\" class="Links" target="_blank">SDS_PE_16_CIVIL - Edital nº 20</a></li>
-                                                                        
-                                                                        <li class="Ultimas"><a href="concursos\sds_pe_16_cientifica\" class="Links" target="_blank">SDS_PE_16_CIENTIFICA - Edital nº 14</a></li>
-                                                                        
-                                                                    </ul>
-                                                                    
-                                                                    <!--
-																		<li class="Ultimas"></li>
-																		<li class="Ultimas"></li>
-																		<li class="Ultimas"></li>
-																		<li class="Ultimas"></li>
-																		<li class="Ultimas"></li>
-																		<li class="Ultimas"></li>
-																		<li class="Ultimas"></li>
-																	-->
-                                                                </p>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                                <td background="imagens/default/ultima_05.jpg"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <img src="imagens/default/ultima_06.jpg"></td>
-                                                <td background="imagens/default/ultima_07.jpg"></td>
-                                                <td>
-                                                    <img src="imagens/default/ultima_08.jpg"></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <!--
-									<br />
-									<table width="100%" border="0" cellpadding="0" cellspacing="0">
-										<tbody>
-											<tr>
-												<td align="right">
-													<img src="imagens/default/ultima_01.jpg"></td>
-												<td background="imagens/default/ultima_02.jpg"></td>
-												<td>
-													<img src="imagens/default/ultima_03.jpg"></td>
-											</tr>
-											<tr>
-												<td background="imagens/default/ultima_04.jpg"></td>
-												<td width="100%">
-													<table width="100%">
-														<tr>
-															<td align="center" class="TituloUltimas"><h1 style="color:red">Atenção</h1></td>
-														</tr>
-														<tr>
-															<td align="left" class="Txts" style="font-size:medium; color:darkred">
-																<br />
-																<b>O Cespe informa que o atendimento aos candidatos está indisponível no momento e deverá ser normalizado a partir das 13h30 desta quinta-feira (16).</b>
-															</td>
-														</tr>
-														<tr>
-															<td nowrap="yes">
-																<p align="justify">
-																	
-																</p>
-															</td>
-														</tr>
-													</table>
-												</td>
-												<td background="imagens/default/ultima_05.jpg"></td>
-											</tr>
-											<tr>
-												<td>
-													<img src="imagens/default/ulti                                      <form action="NoticiasHTML/LerNoticia.asp" method="get">
-                                                    <input class="linkStyle" type="submit" value='Certame oferece vagas para Auditor de Controle Interno. Inscrições iniciam em 17 de dezembro' />
-                                                    <input type="hidden" name="IdNoticia" value='2192' />
-                                                </form>
-                                            </td>
-                                        </tr>
-                                        
-
-                                        <tr>
-                                            <td align="left" valign="top">
-                                                <p class="titulos">Procuradoria-Geral de Pernambuco lança concurso público</p>
-                                                <form action="NoticiasHTML/LerNoticia.asp" method="get">
-                                                    <input class="linkStyle" type="submit" value='Seleção abriu 88 oportunidades para nível superior e médio' />
-                                                    <input type="hidden" name="IdNoticia" value='2189' />
-                                                </form>
-                                            </td>
-                                        </tr>
-                                        
-
-                                        <tr>
-                                            <td align="left" valign="top">
-                                                <p class="titulos">Universidade Estadual de Ciências da Saúde de Alagoas abre processo seletivo </p>
-                                                <form action="NoticiasHTML/LerNoticia.asp" method="get">
-              e(str,48,(latency>>8));str=f5_cspm.set_byte(str,49,(latency&0xff));str=f5_cspm.set_byte(str,43,2);return str;},wait_perf_data:function(){try{var wp=window.performance.timing;if(wp.loadEventEnd>0){var res=wp.loadEventEnd-wp.navigationStart;if(res<60001){var cookie_val=f5_cspm.set_latency(f5_cspm.f5_p,res);window.document.cookie='f5avr1552127320aaaaaaaaaaaaaaaa='+encodeURIComponent(cookie_val)+';path=/';}
-return;}}
-catch(err){return;}
-setTimeout(f5_cspm.wait_perf_data,100);return;},go:function(){var chunk=window.document.cookie.split(/\s*;\s*/);for(var i=0;i<chunk.length;++i){var pair=chunk[i].split(/\s*=\s*/);if(pair[0]=='f5_cspm'&&pair[1]=='1234')
-{var d=new Date();d.setTime(d.getTime()-1000);window.document.cookie='f5_cspm=;expires='+d.toUTCString()+';path=/;';setTimeout(f5_cspm.wait_perf_data,100);}}}}
-f5_cspm.go();}());</script>NU">Colaboradores</a>&nbsp;|&nbsp;
-				<a href="http://www.cespe.unb.br/concursos/" class="MENU">Concursos e Seleções</a>&nbsp;|&nbsp;
-				<a href="http://www.cespe.unb.br/interacao/" class="MENU">Interação</a>&nbsp;|&nbsp;
-				<a href="http://www.cespe.unb.br/pas/" class="MENU">PAS</a>&nbsp;|&nbsp;
-				<a href="http://www.cespe.unb.br/vestibular/" class="MENU">Transferência Facultativa</a>&nbsp;|&nbsp;
-				<a href="http://www.cespe.unb.br/vestibular/" class="MENU">Vestibulares / Acesso UnB</a>&nbsp;|&nbsp;
-				<a href="http://www.unb.br/" class="MENU" target="_blank">UnB</a>&nbsp;<br>
-                    <a href="http://www.cespe.unb.br/profissiografia_e_mapeamento/" class="MENU">Profissiografia e Mapeamento</a>&nbsp;|&nbsp;
-				<a href="https://www.security.cespe.unb.br/cadastro/" class="MENU">Página de Inscrição</a>&nbsp;|&nbsp;
-				<a href="https://www.security.cespe.unb.br/acompanhamento/" class="MENU">Página de Acompanhamento </a>&nbsp;|&nbsp;
-				<a href="http://www.cespe.unb.br/perguntasFrequentes/" class="MENU">Perguntas Freqüentes </a>&nbsp;|&nbsp;
-                    <a href="https://www.canalintegro.com.br/cebraspe/" class="MENU">Canal de Ética On-line </a>&nbsp;|&nbsp;
-                </font></td>
-            </tr>
-            <tr align="center">
-                <td colspan="2" class="Txts">
-                    <br />
-                    <p>
-                        <strong><em>Fone</em>: 61 3448-0100</strong>
-                        <br />
-                        <br />
-                        <a href="http://www.cespe.unb.br/faq/default.htm">FALE CONOSCO</a>
-                    </p>
-                    <p>
-                        Visualização:  a partir de 800x600<br />
-                        Nossos arquivos estão disponibilizados em formato PDF<br />
-                        © CT - Coordenadoria de Tecnologia
-						<br />
-                        <br />
-                        <span class="TituloPagina"><a href="http://www.cespe.unb.br/CESPE/clientes/">Como nos Contratar</a></span><br />
-
-                    </p>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    
-  <!-- 
-    <div id="bloqueiaTudo" onclick="FechaAviso();" class="auto-style1">
-    </div>
-    <div id="AvisoConsulta">
-        <div style="background-color: transparent; text-align: center; width: 100%;" onclick="FechaAviso();">
-            <br />
-            
-            
-                    <img src="Pop-Up_Site_expediente-Copa.png" /><br />
-
-            
-
-            <a style="cursor:pointer; padding:10px 20px; background-color:white; z-index:9999;" >[x] Fechar</a>
-            <br />
-            <br />
-        </div>
-    </div>
-   -->
-
-
-</body>
-</html>
-<script id="f5_cspm">(function(){var f5_cspm={f5_p:'IPIMJLBFMDJNNOICJCDJIJLLLIDKOAEJLLIBICALOFNMGGIMOCONOJNGDNBHMBMFHAKOLLDHKMGBFJHLDBOLJJHECHCACENBAANLGNGGPJNEJGAIAAOPDNGHMLIMEFDM',setCharAt:function(str,index,chr){if(index>str.length-1)return str;return str.substr(0,index)+chr+str.substr(index+1);},get_byte:function(str,i){var s=(i/16)|0;i=(i&15);s=s*32;return((str.charCodeAt(i+16+s)-65)<<4)|(str.charCodeAt(i+s)-65);},set_byte:function(str,i,b){var s=(i/16)|0;i=(i&15);s=s*32;str=f5_cspm.setCharAt(str,(i+16+s),String.fromCharCode((b>>4)+65));str=f5_cspm.setCharAt(str,(i+s),String.fromCharCode((b&15)+65));return str;},set_latency:function(str,latency){latency=latency&0xffff;str=f5_cspm.set_bytROCURADOR - Relação final isenção de taxa</a></li>
-                                                                        
-                                                                        <li class="Ultimas"><a href="concursos\sds_pe_16_civil\" class="Links" target="_blank">SDS_PE_16_CIVIL - Comunicado </a></li>
-                                                                        
-                                                                        <li class="Ultimas"><a href="concursos\sds_pe_16_cientifica\" class="Links" target="_blank">SDS_PE_16_CIENTIFICA - Comunicado </a></li>
-                                                                        
-                                                                        <li class="Ultimas"><a href="concursos\sds_pe_16_civil\" class="Links" target="_blank">SDS_PE_16_CIVIL - Edital nº 20</a></li>
-                                                                        
-                                                                        <li class="Ultimas"><a href="concursos\sds_pe_16_cientifica\" class="Links" target="_blank">SDS_PE_16_CIENTIFICA - Edital nº 14</a></li>
-                                                                        
-                                                                    </ul>
-                                                                    
-                                                                    <!--
-																		<li class="Ultimas"></li>
-																		<li class="Ultimas"></li>
-																		<li class="Ultimas"></li>
-																		<li class="Ultimas"></li>
-																		<li class="Ultimas"></li>
-																		<li class="Ultimas"></li>
-																		<li class="Ultimas"></li>
-																	-->
-                                                                </p>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                                <td background="imagens/default/ultima_05.jpg"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <img src="imagens/default/ultima_06.jpg"></td>
-                                                <td background="imagens/default/ultima_07.jpg"></td>
-                                                <td>
-                                                    <img src="imagens/default/ultima_08.jpg"></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <!--
-									<br />
-									<table width="100%" border="0" cellpadding="0" cellspacing="0">
-										<tbody>
-											<tr>
-												<td align="right">
-													<img src="imagens/default/ultima_01.jpg"></td>
-												<td background="imagens/default/ultima_02.jpg"></td>
-												<td>
-													<img src="imagens/default/ultima_03.jpg"></td>
-											</tr>
-											<tr>
-												<td background="imagens/default/ultima_04.jpg"></td>
-												<td width="100%">
-													<table width="100%">
-														<tr>
-															<td align="center" class="TituloUltimas"><h1 style="color:red">Atenção</h1></td>
-														</tr>
-														<tr>
-															<td align="left" class="Txts" style="font-size:medium; color:darkred">
-																<br />
-																<b>O Cespe informa que o atendimento aos candidatos está indisponível no momento e deverá ser normalizado a partir das 13h30 desta quinta-feira (16).</b>
-															</td>
-														</tr>
-														<tr>
-															<td nowrap="yes">
-																<p align="justify">
-																	
-																</p>
-															</td>
-														</tr>
-													</table>
-												</td>
-												<td background="imagens/default/ultima_05.jpg"></td>
-											</tr>
-											<tr>
-												<td>
-													<img src="imagens/default/ulti                                      <form action="NoticiasHTML/LerNoticia.asp" method="get">
-                                                    <input class="linkStyle" type="submit" value='Certame oferece vagas para Auditor de Controle Interno. Inscrições iniciam em 17 de dezembro' />
-                                                    <input type="hidden" name="IdNoticia" value='2192' />
-                                                </form>
-                                            </td>
-                                        </tr>
-                                        
-
-                                        <tr>
-                                            <td align="left" valign="top">
-                                                <p class="titulos">Procuradoria-Geral de Pernambuco lança concurso público</p>
-                                                <form action="NoticiasHTML/LerNoticia.asp" method="get">
-                                                    <input class="linkStyle" type="submit" value='Seleção abriu 88 oportunidades para nível superior e médio' />
-                                                    <input type="hidden" name="IdNoticia" value='2189' />
-                                                </form>
-                                            </td>
-                                        </tr>
-                                        
-
-                                        <tr>
-                                            <td align="left" valign="top">
-                                                <p class="titulos">Universidade Estadual de Ciências da Saúde de Alagoas abre processo seletivo </p>
-                                                <form action="NoticiasHTML/LerNoticia.asp" method="get">
-              
+Links">CESPE/UnB&nbsp;<br />
+                            &nbsp;Fale Conosco&nbsp;<br />
+                            &nbsp;Fone: 61 3448-0100&nbsp;<br />
+                            &nbsp;Fax: 61 3448-0110&nbsp;<br />
+                            <em>e-mail</em>: <a class="MenuLadoLinks" href="mailto:sac@cespe.unb.br">sac@cespe.unb.br</a><font face="Verdana" color="#ffffff" size="1">&nbsp;</font><br />
+                            <a href="http://www.adobe.com.br/products/acrobat/readstep.html" target="_blank">
+                                <img src="../imagens/getacro.gif" width="100" height="31" border="0" alt="Adobe Acrobat Readerr transferência facultativa de 2015</a></li>
+												<li><a href="TRFAC_15_1" class="Links">1° Admissão por transferência facultativa de 2015</a></li>
+												<li><a href="TRFAC_14_2" class="Links">2ª Transferência Facultativa de 2014</a></li>
+												<li><a href="TRFAC_14_1" class="Links">1ª Transferência Facultativa de 2014</a></li>
+											</ul>
+										</fieldset>
+										<fieldset>
+											<legend>Vestibular</legend>
+											<ul>
+												<li><a href="VESTUNB_15_2_REMANESCENTES" class="Links">Vestibular UnB de 2015 - Vagas Remanescentes</a></li>
+												<li><a href="VESTUNB_15_2" class="Links">Vestibular UnB de 2015</a></li>
+												<li><a href="VESTUNB_15_1_REMANESCENTES" class="Links">Seleção para vagas remanescentes do 1º semestre de 2015</a></li>
+												<li><a href="VESTUNB_15_1_LIBRAS" class="Links">Vestibular 2015 Licenciatura em Língua de Sinais Brasileira/Português como segunda Língua</a></li>
+												<li><a href="VEST_ESCS_15" class="Links">Vestibular ESCS 2015</a></li>
+												<li><a href="VEST_ESCS_14" class="Links">Vestibular ESCS 2014</a></li>
+												<li><a href="VESTUNB_14_2" class="Links">Vestibular UnB de 2014</a></li>
+												<li><a href="VESTDIST_14_1_EDUCAMPO" class="Links">Vestibular para ingresso no curso de graduação: Licenciatura em Educação do Campo 2014</a></li>
+												<li><a href="VESTDIST_13_1_EDU
