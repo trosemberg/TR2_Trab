@@ -7,7 +7,7 @@ char *raiz;
 Crawler::Crawler() = default;
 Crawler::~Crawler() = default;
 //  escreve no arquivo a resposta da request
-int Crawler::wget (char *host)
+int Crawler::wget (char *host, char *path)
 {  
     char buffer[65535];
     struct addrinfo host_info;
@@ -51,7 +51,10 @@ int Crawler::wget (char *host)
     /* Recv data */
     memset(buffer,0,sizeof (buffer));  
     int bytesRecv;
-    fp1 = fopen("index.html","w");
+    char arquivo[1000] = "./html/";
+    strcat(arquivo,host);
+    strcat(arquivo,".html");
+    fp1 = fopen(arquivo,"w");
     while ((bytesRecv = recv(idSocket, buffer, sizeof (buffer), 0)) > 0) {
         fprintf(fp1,"%s", buffer);         
     } 
@@ -114,14 +117,17 @@ void Crawler::spider(char *host)
 {   raiz = host;
     FILE *fp1;
     char dados[5000];
-    fp1 = fopen("index.html","r");
+    char arquivo[1000]="./html/";
+    strcat(arquivo,host);
+    strcat(arquivo,".html");
+    fp1 = fopen(arquivo,"r");
     queue <string> auxiliar;
     if(fp1 == NULL)
     {
-        printf("Falha ao abrir o arquivo\n");
+        printf("\nFalha ao abrir o arquivo\n");
         cout << host;
         cout << '\n';
-        exit(1);
+        return ;
     }else{
         string domain = raiz;
         size_t pos = domain.find("www.");
@@ -282,4 +288,9 @@ void Crawler::spider(char *host)
     cout << host;cout << " >> ";cout << '\n';
     showq(auxiliar);
     std::cout<<"Fim spider";
+}
+
+void Crawler::run(char *host,char *path){
+    wget(host,path);
+    spider(host);
 }

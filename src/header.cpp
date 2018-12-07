@@ -22,6 +22,7 @@ void* HTTP::RequestHTTP(void* socketid)
 	std::string go;
 	int newsockfd = *((int*)socketid);
 	int total_de_bits_recebidos = 0, recvd;
+	char go_to[100] = "";
 
 	int iServerfd;
 
@@ -85,9 +86,8 @@ void* HTTP::RequestHTTP(void* socketid)
 		switch(opcao)
 		{
 			// caso escolhido 1, faz o wget + crawler
-			case 1:  
-				crawler.wget(pedido->host);
-				crawler.spider(pedido->host);
+			case 1:
+				crawler.run(pedido->host, pedido->path);
 				break;
 			// caso escolhido 2, termina a execucao do programa
 			case 2:
