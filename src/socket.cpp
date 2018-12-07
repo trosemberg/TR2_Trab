@@ -128,18 +128,23 @@ void Socket::sendToClientSocket(const char* bufferServer,int socketfd,int sizeBu
 }
 
 // recebe de volta do servidor a resposta
-void Socket::receiveFromServer (int Clientfd, int Serverfd) 
-{
+void Socket::receiveFromServer (int Clientfd, int Serverfd) {
+	std::string temp;
 	int sizeBuffer = 5000;
 	int iRecv;
 	char buffer[sizeBuffer];
+	std::fstream response;
+	response.open("response", std::ios::binary| std::ios::out);
 		// while de verificacao se o recebido e maior que 0 bits
 		// iRecv > 0 armazena o buffer e =0 terminou de enviar
 		std::cout<<"\n\e[92mResposta do servidor:\n";
 	while ((iRecv = recv(Serverfd, buffer, sizeBuffer, 0)) > 0) {
+		temp.append(buffer);
 	    sendToClientSocket(buffer, Clientfd,iRecv);         // writing to client	  
 		memset(buffer,0,sizeof (buffer));	
-	}     
+	}
+	response<< temp;
+	response.close();     
 	if (iRecv < 0) {
 	  throw("Erro enquanto recebia do servidor!\n");
 	}
