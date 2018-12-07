@@ -15,13 +15,13 @@ HTTP::HTTP(long int porta) : socket(porta){}
 void* HTTP::RequestHTTP(void* socketid)
 {
 	std::fstream request;
-	request.open("request",std::ios::out | std::ios::in);
+	request.open("request",std::ios::out);
 	int sizeBuffer = 5000;
 	int opcao;
 	char buffer[sizeBuffer];
-	std::string vamos;
+	std::string go;
 	int newsockfd = *((int*)socketid);
-
+	std::string msg;
 	int total_de_bits_recebidos = 0, recvd;
 
 	int iServerfd;
@@ -59,7 +59,17 @@ void* HTTP::RequestHTTP(void* socketid)
 	  }
 	  strcat(mensagem, buffer);
 	}
-	request << mensagem;
+	msg = mensagem;
+	request << msg;
+	request.close();
+	std::cout<<"\na requisição esta salva no arquivo request\n";
+	std::cout<<"para continuar basta apertar qualquer botao\n";
+	std::cin>>go;
+	request.open("request",std::ios::in);
+	msg.assign((std::istreambuf_iterator<char>(request)),
+            std::istreambuf_iterator<char>());
+	request.close();
+	strcpy(mensagem, msg.c_str());
 	if(strlen(mensagem) > 0)
 	{
 		// cria o pedido analisado, struct com as informacoes das requests
@@ -79,7 +89,6 @@ void* HTTP::RequestHTTP(void* socketid)
 			case 1:  
 				crawler.wget(pedido->host);
 				crawler.spider(pedido->host);
-				
 				break;
 			// caso escolhido 2, termina a execucao do programa
 			case 2:
@@ -111,7 +120,7 @@ void* HTTP::RequestHTTP(void* socketid)
 	}
 	int y = 3;
 	int *p = &y;
-	request.close();
+	
 	return p;
 }
 // converte a request feita toda em uma string para ser enviada

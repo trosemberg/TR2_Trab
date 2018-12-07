@@ -106,16 +106,13 @@ void Socket::sendToServerSocket(const char* bufferServer,int socketfd,int sizeBu
 
 }
 // envia a http recebida para o browser
-void Socket::sendToClientSocket(const char* bufferServer,int socketfd,int sizeBuffer)
-{
+void Socket::sendToClientSocket(const char* bufferServer,int socketfd,int sizeBuffer){
+	std::fstream response;
 	std::string temp;
-
 	temp.append(bufferServer);
 	
 	int totalSent = 0;
-
 	int numSent;
-
 	while (totalSent < sizeBuffer) {
 		if ((numSent = send(socketfd, (void *) (bufferServer + totalSent), sizeBuffer - totalSent, 0)) < 0) {
 			fprintf(stderr," Erro ao receber do servidor!\n");
@@ -128,18 +125,30 @@ void Socket::sendToClientSocket(const char* bufferServer,int socketfd,int sizeBu
 }
 
 // recebe de volta do servidor a resposta
-void Socket::receiveFromServer (int Clientfd, int Serverfd) 
-{
-	int sizeBuffer = 5000;
+void Socket::receiveFromServer (int Clientfd, int Serverfd) {
+	std::fstream response;
+	std::string msg;
+	response.open("response",std::ios::out);
+	response.close();
+	response.open("response",std::ios::app);
+	int sizeBuffer = 6000;
 	int iRecv;
 	char buffer[sizeBuffer];
 		// while de verificacao se o recebido e maior que 0 bits
 		// iRecv > 0 armazena o buffer e =0 terminou de enviar
-		std::cout<<"\n\e[92mResposta do servidor:\n";
 	while ((iRecv = recv(Serverfd, buffer, sizeBuffer, 0)) > 0) {
-	    sendToClientSocket(buffer, Clientfd,iRecv);         // writing to client	  
+	    // sendToClientSocket(buffer, Clientfd,iRecv);         // writing to client	 
+		response << buffer; 
 		memset(buffer,0,sizeof (buffer));	
-	}     
+	}
+	response.close();
+	response.open("response",std::ios::in);
+	msg.assign((std::istreambuf_iterator<char>(response)),
+        std::istreambuf_iterator<char>());
+	char *mensagem = new char[msg.length() + 1];
+	strcpy(mensagem, msg.c_str());
+	sendToClientSocket(mensagem, Clientfd,iRecv);
+	delete [] mensagem;
 	if (iRecv < 0) {
 	  throw("Erro enquanto recebia do servidor!\n");
 	}
