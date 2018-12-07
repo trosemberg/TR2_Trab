@@ -62,7 +62,7 @@ void* HTTP::RequestHTTP(void* socketid)
 	msg = mensagem;
 	request << msg;
 	request.close();
-	std::cout<<"\na requisição esta salva no arquivo request\n";
+	std::cout<<"\nA requisição esta salva no arquivo request\n";
 	std::cout<<"para continuar basta apertar qualquer botao\n";
 	std::cin>>go;
 	request.open("request",std::ios::in);

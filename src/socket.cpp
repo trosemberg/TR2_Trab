@@ -127,7 +127,7 @@ void Socket::sendToClientSocket(const char* bufferServer,int socketfd,int sizeBu
 // recebe de volta do servidor a resposta
 void Socket::receiveFromServer (int Clientfd, int Serverfd) {
 	std::fstream response;
-	std::string msg;
+	std::string msg,go;
 	response.open("response",std::ios::out);
 	response.close();
 	response.open("response",std::ios::app);
@@ -142,11 +142,16 @@ void Socket::receiveFromServer (int Clientfd, int Serverfd) {
 		memset(buffer,0,sizeof (buffer));	
 	}
 	response.close();
+	std::cout<<"\nA resposta esta salva no arquivo response\n";
+	std::cout<<"para continuar basta apertar qualquer botao\n";
+	std::cin>>go;
+	std::cout<<"\n\e[92mResposta do servidor:\n";
 	response.open("response",std::ios::in);
 	msg.assign((std::istreambuf_iterator<char>(response)),
         std::istreambuf_iterator<char>());
 	char *mensagem = new char[msg.length() + 1];
 	strcpy(mensagem, msg.c_str());
+	std::cout<<mensagem;
 	sendToClientSocket(mensagem, Clientfd,iRecv);
 	delete [] mensagem;
 	if (iRecv < 0) {
