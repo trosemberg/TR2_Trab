@@ -128,7 +128,6 @@ void Socket::sendToClientSocket(const char* bufferServer,int socketfd,int sizeBu
 }
 
 // recebe de volta do servidor a resposta
-// TODO FAZER RESPONSE SER EDITAVEL
 void Socket::receiveFromServer (int Clientfd, int Serverfd) {
 	std::string temp;
 	int sizeBuffer = 5000;
