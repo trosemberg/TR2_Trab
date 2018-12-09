@@ -308,7 +308,7 @@ std::queue <std::string> Crawler::spider(char *host,char *path)
 }
 
 void Crawler::run(char *host,char *path){
-    queue <string> first,second;
+    queue <string> first,second,third;
     int wget_ret;
     std::cout<<host<<path<<"\n";
     char hoost[100] = "/", paath[100] = "/", temp[100],*temp_2;
@@ -336,8 +336,30 @@ void Crawler::run(char *host,char *path){
             if(wget_ret == 0){
                 second = spider(hoost,paath);
                 while(!second.empty()){
+                    std::strcpy(hoost,"/");
+                    std::strcpy(paath,"/");
                     std::cout<<"\t-\t-"<<second.front()<<"\n";
+                    strcpy(temp,(char *)second.front().c_str());
+                    // std::cout<<"TEMP:"<<temp;
+                    temp_2 = strtok (temp,"/");
+                    std::strcpy(hoost,temp_2);
+                    // std::cout<<"hoost:"<<hoost;
+                    temp_2 = strtok (NULL,"/");
+                    if (temp_2 == NULL) {          // replace empty abs_path with "/"
+                        std::strcpy(paath,"/");
+                    }else{
+                        std::strcat(paath,temp_2);
+                    }
+                    // std::cout<<"paath:"<<paath;
+                    wget_ret = wget(hoost,paath);
                     second.pop();
+                    if(wget_ret == 0){
+                        third = spider(hoost,paath);   
+                        while(!third.empty()){
+                            std::cout<<"\t-\t-\t"<<third.front()<<"\n";
+                            third.pop();
+                        }
+                    }
                 }
             }
         }
