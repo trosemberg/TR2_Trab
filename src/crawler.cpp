@@ -54,6 +54,7 @@ int Crawler::wget (char *host, char *path){
     strcat(format,host);
     // strcat(format,"\r\nAccept: text/html");
     strcat(format,"\r\nConnection: close\r\n\r\n");
+    // std::cout<<format;
     /* Send the request. */
     int bytesSend;
     bytesSend = send (idSocket, format, strlen (format), 0);
@@ -315,6 +316,8 @@ void Crawler::run(char *host,char *path){
     if (wget_ret == 0){
         first = spider(host,path);
         while(!first.empty()){
+            std::strcpy(hoost,"/");
+            std::strcpy(paath,"/");
             std::cout<<"\t-"<<first.front()<<"\n";
             strcpy(temp,(char *)first.front().c_str());
             // std::cout<<"TEMP:"<<temp;
@@ -325,7 +328,7 @@ void Crawler::run(char *host,char *path){
             if (temp_2 == NULL) {          // replace empty abs_path with "/"
                 std::strcpy(paath,"/");
             }else{
-                std::strcpy(paath,temp_2);
+                std::strcat(paath,temp_2);
             }
             // std::cout<<"paath:"<<paath;
             wget_ret = wget(hoost,paath);
