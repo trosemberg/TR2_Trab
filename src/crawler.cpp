@@ -310,7 +310,7 @@ std::queue <std::string> Crawler::spider(char *host,char *path)
 void Crawler::run(char *host,char *path){
     queue <string> first,second,third;
     int wget_ret;
-    std::cout<<host<<path<<"\n";
+    std::cout<<host<<path<<"\n\e[95m";
     char hoost[100] = "/", paath[100] = "/", temp[100],*temp_2;
     wget_ret = wget(host,path);
     if (wget_ret == 0){
@@ -364,5 +364,5 @@ void Crawler::run(char *host,char *path){
             }
         }
     }
-    std::cout<<"\n\nFim spider + wget recursivo de profundidade 2\n\n";
+    std::cout<<"\e[0m\n\nFim spider + wget recursivo de profundidade 2\n\n";
 }
