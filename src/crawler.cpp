@@ -3,25 +3,31 @@
 using namespace std;
 queue <string> gquiz;
 char *raiz;
+static const char *root_abs_path = "/";
 
 Crawler::Crawler() = default;
 Crawler::~Crawler() = default;
 //  escreve no arquivo a resposta da request
-int Crawler::wget (char *host, char *path)
-{  
+int Crawler::wget (char *host, char *path){
+
     char buffer[65535];
     struct addrinfo host_info;
     struct addrinfo *host_info_list;
     int idSocket;
+    std::string caminho(path);
+    std::size_t found = caminho.find_first_of("/");
+    // std::cout<<"ENTER WGET";
+    while (found!=std::string::npos){
+        caminho[found]='-';
+        found=caminho.find_first_of("/",found+1);
+    }
+
     FILE *fp1;
     //Obtem informações de endereço para o soquete de fluxo na porta de entrada
     memset(&host_info, 0, sizeof(host_info));
     host_info.ai_family = AF_UNSPEC;
     host_info.ai_socktype = SOCK_STREAM;
     if (getaddrinfo(host, "http", &host_info, &host_info_list) != 0) {
-        fprintf(stderr," Nao pode obter a pagina >> ");
-        printf("%s\n", host);
-        //exit (1);
         return 1;
     }
     //cria um socket
@@ -33,7 +39,6 @@ int Crawler::wget (char *host, char *path)
     //faz a conecção
     if (connect(idSocket, host_info_list->ai_addr, host_info_list->ai_addrlen) < 0)
     {
-        fprintf(stderr," Erro ao tentar conectar o servidor! O programa foi encerrado\n");
         return 1;
     }
     freeaddrinfo(host_info_list);
@@ -57,13 +62,14 @@ int Crawler::wget (char *host, char *path)
     int bytesRecv;
     char arquivo[1000] = "./html/";
     strcat(arquivo,host);
+    strcat(arquivo,caminho.c_str());
     strcat(arquivo,".html");
     fp1 = fopen(arquivo,"w");
     while ((bytesRecv = recv(idSocket, buffer, sizeof (buffer), 0)) > 0) {
         fprintf(fp1,"%s", buffer);         
     } 
     fclose(fp1);
-    std::cout<<"endwget";
+    // std::cout<<"EXIT WGET";
     return 0;
 }
 void Crawler::delay (float delay1) {
@@ -94,9 +100,9 @@ void Crawler::showq(queue <string> gq)
         found6 = aux.find(".css");
         if(found1==std::string::npos && found2==std::string::npos && found3==std::string::npos && found4==std::string::npos && found5==std::string::npos && found6==std::string::npos && aux.size() > 17)
         {
-            printf("\t\t\t");
-            printf("-- %s %s-- ", __DATE__,__TIME__);
-            cout << g.front() << '\n';
+            // printf("\t\t\t");
+            // printf("-- %s %s-- ", __DATE__,__TIME__);
+            // cout << g.front() << '\n';
             delay(1);
         }
         g.pop();
@@ -117,12 +123,20 @@ int Crawler::compara(queue <string> gq, string name)
 }
 
 
-void Crawler::spider(char *host,char *path)
+std::queue <std::string> Crawler::spider(char *host,char *path)
 {   raiz = host;
     FILE *fp1;
     char dados[5000];
     char arquivo[1000]="./html/";
+    std::string caminho(path);
+    // std::cout<<"ENTER SPIDER";
+    std::size_t found = caminho.find_first_of("/");
+    while (found!=std::string::npos){
+        caminho[found]='-';
+        found=caminho.find_first_of("/",found+1);
+    }
     strcat(arquivo,host);
+    strcat(arquivo,caminho.c_str());
     strcat(arquivo,".html");
     fp1 = fopen(arquivo,"r");
     queue <string> auxiliar;
@@ -131,7 +145,7 @@ void Crawler::spider(char *host,char *path)
         printf("\nFalha ao abrir o arquivo\n");
         cout << host;
         cout << '\n';
-        return ;
+        return auxiliar;
     }else{
         string domain = raiz;
         size_t pos = domain.find("www.");
@@ -288,13 +302,42 @@ void Crawler::spider(char *host,char *path)
         }
     }
     fclose(fp1);
-    printf("-- %s %s-- ", __DATE__,__TIME__);
-    cout << host;cout << " >> ";cout << '\n';
-    showq(auxiliar);
-    std::cout<<"Fim spider";
+    // std::cout<<"EXIT SPIDER";
+    return auxiliar;
 }
 
 void Crawler::run(char *host,char *path){
-    wget(host,path);
-    spider(host,path);
+    queue <string> first,second;
+    int wget_ret;
+    std::cout<<host<<path<<"\n";
+    char hoost[100] = "/", paath[100] = "/", temp[100],*temp_2;
+    wget_ret = wget(host,path);
+    if (wget_ret == 0){
+        first = spider(host,path);
+        while(!first.empty()){
+            std::cout<<"\t-"<<first.front()<<"\n";
+            strcpy(temp,(char *)first.front().c_str());
+            // std::cout<<"TEMP:"<<temp;
+            temp_2 = strtok (temp,"/");
+            std::strcpy(hoost,temp_2);
+            // std::cout<<"hoost:"<<hoost;
+            temp_2 = strtok (NULL,"/");
+            if (temp_2 == NULL) {          // replace empty abs_path with "/"
+                std::strcpy(paath,"/");
+            }else{
+                std::strcpy(paath,temp_2);
+            }
+            // std::cout<<"paath:"<<paath;
+            wget_ret = wget(hoost,paath);
+            first.pop();
+            if(wget_ret == 0){
+                second = spider(hoost,paath);
+                while(!second.empty()){
+                    std::cout<<"\t-\t-"<<second.front()<<"\n";
+                    second.pop();
+                }
+            }
+        }
+    }
+    std::cout<<"\n\nFim spider + wget recursivo de profundidade 2\n\n";
 }

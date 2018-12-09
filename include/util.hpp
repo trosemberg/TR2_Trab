@@ -28,5 +28,5 @@
 #include <queue>
 #include <sstream>
 #include <fstream>
-
+#include <streambuf>
 #endif
