@@ -143,6 +143,7 @@ void Socket::receiveFromServer (int Clientfd, int Serverfd) {
 	    sendToClientSocket(buffer, Clientfd,iRecv);         // writing to client	  
 		memset(buffer,0,sizeof (buffer));	
 	}
+	std::cout<<"\n A response está salva no arquivo \e[92mresponse\e[0m\n";
 	response<< temp;
 	response.close();     
 	if (iRecv < 0) {
