@@ -75,11 +75,10 @@ int Socket::createServerSocket(char *requestHost, char *requestPort) {
   {
     	throw(" Erro ao criar socket para o servidor!\n");
   }
-  //faz a conecção
+  //faz a conexao
   if (connect(idSocket, host_info_list->ai_addr, host_info_list->ai_addrlen) < 0)
   {
     	throw(" Erro ao tentar conectar o servidor!\n");
-		exit (1);
   }
   freeaddrinfo(host_info_list);
   return idSocket;

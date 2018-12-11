@@ -118,6 +118,7 @@ void* HTTP::RequestHTTP(void* socketid)
 	int y = 3;
 	int *p = &y;
 	free(mensagem);
+	std::cout<<"\n\e[04;01;31mKeep Using\e[0m\n"; 
 	return p;
 }
 // converte a request feita toda em uma string para ser enviada
