@@ -5,7 +5,7 @@
 #include "crawler.hpp"
 #include <cstdio>
 
-
+// Classe responsavel por fazer as operações necessarias com as requests e reponses em HTTP
 class HTTP{
 public:
 	HTTP(long int porta);

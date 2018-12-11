@@ -1,7 +1,7 @@
 #ifndef SOCKET
 #define SOCKET 
 #include "util.hpp"
-
+// Classe responsavel pelas funções que envolvem socket
 class Socket{
 public:
     int inSocket = -1;

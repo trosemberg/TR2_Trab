@@ -1,6 +1,8 @@
 #ifndef CRAWLER_H
 #define CRAWLER_H
 #include "util.hpp"
+
+//Classe responsavel por rodar o wget e o spider
 class Crawler{
 public:
     Crawler();

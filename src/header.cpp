@@ -22,7 +22,6 @@ void* HTTP::RequestHTTP(void* socketid)
 	std::string go;
 	int newsockfd = *((int*)socketid);
 	int total_de_bits_recebidos = 0, recvd;
-	char go_to[100] = "";
 
 	int iServerfd;
 
@@ -93,8 +92,6 @@ void* HTTP::RequestHTTP(void* socketid)
 			case 2:
 				close(newsockfd);   
 				close(iServerfd);
-				close(socket.inSocket);
- 				close(socket.bind_socket);
 				std::cout<<"\n\t FIM :)";
 				exit(-1);
 				break;
@@ -359,6 +356,7 @@ void HTTP::PedidoHeader_create(struct PedidoAnalisado *p)
      p->headersused = 0;
 } 
 
+// cria a struct pedido analisado
 struct PedidoAnalisado* HTTP::PedidoAnalisado_create()
 {
      struct PedidoAnalisado *pr;
@@ -418,7 +416,7 @@ int HTTP::PedidoAnalisado_printRequestLine(struct PedidoAnalisado *pr, char * bu
      *tmp = current-buf;
      return 0;
 }
-
+// limpa a memoria unitaria do header
 void HTTP::PedidoHeader_destroyOne(struct PedidoHeader * ph)
 {
      if(ph->key != NULL)
@@ -447,6 +445,7 @@ void HTTP::PedidoAnalisado_destroy(struct PedidoAnalisado *p)
      }
      free(p);
 }
+// limpa a memoria alocada dinamicamente do header
 void HTTP::PedidoHeader_destroy(struct PedidoAnalisado * pr)
 {
      size_t i = 0;

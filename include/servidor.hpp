@@ -3,7 +3,7 @@
 #include "util.hpp"
 #include "header.hpp"
 
-// classe Servidor, responsavel po rodar o programa
+// classe Servidor, responsavel por rodar o programa
 // baseando se na classe socket e http
 
 class Servidor{

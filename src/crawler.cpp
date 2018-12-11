@@ -3,7 +3,6 @@
 using namespace std;
 queue <string> gquiz;
 char *raiz;
-static const char *root_abs_path = "/";
 
 Crawler::Crawler() = default;
 Crawler::~Crawler() = default;
