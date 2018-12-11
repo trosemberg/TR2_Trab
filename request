@@ -1,10 +1,10 @@
-GET http://detectportal.firefox.com/success.txt HTTP/1.1
-Host: detectportal.firefox.com
+GET http://www.cespe.unb.br/pas/images/estrutura/cespe.png HTTP/1.1
+Host: www.cespe.unb.br
 User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:63.0) Gecko/20100101 Firefox/63.0
 Accept: */*
 Accept-Language: en-US,en;q=0.5
 Accept-Encoding: gzip, deflate
-Cache-Control: no-cache
-Pragma: no-cache
+Referer: http://www.cespe.unb.br/pas/styles/estrutura.css
 Connection: keep-alive
+Cookie: f5avrbbbbbbbbbbbbbbbb=HFOCJEJCAKILLIAGILLBGIFFMHBEJPKKDNOJBLNFFCAMDOJCKDEOLLDIGCFEHIINAONCGHFGFNHDFCDIICAFCGKONLMALNCFNHOMJHKOBGOEEIMDHEEJNDEMKJNBCGIE; f5_cspm=1234; ASPSESSIONIDAQBQBRRD=HJKOGDDDFCGCKPPGDCKJBHFC; cebraspe=637534218.20480.0000; f5avrbbbbbbbbbbbbbbbb=FGDIADNFEICDPDINBFNOPCPPGKDINIEHKEKIACBNKLLIFGEBCJAKDBGLHKAKANODFIDNHAFLMHGDKGEEEGBIMBICILFADPBGJFDGBIIHJCDPJHOLGEAONCHPBIFBFDGB; ASPSESSIONIDCSAQDRRD=FFLLJAHDNLBNAGBOEABBNJPE; ASPSESSIONIDCQATBTSB=NHBEOBOCJBKFHENOPIFKHKBP
 
