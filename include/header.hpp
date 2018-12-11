@@ -17,7 +17,6 @@ public:
      void PedidoAnalisado_destroy(struct PedidoAnalisado *p);
      int recuperaPedidoHTTP(struct PedidoAnalisado *p, char *buffer,std::size_t size_buffer);
      int recupera_cabecalho_PedidoHTTP(struct PedidoAnalisado *p, char *buffer, std::size_t size_buffer);
-     std::size_t PedidoAnalisado_sizeTotal(struct PedidoAnalisado *p);
      int PedidoHeader_set(struct PedidoAnalisado *p, const char * key, const char * value);
      struct PedidoHeader* PedidoHeader_get(struct PedidoAnalisado *p, const char * key);
      int PedidoHeader_remove (struct PedidoAnalisado *p, const char * key);

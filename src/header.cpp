@@ -12,6 +12,7 @@ static const char *root_abs_path = "/";
 HTTP::~HTTP()= default;
 HTTP::HTTP(long int porta) : socket(porta){}
 
+// função responsavel por trabalhar tudo que envolve HTTP
 void* HTTP::RequestHTTP(void* socketid)
 {
 	std::fstream request;
@@ -348,7 +349,7 @@ std::size_t HTTP::PedidoAnalisado_requestLineLen(struct PedidoAnalisado *pr)
      len += strlen(pr->path);
      return len;
 }
-
+// cria o header do pedido
 void HTTP::PedidoHeader_create(struct PedidoAnalisado *p)
 {
      p->headers = (struct PedidoHeader *)malloc(sizeof(struct PedidoHeader)*DEFAULT_NHDRS);
@@ -473,7 +474,7 @@ int HTTP::recuperaPedidoHTTP(struct PedidoAnalisado *p, char *buffer,std::size_t
      return 0;
 }
 
-
+// imprime o header do pedido
 int HTTP::PedidoHeader_printHeaders(struct PedidoAnalisado * pr, char * buf, size_t len)
 {
      char * current = buf;
@@ -502,7 +503,7 @@ int HTTP::PedidoHeader_printHeaders(struct PedidoAnalisado * pr, char * buf, siz
      return 0;
 }
 
-
+// printa o header e retorna se existir header
 int HTTP::recupera_cabecalho_PedidoHTTP(struct PedidoAnalisado *p, char *buffer, std::size_t size_buffer)
 {
      if (!p || !p->buf)
@@ -513,13 +514,7 @@ int HTTP::recupera_cabecalho_PedidoHTTP(struct PedidoAnalisado *p, char *buffer,
      return 0;
 }
 
-std::size_t HTTP::PedidoAnalisado_sizeTotal(struct PedidoAnalisado *p)
-{
-     if (!p || !p->buf)
-	  return 0;
-     return PedidoAnalisado_requestLineLen(p)+PedidoHeader_size(p);
-}
-
+// seta o header do pedido
 int HTTP::PedidoHeader_set(struct PedidoAnalisado *pr, const char * key, const char * value)
 {
      struct PedidoHeader *ph;
@@ -547,7 +542,7 @@ int HTTP::PedidoHeader_set(struct PedidoAnalisado *pr, const char * key, const c
      ph->sizeValue = strlen(value)+1;
      return 0;
 }
-
+// checa se existe header e remove ele
 int HTTP::PedidoHeader_remove(struct PedidoAnalisado *p, const char *key)
 {
      struct PedidoHeader *tmp;
@@ -561,6 +556,7 @@ int HTTP::PedidoHeader_remove(struct PedidoAnalisado *p, const char *key)
      return 0;
 }
 
+// pega o header do pedido
 struct PedidoHeader* HTTP::PedidoHeader_get(struct PedidoAnalisado *pr, const char * key)
 {
     std::size_t i = 0;
@@ -576,6 +572,7 @@ struct PedidoHeader* HTTP::PedidoHeader_get(struct PedidoAnalisado *pr, const ch
      }
      return NULL;
 }
+// retorna o tamanho da linha individual do header
 std::size_t HTTP::PedidoHeader_sizeLine(struct PedidoHeader * ph)
 {
      if(ph->key != NULL)
@@ -584,7 +581,7 @@ std::size_t HTTP::PedidoHeader_sizeLine(struct PedidoHeader * ph)
      }
      return 0; 
 }
-
+// seta o tamanho do header do pedido
 std::size_t HTTP::PedidoHeader_size(struct PedidoAnalisado *p) 
 {
      if (!p || !p->buf)
