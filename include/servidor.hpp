@@ -11,6 +11,7 @@ public:
     Servidor(long int porta);
     int init();
     ~Servidor();
+    int run();
 private:
     Socket socket;
     HTTP http;

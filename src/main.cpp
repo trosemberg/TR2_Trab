@@ -36,5 +36,6 @@ int main(int argc, char const *argv[]){
   // cria servidor e inicializa ele com porta escolhida
   Servidor server((long int)porta);
   server.init();
+  server.run();
   return 0;
 }

@@ -3,7 +3,8 @@
 
 // define bibliotecas padroes para serem usadas pelo codigo
 
-
+#include <iterator>
+#include <algorithm>
 #include <cstdio>
 #include <stdio.h>
 #include <stdlib.h>

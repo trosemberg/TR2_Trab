@@ -22,7 +22,10 @@ int Servidor::init(){
     }
 
     printf("Bind e Listen feito \n");
-    // roda o programa, fazendo o accept e toda a parte de manipulacacao HTTP e Spider
+}
+
+int Servidor::run(){
+        // roda o programa, fazendo o accept e toda a parte de manipulacacao HTTP e Spider
     while(1){
         socket.SocketAccept();
 		http.RequestHTTP((void*)&socket.inSocket);      

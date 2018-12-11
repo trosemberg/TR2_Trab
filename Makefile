@@ -12,7 +12,7 @@ IncludeDIR =./include/
 CppDIR=./src/
 ObjDIR=./src/obj/
 CC=g++
-CFLAGS=-ansi -Wall -Wextra -std=c++0x -I$(IncludeDIR)
+CFLAGS=-ansi -Wall -Wextra -std=c++11 -I$(IncludeDIR)
 CFLAGSTEST=-ansi -Wall -Wextra -I$(IncludeDIR)
 
 # Vars:
