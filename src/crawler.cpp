@@ -7,17 +7,19 @@ char *raiz;
 Crawler::Crawler() = default;
 Crawler::~Crawler() = default;
 //  escreve no arquivo a resposta da request
-int Crawler::wget (char *host, char *path){
-
+int Crawler::wget (char *host, char *path, int atual, int max){
     char buffer[65535];
     struct addrinfo host_info;
     struct addrinfo *host_info_list;
     int idSocket;
+    if(atual>=max){
+        return 0;
+    }
     std::string caminho(path);
     std::size_t found = caminho.find_first_of("/");
     // std::cout<<"ENTER WGET";
     while (found!=std::string::npos){
-        caminho[found]='-';
+        caminho[found]='_';
         found=caminho.find_first_of("/",found+1);
     }
 
@@ -69,7 +71,7 @@ int Crawler::wget (char *host, char *path){
         fprintf(fp1,"%s", buffer);         
     } 
     fclose(fp1);
-    // std::cout<<"EXIT WGET";
+    spider(host,path,atual,max);
     return 0;
 }
 // compara pra ver se ja esta na fila a string passada
@@ -86,16 +88,18 @@ int Crawler::compara(queue <string> gq, string name)
 }
 
 //retorna uma fila com os links achados
-std::queue <std::string> Crawler::spider(char *host,char *path)
-{   raiz = host;
+std::queue <std::string> Crawler::spider(char *host,char *path, int atual, int max){
+    raiz = host;
     FILE *fp1;
+    char hoost[100] = "/", paath[100] = "/", temp[100],*temp_2;
     char dados[5000];
     char arquivo[1000]="./html/";
+    int wget_ret;
     std::string caminho(path);
     // std::cout<<"ENTER SPIDER";
     std::size_t found = caminho.find_first_of("/");
     while (found!=std::string::npos){
-        caminho[found]='-';
+        caminho[found]='_';
         found=caminho.find_first_of("/",found+1);
     }
     strcat(arquivo,host);
@@ -265,17 +269,39 @@ std::queue <std::string> Crawler::spider(char *host,char *path)
         }
     }
     fclose(fp1);
+    while(!auxiliar.empty()){
+        std::strcpy(hoost,"/");
+        std::strcpy(paath,"/");
+        for(int i =0;i<atual;i++){
+            std::cout<<"\t-";
+        }
+        std::cout<<auxiliar.front()<<"\n";
+        strcpy(temp,(char *)auxiliar.front().c_str());
+        temp_2 = strtok (temp,"/");
+        std::strcpy(hoost,temp_2);
+        temp_2 = strtok (NULL,"/");
+        if (temp_2 == NULL) {          
+            std::strcpy(paath,"/");
+        }else{
+            std::strcat(paath,temp_2);
+        }
+        wget(hoost,paath,atual + 1,max);
+        auxiliar.pop();
+    }
     return auxiliar;
 }
 //roda o spider e o wget com profundidade 2
 void Crawler::run(char *host,char *path){
+    int nivel = 1;
     queue <string> first,second,third;
     int wget_ret;
     std::cout<<host<<path<<"\n\e[95m";
     char hoost[100] = "/", paath[100] = "/", temp[100],*temp_2;
-    wget_ret = wget(host,path);
+    std::cout<<"\nDigite a profundidade desejada:";
+    std::cin>>nivel;
+    wget(host,path, 1,nivel);
     if (wget_ret == 0){
-        first = spider(host,path);
+        first = spider(host,path, 1, nivel);
         while(!first.empty()){
             std::strcpy(hoost,"/");
             std::strcpy(paath,"/");
@@ -319,5 +345,5 @@ void Crawler::run(char *host,char *path){
             }
         }
     }
-    std::cout<<"\e[0m\n\nFim spider + wget recursivo de profundidade 2\n\n";
+    std::cout<<"\e[0m\n\nFim spider + wget recursivo\n\n";
 }

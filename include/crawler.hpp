@@ -8,8 +8,8 @@ public:
     Crawler();
     ~Crawler();
     int compara(std::queue <std::string> gq, std::string name);
-    std::queue <std::string> spider(char *host, char *path);
-    int wget (char *host,char *path);
+    std::queue <std::string> spider(char *host, char *path, int atual, int max);
+    int wget (char *host,char *path, int atual, int max);
     void run(char *host,char *path);
 };
 #endif

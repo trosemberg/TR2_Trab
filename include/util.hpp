@@ -2,7 +2,11 @@
 #define UTIL
 
 // define bibliotecas padroes para serem usadas pelo codigo
-
+#include <string.h>
+#include <set>
+#include <fstream>
+#include <experimental/filesystem>
+#include <map>
 #include <iterator>
 #include <algorithm>
 #include <cstdio>
