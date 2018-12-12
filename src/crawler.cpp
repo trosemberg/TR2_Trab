@@ -131,6 +131,12 @@ std::queue <std::string> Crawler::spider(char *host,char *path, int atual, int m
             for (std::string hlink : ExtractImageslinks(line)){
                 imagens.push(hlink);
             }
+            for (std::string hlink : ExtractCssLinks_1(line)){
+                imagens.push(hlink);
+            }
+            for (std::string hlink : ExtractCssLinks_2(line)){
+                imagens.push(hlink);
+            }
         }
     }
     fclose(fp1);
@@ -297,6 +303,20 @@ std::set<std::string> Crawler::ExtractHyperlinks(std::string text){
 
 std::set<std::string> Crawler::ExtractImageslinks(std::string text){
     static const regex hl_regex("<img src=\"(.*?)\"", std::regex_constants::icase);
+
+    return {sregex_token_iterator(text.begin(), text.end(), hl_regex, 1),
+            sregex_token_iterator{}};
+}
+
+std::set<std::string> Crawler::ExtractCssLinks_1(std::string text){
+    static const regex hl_regex("<link href=\"(.*?)\"", std::regex_constants::icase);
+
+    return {sregex_token_iterator(text.begin(), text.end(), hl_regex, 1),
+            sregex_token_iterator{}};
+}
+
+std::set<std::string> Crawler::ExtractCssLinks_2(std::string text){
+    static const regex hl_regex("<link rel=\"stylesheet\" href=\"(.*?)\"", std::regex_constants::icase);
 
     return {sregex_token_iterator(text.begin(), text.end(), hl_regex, 1),
             sregex_token_iterator{}};
