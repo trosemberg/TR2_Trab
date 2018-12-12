@@ -7,9 +7,9 @@ class Crawler{
 public:
     Crawler();
     ~Crawler();
-    int compara(std::queue <std::string> gq, std::string name);
     std::queue <std::string> spider(char *host, char *path, int atual, int max);
     int wget (char *host,char *path, int atual, int max);
+    std::set<std::string> ExtractHyperlinks(std::string text);
     void run(char *host,char *path);
 };
 #endif

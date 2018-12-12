@@ -74,18 +74,6 @@ int Crawler::wget (char *host, char *path, int atual, int max){
     spider(host,path,atual,max);
     return 0;
 }
-// compara pra ver se ja esta na fila a string passada
-int Crawler::compara(queue <string> gq, string name)
-{
-    queue <string> g = gq;
-    while (!g.empty())
-    {
-        string str = g.front();
-        if(str.compare(name) != 0) g.pop();
-        else return 1; //retorna 1 se for igual
-    }
-    return 0;
-}
 
 //retorna uma fila com os links achados
 std::queue <std::string> Crawler::spider(char *host,char *path, int atual, int max){
@@ -96,7 +84,6 @@ std::queue <std::string> Crawler::spider(char *host,char *path, int atual, int m
     std::fstream file;
     char arquivo[1000]="./html/";
     std::string caminho(path);
-    // std::cout<<"ENTER SPIDER";
     std::size_t found = caminho.find_first_of("/");
     while (found!=std::string::npos){
         caminho[found]='_';
@@ -114,157 +101,11 @@ std::queue <std::string> Crawler::spider(char *host,char *path, int atual, int m
         cout << '\n';
         return auxiliar;
     }else{
-        string domain = raiz;
-        size_t pos = domain.find("www.");
-        domain = domain.substr(pos+4);
         while(fgets(dados,5000, fp1) != NULL) //le o arquivo de entrada
         {
             string line = dados;
-            size_t pos = line.find("href=");
-            if (pos!=std::string::npos)
-            {
-                string hostname;
-                string str1 = line.substr(pos+5);
-                pos = str1.find(" ");
-                string url = str1.substr(0,pos);
-                size_t pos1 = url.find_first_of("http://");
-                size_t pos2 = url.find_last_of('"');
-                if (pos1!=std::string::npos && pos2!=std::string::npos)
-                {
-                    url = url.substr(pos1, pos2-1);
-                    pos = url.find("http://");
-                    if (pos!=std::string::npos)
-                    {
-                        hostname = url.substr(pos+7);
-                        pos = hostname.find_last_of('/');
-                        if(pos!=std::string::npos) hostname = hostname.substr(0,pos);
-                        pos = hostname.find(domain);
-                        if (pos!=std::string::npos && hostname.compare(host) != 0 && compara(gquiz,hostname) != 1)
-                        {
-                            gquiz.push(hostname);
-                            auxiliar.push(hostname);
-                        }
-                    }else{
-                        pos = url.find("https://");
-                        if (pos==std::string::npos)
-                        {
-                            hostname = raiz + url;
-                            pos = hostname.find_last_of('/');
-                            if(pos!=std::string::npos) hostname = hostname.substr(0,pos);
-                            if (hostname.compare(host) != 0 && compara(gquiz,hostname) != 1)
-                            {
-                                gquiz.push(hostname);
-                                auxiliar.push(hostname);
-                            }
-                        }else{
-                            hostname = url.substr(pos+8);
-                            pos = hostname.find_last_of('/');
-                            if(pos!=std::string::npos) hostname = hostname.substr(0,pos);
-                            pos = hostname.find(domain);
-                            if (pos!=std::string::npos && hostname.compare(host) != 0 && compara(gquiz,hostname) != 1)
-                            {
-                                gquiz.push(hostname);
-                                auxiliar.push(hostname);
-                            }
-                        }
-                    }
-                }
-                pos = str1.find("<img src=");
-                if (pos!=std::string::npos)
-                {
-                    string img = str1.substr(pos+9);
-                    pos = img.find(" ");
-                    if (pos!=std::string::npos) img = img.substr(0,pos);
-                    size_t pos1 = img.find_first_of('"');
-                    size_t pos2 = img.find_last_of('"');
-                    if (pos1!=std::string::npos && pos2!=std::string::npos)
-                    {
-                        string Img = img.substr(pos1+2, pos2+1);
-                        pos = Img.find('"');
-                        if (pos!=std::string::npos) Img = Img.substr(0,pos);
-                        string link = hostname + "/" + Img;
-                        if(compara(gquiz,link) != 1) {
-                            gquiz.push(link);
-                            auxiliar.push(hostname);
-                        }
-                    }
-                }
-            }
-            pos = line.find("<li class=");
-            size_t pos5 = line.find("<ul class=");
-            if (pos!=std::string::npos || pos5!=std::string::npos)
-            {
-                size_t pos = line.find("href=");
-                if (pos!=std::string::npos)
-                {
-                    string hostname;
-                    string str1 = line.substr(pos+5);
-                    pos = str1.find(" ");
-                    string url = str1.substr(0,pos);
-                    size_t pos1 = url.find_first_of("http://");
-                    size_t pos2 = url.find_last_of('"');
-                    if (pos1!=std::string::npos && pos2!=std::string::npos)
-                    {
-                        url = url.substr(pos1, pos2-1);
-                        pos = url.find("http://");
-                        if (pos!=std::string::npos)
-                        {
-                            hostname = url.substr(pos+7);
-                            pos = hostname.find_last_of('/');
-                            if(pos!=std::string::npos) hostname = hostname.substr(0,pos);
-                            pos = hostname.find(domain);
-                            if (pos!=std::string::npos && hostname.compare(host) != 0 && compara(gquiz,hostname) != 1)
-                            {
-                                gquiz.push(hostname);
-                                auxiliar.push(hostname);
-                            }
-                        }else{
-                            pos = url.find("https://");
-                            if (pos==std::string::npos)
-                            {
-                                hostname = raiz + url;
-                                pos = hostname.find_last_of('/');
-                                if(pos!=std::string::npos) hostname = hostname.substr(0,pos);
-                                pos = hostname.find(domain);
-                                if (pos!=std::string::npos && hostname.compare(host) != 0 && compara(gquiz,hostname) != 1)
-                                {
-                                    gquiz.push(hostname);
-                                    auxiliar.push(hostname);
-                                }
-                            }else{
-                                hostname = url.substr(pos+8);
-                                pos = hostname.find_last_of('/');
-                                if(pos!=std::string::npos) hostname = hostname.substr(0,pos);
-                                pos = hostname.find(domain);
-                                if (pos!=std::string::npos && hostname.compare(host) != 0 && compara(gquiz,hostname) != 1)
-                                {
-                                    gquiz.push(hostname);
-                                    auxiliar.push(hostname);
-                                }
-                            }
-                        }
-                    }
-                    pos = str1.find("<img src=");
-                    if (pos!=std::string::npos)
-                    {
-                        string img = str1.substr(pos+9);
-                        pos = img.find(" ");
-                        if (pos!=std::string::npos) img = img.substr(0,pos);
-                        size_t pos1 = img.find_first_of('"');
-                        size_t pos2 = img.find_last_of('"');
-                        if (pos1!=std::string::npos && pos2!=std::string::npos)
-                        {
-                            string Img = img.substr(pos1+2, pos2+1);
-                            pos = Img.find('"');
-                            if (pos!=std::string::npos) Img = Img.substr(0,pos);
-                            string link = hostname + "/" + Img;
-                            if(compara(gquiz,link) != 1) {
-                                gquiz.push(link);
-                                auxiliar.push(hostname);
-                            }
-                        }
-                    }
-                }
+            for (std::string hlink : ExtractHyperlinks(line)){
+                auxiliar.push(hlink);
             }
         }
     }
@@ -299,9 +140,17 @@ std::queue <std::string> Crawler::spider(char *host,char *path, int atual, int m
     }
     return auxiliar;
 }
+
+std::set<std::string> Crawler::ExtractHyperlinks(std::string text){
+    static const regex hl_regex("<a href=\"http://(.*?)\"", std::regex_constants::icase);
+
+    return {sregex_token_iterator(text.begin(), text.end(), hl_regex, 1),
+            sregex_token_iterator{}};
+}
+
 //roda o spider e o wget com profundidade 2
 void Crawler::run(char *host,char *path){
-    int nivel = 1;
+    int nivel = 0;
     queue <string> first,second,third;
     std::cout<<host<<path<<"\n\e[95m";
     std::cout<<"\nDigite a profundidade desejada:";

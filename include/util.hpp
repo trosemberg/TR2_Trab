@@ -34,4 +34,6 @@
 #include <sstream>
 #include <fstream>
 #include <streambuf>
+#include <regex>
+
 #endif
