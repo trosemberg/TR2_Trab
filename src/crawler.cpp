@@ -7,10 +7,13 @@ Crawler::Crawler() = default;
 Crawler::~Crawler() = default;
 //  escreve no arquivo a resposta da request
 int Crawler::wget (char *host, char *path, int atual, int max){
+    std::fstream file;
     char buffer[65535];
     struct addrinfo host_info;
     struct addrinfo *host_info_list;
     int idSocket;
+    // std::size_t achou;
+    std::string moved = "";
     std::string URL(host);
     URL  = URL + path;
     for (std::vector<std::string>::iterator it = acessados.begin() ; it != acessados.end(); ++it){
@@ -78,6 +81,33 @@ int Crawler::wget (char *host, char *path, int atual, int max){
     }
     acessados.push_back(URL); 
     fclose(fp1);
+    file.open(arquivo,std::ios::in);
+    std::string msg;
+	msg.assign((std::istreambuf_iterator<char>(file)),
+        std::istreambuf_iterator<char>());
+	file.close();
+    // if(!msg.empty()){
+    //     achou = msg.find("HTTP/1.1 301 Moved");
+    //     if(achou!=std::string::npos){
+    //         achou = msg.find("Location:");
+    //         moved = msg.substr(achou);
+    //         achou = moved.find("http");
+    //         moved = moved.substr(achou);
+    //         achou = moved.find("\r\n");
+    //         moved = moved.substr(0,achou);
+    //         std::cout<<"\n\n moved to:"<<moved;
+    //         memset(format,0,sizeof (format));
+    //         strcpy(format,"GET ");
+    //         strcpy(format,(char *)moved.c_str());
+    //         strcat(format," HTTP/1.1\r\nHost:");
+    //         strcat(format,host);
+    //         strcat(format,"\r\nConnection: close\r\n\r\n");
+    //         bytesSend = send (idSocket, format, strlen (format), 0);
+    //         while ((bytesRecv = recv(idSocket, buffer, sizeof (buffer), 0)) > 0) {
+    //             std::cout<<"   buffer:   "<<buffer;        
+    //         } 
+    //     }
+    // }
     spider(host,path,atual,max);
     return 0;
 }
@@ -171,6 +201,7 @@ std::set<std::string> Crawler::ExtractHyperlinks(std::string text){
             sregex_token_iterator{}};
 }
 
+
 //roda o spider e o wget com profundidade 2
 void Crawler::run(char *host,char *path){
     int nivel = 0;
@@ -185,5 +216,4 @@ void Crawler::run(char *host,char *path){
 }
 
 
-// TODO: RESOLVER O HTTP 301, E CRIAR VETOR DE JÁ ACESSADOS, FAZER INTERFACE GRAFICA,
-// RESOLVER REFERENCIAS LOCAIS.
+// TODO: RESOLVER O HTTP 301(NÃO CONSEGUI), FAZER INTERFACE GRAFICA, RESOLVER REFERENCIAS LOCAIS.
