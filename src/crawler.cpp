@@ -1,7 +1,6 @@
 #include "util.hpp"
 #include "crawler.hpp"
 using namespace std;
-queue <string> gquiz;
 char *raiz;
 
 Crawler::Crawler() = default;
@@ -12,6 +11,13 @@ int Crawler::wget (char *host, char *path, int atual, int max){
     struct addrinfo host_info;
     struct addrinfo *host_info_list;
     int idSocket;
+    std::string URL(host);
+    URL  = URL + path;
+    for (std::vector<std::string>::iterator it = acessados.begin() ; it != acessados.end(); ++it){
+        if(URL.compare(*it) == 0){
+            return 0;
+        }
+    }
     if(atual>=max){
         return 0;
     }
@@ -69,7 +75,8 @@ int Crawler::wget (char *host, char *path, int atual, int max){
     fp1 = fopen(arquivo,"w");
     while ((bytesRecv = recv(idSocket, buffer, sizeof (buffer), 0)) > 0) {
         fprintf(fp1,"%s", buffer);         
-    } 
+    }
+    acessados.push_back(URL); 
     fclose(fp1);
     spider(host,path,atual,max);
     return 0;
@@ -83,7 +90,9 @@ std::queue <std::string> Crawler::spider(char *host,char *path, int atual, int m
     char dados[5000];
     std::fstream file;
     char arquivo[1000]="./html/";
+    std::string URL = "";
     std::string caminho(path);
+    std::size_t achou;
     std::size_t found = caminho.find_first_of("/");
     while (found!=std::string::npos){
         caminho[found]='_';
@@ -115,17 +124,23 @@ std::queue <std::string> Crawler::spider(char *host,char *path, int atual, int m
 	msg.assign((std::istreambuf_iterator<char>(file)),
         std::istreambuf_iterator<char>());
 	file.close();
-    std::string result = msg.substr(msg.find("<"));
-    file.open(arquivo,std::ios::out);
-    file << result;
-    file.close();
+    if(!msg.empty()){
+        achou = msg.find("<");
+        if(achou!=std::string::npos){
+            std::string result = msg.substr(achou);
+            file.open(arquivo,std::ios::out);
+            file << result;
+            file.close();
+        }
+    }
+
     while(!auxiliar.empty()){
         std::strcpy(hoost,"/");
         std::strcpy(paath,"/");
         for(int i =0;i<atual;i++){
             std::cout<<"\t-";
         }
-        std::cout<<auxiliar.front()<<"\n";
+        std::cout<<auxiliar.front();
         strcpy(temp,(char *)auxiliar.front().c_str());
         temp_2 = strtok (temp,"/");
         std::strcpy(hoost,temp_2);
@@ -135,6 +150,14 @@ std::queue <std::string> Crawler::spider(char *host,char *path, int atual, int m
         }else{
             std::strcat(paath,temp_2);
         }
+        URL += hoost;
+        URL += paath;
+        for (std::vector<std::string>::iterator it = acessados.begin() ; it != acessados.end(); ++it){
+            if(URL.compare(*it) == 0){
+                std::cout<< " \e[96mX\e[95m";
+            }
+        }
+        std::cout<<"\n";
         wget(hoost,paath,atual + 1,max);
         auxiliar.pop();
     }
@@ -151,10 +174,16 @@ std::set<std::string> Crawler::ExtractHyperlinks(std::string text){
 //roda o spider e o wget com profundidade 2
 void Crawler::run(char *host,char *path){
     int nivel = 0;
+    acessados.clear();
     queue <string> first,second,third;
     std::cout<<host<<path<<"\n\e[95m";
     std::cout<<"\nDigite a profundidade desejada:";
     std::cin>>nivel;
     wget(host,path, 1,nivel);
     std::cout<<"\e[0m\n\nFim spider + wget recursivo\n\n";
+    acessados.clear();
 }
+
+
+// TODO: RESOLVER O HTTP 301, E CRIAR VETOR DE JÁ ACESSADOS, FAZER INTERFACE GRAFICA,
+// RESOLVER REFERENCIAS LOCAIS.

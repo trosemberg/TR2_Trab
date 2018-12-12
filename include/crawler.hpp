@@ -11,5 +11,6 @@ public:
     int wget (char *host,char *path, int atual, int max);
     std::set<std::string> ExtractHyperlinks(std::string text);
     void run(char *host,char *path);
+    std::vector<std::string> acessados;
 };
 #endif
