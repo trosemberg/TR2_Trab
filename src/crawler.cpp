@@ -244,4 +244,4 @@ void Crawler::run(char *host,char *path){
 }
 
 
-// TODO: RESOLVER O HTTP 301(NÃO CONSEGUI), FAZER INTERFACE GRAFICA
+// FAZER INTERFACE GRAFICA
