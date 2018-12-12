@@ -86,28 +86,6 @@ int Crawler::wget (char *host, char *path, int atual, int max){
 	msg.assign((std::istreambuf_iterator<char>(file)),
         std::istreambuf_iterator<char>());
 	file.close();
-    // if(!msg.empty()){
-    //     achou = msg.find("HTTP/1.1 301 Moved");
-    //     if(achou!=std::string::npos){
-    //         achou = msg.find("Location:");
-    //         moved = msg.substr(achou);
-    //         achou = moved.find("http");
-    //         moved = moved.substr(achou);
-    //         achou = moved.find("\r\n");
-    //         moved = moved.substr(0,achou);
-    //         std::cout<<"\n\n moved to:"<<moved;
-    //         memset(format,0,sizeof (format));
-    //         strcpy(format,"GET ");
-    //         strcpy(format,(char *)moved.c_str());
-    //         strcat(format," HTTP/1.1\r\nHost:");
-    //         strcat(format,host);
-    //         strcat(format,"\r\nConnection: close\r\n\r\n");
-    //         bytesSend = send (idSocket, format, strlen (format), 0);
-    //         while ((bytesRecv = recv(idSocket, buffer, sizeof (buffer), 0)) > 0) {
-    //             std::cout<<"   buffer:   "<<buffer;        
-    //         } 
-    //     }
-    // }
     spider(host,path,atual,max);
     return 0;
 }
@@ -136,6 +114,7 @@ std::queue <std::string> Crawler::spider(char *host,char *path, int atual, int m
     strcat(arquivo,".html");
     fp1 = fopen(arquivo,"r");
     queue <string> auxiliar;
+    queue <string> imagens;
     if(fp1 == NULL)
     {
         printf("\nFalha ao abrir o arquivo\n");
@@ -149,9 +128,16 @@ std::queue <std::string> Crawler::spider(char *host,char *path, int atual, int m
             for (std::string hlink : ExtractHyperlinks(line)){
                 auxiliar.push(hlink);
             }
+            for (std::string hlink : ExtractImageslinks(line)){
+                imagens.push(hlink);
+            }
         }
     }
     fclose(fp1);
+    while(!imagens.empty()){
+        RequestImage(imagens.front(),host);
+        imagens.pop();
+    }
     file.open(arquivo,std::ios::in);
     std::string msg;
 	msg.assign((std::istreambuf_iterator<char>(file)),
@@ -222,8 +208,95 @@ std::queue <std::string> Crawler::spider(char *host,char *path, int atual, int m
     return auxiliar;
 }
 
+void Crawler::RequestImage(std::string imagem,char* host){
+    std::ofstream file;
+    char buffer[65535];
+    unsigned char buff;
+    vector <unsigned char> response;
+    std::size_t found,end_of_file;
+    struct addrinfo host_info;
+    struct addrinfo *host_info_list;
+    int idSocket;
+    std::string comando="mkdir -p ./html/";
+    if (imagem.length()<=3){
+        return;
+    }
+    if((imagem.compare(0,3,"../") == 0) | (imagem.compare(0,2,"//") == 0)){
+        return;
+    }
+    if(imagem.compare(0,1,"/")!=0){
+        imagem.insert(0,"/");
+    }
+    char format[2000];
+    memset(format,0,sizeof (format));
+    strcpy(format,"GET http://");
+    strcat(format,host);
+    strcat(format,(char *)imagem.c_str());
+    strcat(format," HTTP/1.1\r\nHost:");
+    strcat(format,host);
+    // strcat(format,"\r\nAccept: text/html");
+    strcat(format,"\r\nConnection: close\r\n\r\n");
+    // std::cout<<format;
+    /* Send the request. */
+    memset(&host_info, 0, sizeof(host_info));
+    host_info.ai_family = AF_UNSPEC;
+    host_info.ai_socktype = SOCK_STREAM;
+    if (getaddrinfo(host, "http", &host_info, &host_info_list) != 0) {
+        return ;
+    }
+    //cria um socket
+    if ((idSocket = socket(host_info_list->ai_family, host_info_list->ai_socktype, host_info_list->ai_protocol)) < 0) 
+    {
+        fprintf(stderr," Erro ao criar socket para o servidor! O programa foi encerrado\n");
+        return ;
+    }
+    //faz a conexão
+    if (connect(idSocket, host_info_list->ai_addr, host_info_list->ai_addrlen) < 0)
+    {
+        return ;
+    }
+    freeaddrinfo(host_info_list);
+
+    int bytesSend;
+    bytesSend = send (idSocket, format, strlen (format), 0);
+    /* Recv data */
+    memset(buffer,0,sizeof (buffer));  
+    int bytesRecv;
+    char arquivo[1000] = "./html";
+    found = imagem.find_last_of("/");
+    if (found!=std::string::npos){
+        std::string str = imagem.substr(0,found);
+        comando+=str;
+        system(comando.c_str());
+    }
+    strcat(arquivo,imagem.c_str());
+    while ((bytesRecv = read(idSocket, &buff, 1)) > 0) {
+        response.push_back(buff);         
+    } 
+    std::string msg;
+    for(auto letter:response){
+        msg += letter;
+    }
+    end_of_file =  msg.find("\r\n\r\n");
+    if(end_of_file!=std::string::npos){
+        msg = msg.substr(end_of_file+4);
+    }
+    file.open(arquivo,ofstream::binary);
+    if(file.is_open()){
+    file<<msg;
+    file.close();
+    }
+}
+
 std::set<std::string> Crawler::ExtractHyperlinks(std::string text){
     static const regex hl_regex("<a href=\"http://(.*?)\"", std::regex_constants::icase);
+
+    return {sregex_token_iterator(text.begin(), text.end(), hl_regex, 1),
+            sregex_token_iterator{}};
+}
+
+std::set<std::string> Crawler::ExtractImageslinks(std::string text){
+    static const regex hl_regex("<img src=\"(.*?)\"", std::regex_constants::icase);
 
     return {sregex_token_iterator(text.begin(), text.end(), hl_regex, 1),
             sregex_token_iterator{}};
@@ -244,4 +317,4 @@ void Crawler::run(char *host,char *path){
 }
 
 
-// FAZER INTERFACE GRAFICA
+// FAZER INTERFACE GRAFICA, baixar css e imagens.

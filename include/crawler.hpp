@@ -10,6 +10,8 @@ public:
     std::queue <std::string> spider(char *host, char *path, int atual, int max);
     int wget (char *host,char *path, int atual, int max);
     std::set<std::string> ExtractHyperlinks(std::string text);
+    std::set<std::string> ExtractImageslinks(std::string text);
+    void RequestImage(std::string imagem,char *host);
     void run(char *host,char *path);
     std::vector<std::string> acessados;
 };
