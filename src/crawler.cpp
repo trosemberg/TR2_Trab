@@ -190,6 +190,12 @@ std::queue <std::string> Crawler::spider(char *host,char *path, int atual, int m
             std::cout<<"\t-";
         }
         std::cout<<auxiliar.front();
+        for (std::vector<std::string>::iterator it = acessados.begin() ; it != acessados.end(); ++it){
+            if(auxiliar.front().compare(*it) == 0){
+                std::cout<< " \e[96mX\e[95m";
+            }
+        }
+        std::cout<<"\n";
         strcpy(temp,(char *)auxiliar.front().c_str());
         temp_2 = strtok (temp,"/");
         std::strcpy(hoost,temp_2);
@@ -202,12 +208,6 @@ std::queue <std::string> Crawler::spider(char *host,char *path, int atual, int m
         }
         URL += hoost;
         URL += paath;
-        for (std::vector<std::string>::iterator it = acessados.begin() ; it != acessados.end(); ++it){
-            if(URL.compare(*it) == 0){
-                std::cout<< " \e[96mX\e[95m";
-            }
-        }
-        std::cout<<"\n";
         wget(hoost,paath,atual + 1,max);
         auxiliar.pop();
     }
@@ -337,4 +337,4 @@ void Crawler::run(char *host,char *path){
 }
 
 
-// FAZER INTERFACE GRAFICA, baixar css e imagens.
+// FAZER INTERFACE GRAFICA
