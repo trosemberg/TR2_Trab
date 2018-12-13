@@ -48,28 +48,27 @@ int main(){
 		// determina onde é o fim da request
 		while (strstr(mensagem, "\r\n\r\n") == NULL) {  
 
-		recvd = recv(newsockfd, buffer, sizeBuffer, 0) ;
+			recvd = recv(newsockfd, buffer, sizeBuffer, 0) ;
 
-		if(recvd < 0 ){
-			fprintf(stderr," Erro ao receber mensagem do cliente!\n");
-			exit (1);
-						
-		}else if(recvd == 0) {
+			if(recvd < 0 ){
+				fprintf(stderr," Erro ao receber mensagem do cliente!\n");
+				exit (1);				
+			}else if(recvd == 0) {
 				break;
-		} else {
-			total_de_bits_recebidos += recvd;
-			//Se o tamanho da mensagem for maior que o tamanho da string buffer, dobra o tamanho da string
-			buffer[recvd] = '\0';
-			if (total_de_bits_recebidos > sizeBuffer) {
-				sizeBuffer *= 2;
-				mensagem = (char *) realloc(mensagem, sizeBuffer);
-				if (mensagem == NULL) {
-					fprintf(stderr," Erro durante a realocação de memoria!\n");
-					exit (1);
+			} else {
+				total_de_bits_recebidos += recvd;
+				//Se o tamanho da mensagem for maior que o tamanho da string buffer, dobra o tamanho da string
+				buffer[recvd] = '\0';
+				if (total_de_bits_recebidos > sizeBuffer) {
+					sizeBuffer *= 2;
+					mensagem = (char *) realloc(mensagem, sizeBuffer);
+					if (mensagem == NULL) {
+						fprintf(stderr," Erro durante a realocação de memoria!\n");
+						exit (1);
+					}
 				}
 			}
-		}
-		strcat(mensagem, buffer);
+			strcat(mensagem, buffer);
 		}
 		std::string msg(mensagem);
 		request << mensagem;
@@ -82,8 +81,7 @@ int main(){
 				std::istreambuf_iterator<char>());
 		request.close();
 		strcpy(mensagem, msg.c_str());
-		if(strlen(mensagem) > 0)
-		{
+		if(strlen(mensagem) > 0){
 			// cria o pedido analisado, struct com as informacoes das requests
 			struct PedidoAnalisado *pedido;
 			pedido = http.PedidoAnalisado_create();
@@ -94,7 +92,6 @@ int main(){
 			scanf("%d", &opcao);
 			// analisa a request
 			http.Analise_do_pedido(pedido, mensagem, strlen(mensagem));
-			
 			switch(opcao)
 			{
 				// caso escolhido 1, faz o wget + crawler
