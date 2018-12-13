@@ -15,7 +15,7 @@ public:
     std::set<std::string> ExtractCssLinks_2(std::string text);
     void RequestImage(std::string imagem,char *host);
     void RequestCss(std::string imagem,char *host);
-    void run(char *host,char *path);
+    void run(char *host,char *path, int nivel);
     std::vector<std::string> acessados;
 };
 #endif

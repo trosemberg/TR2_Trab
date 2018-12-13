@@ -8,9 +8,9 @@
 // Classe responsavel por fazer as operações necessarias com as requests e reponses em HTTP
 class HTTP{
 public:
-	HTTP(long int porta);
-	~HTTP();
-	void* RequestHTTP(void*);
+    HTTP();
+    int porta = 8228;
+    ~HTTP();
      int PedidoAnalisado_printRequestLine(struct PedidoAnalisado *pr, char * buf, std::size_t buflen, std::size_t *tmp);
      std::size_t PedidoAnalisado_requestLineLen(struct PedidoAnalisado *pr);
      int Analise_do_pedido(struct PedidoAnalisado *p, const char *buffer,int size_buffer);
@@ -23,7 +23,7 @@ public:
      char* converte_Request_to_string(struct PedidoAnalisado *pedido);
      void PedidoHeader_create(struct PedidoAnalisado *p);
      int PedidoHeader_printHeaders(struct PedidoAnalisado * pr, char * buf, std::size_t len);
-	struct PedidoAnalisado* PedidoAnalisado_create();
+    struct PedidoAnalisado* PedidoAnalisado_create();
      std::size_t PedidoHeader_size(struct PedidoAnalisado *p);
      int Analise_PedidoHeader(struct PedidoAnalisado * pr, char * line);
      std::size_t PedidoHeader_sizeLine(struct PedidoHeader * ph);
@@ -31,14 +31,13 @@ public:
      void PedidoHeader_destroy(struct PedidoAnalisado * pr);
 private:
      Socket socket;
-     Crawler crawler;
 };
 // struct que define o pedido
 struct PedidoAnalisado {
-     char *method; 
-     char *protocol; 
-     char *host; 
-     char *port; 
+     char *method;
+     char *protocol;
+     char *host;
+     char *port;
      char *path;
      char *version;
      char *buf;

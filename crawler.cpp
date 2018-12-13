@@ -41,7 +41,7 @@ int Crawler::wget (char *host, char *path, int atual, int max){
         return 1;
     }
     //cria um socket
-    if ((idSocket = socket(host_info_list->ai_family, host_info_list->ai_socktype, host_info_list->ai_protocol)) < 0) 
+    if ((idSocket = socket(host_info_list->ai_family, host_info_list->ai_socktype, host_info_list->ai_protocol)) < 0)
     {
         fprintf(stderr," Erro ao criar socket para o servidor! O programa foi encerrado\n");
         return 1;
@@ -69,7 +69,7 @@ int Crawler::wget (char *host, char *path, int atual, int max){
     int bytesSend;
     bytesSend = send (idSocket, format, strlen (format), 0);
     /* Recv data */
-    memset(buffer,0,sizeof (buffer));  
+    memset(buffer,0,sizeof (buffer));
     int bytesRecv;
     char arquivo[1000] = "./html/";
     strcat(arquivo,host);
@@ -77,15 +77,15 @@ int Crawler::wget (char *host, char *path, int atual, int max){
     strcat(arquivo,".html");
     fp1 = fopen(arquivo,"w");
     while ((bytesRecv = recv(idSocket, buffer, sizeof (buffer), 0)) > 0) {
-        fprintf(fp1,"%s", buffer);         
+        fprintf(fp1,"%s", buffer);
     }
-    acessados.push_back(URL); 
+    acessados.push_back(URL);
     fclose(fp1);
     file.open(arquivo,std::ios::in);
     std::string msg;
-	msg.assign((std::istreambuf_iterator<char>(file)),
+    msg.assign((std::istreambuf_iterator<char>(file)),
         std::istreambuf_iterator<char>());
-	file.close();
+    file.close();
     spider(host,path,atual,max);
     return 0;
 }
@@ -146,9 +146,9 @@ std::queue <std::string> Crawler::spider(char *host,char *path, int atual, int m
     }
     file.open(arquivo,std::ios::in);
     std::string msg;
-	msg.assign((std::istreambuf_iterator<char>(file)),
+    msg.assign((std::istreambuf_iterator<char>(file)),
         std::istreambuf_iterator<char>());
-	file.close();
+    file.close();
     if(!msg.empty()){
         achou = msg.find("<");
         if(achou!=std::string::npos){
@@ -159,9 +159,9 @@ std::queue <std::string> Crawler::spider(char *host,char *path, int atual, int m
         }
     }
     file.open(arquivo,std::ios::in);
-	msg.assign((std::istreambuf_iterator<char>(file)),
+    msg.assign((std::istreambuf_iterator<char>(file)),
         std::istreambuf_iterator<char>());
-	file.close();
+    file.close();
     if(!msg.empty()){
         found = msg.find("<a href=\"http://");
         found_2 = msg.find("\"",found+10);
@@ -200,7 +200,7 @@ std::queue <std::string> Crawler::spider(char *host,char *path, int atual, int m
         temp_2 = strtok (temp,"/");
         std::strcpy(hoost,temp_2);
         temp_2 = strtok (NULL,"/");
-        if (temp_2 == NULL) {          
+        if (temp_2 == NULL) {
             std::strcpy(paath,"/");
         }else{
             std::strcat(paath,temp_2);
@@ -251,7 +251,7 @@ void Crawler::RequestImage(std::string imagem,char* host){
         return ;
     }
     //cria um socket
-    if ((idSocket = socket(host_info_list->ai_family, host_info_list->ai_socktype, host_info_list->ai_protocol)) < 0) 
+    if ((idSocket = socket(host_info_list->ai_family, host_info_list->ai_socktype, host_info_list->ai_protocol)) < 0)
     {
         fprintf(stderr," Erro ao criar socket para o servidor! O programa foi encerrado\n");
         return ;
@@ -266,7 +266,7 @@ void Crawler::RequestImage(std::string imagem,char* host){
     int bytesSend;
     bytesSend = send (idSocket, format, strlen (format), 0);
     /* Recv data */
-    memset(buffer,0,sizeof (buffer));  
+    memset(buffer,0,sizeof (buffer));
     int bytesRecv;
     char arquivo[1000] = "./html";
     found = imagem.find_last_of("/");
@@ -277,8 +277,8 @@ void Crawler::RequestImage(std::string imagem,char* host){
     }
     strcat(arquivo,imagem.c_str());
     while ((bytesRecv = read(idSocket, &buff, 1)) > 0) {
-        response.push_back(buff);         
-    } 
+        response.push_back(buff);
+    }
     std::string msg;
     for(auto letter:response){
         msg += letter;
@@ -322,19 +322,15 @@ std::set<std::string> Crawler::ExtractCssLinks_2(std::string text){
             sregex_token_iterator{}};
 }
 
-
 //roda o spider e o wget com profundidade 2
-void Crawler::run(char *host,char *path){
-    int nivel = 0;
+void Crawler::run(char *host, char *path, int nivel){
     acessados.clear();
     queue <string> first,second,third;
     std::cout<<host<<path<<"\n\e[95m";
-    std::cout<<"\nDigite a profundidade desejada:";
-    std::cin>>nivel;
+    std::cout<<"\n"<<nivel<<"\n";
     wget(host,path, 1,nivel);
     std::cout<<"\e[0m\n\nFim spider + wget recursivo\n\n";
     acessados.clear();
 }
-
 
 // FAZER INTERFACE GRAFICA
