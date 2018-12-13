@@ -1,5 +1,4 @@
 #include "socket.hpp"
-#include "servidor.hpp"
 #include "util.hpp"
 
 Socket::Socket(long int porta) {
@@ -128,7 +127,7 @@ void Socket::sendToClientSocket(const char* bufferServer,int socketfd,int sizeBu
 
 // recebe de volta do servidor a resposta
 void Socket::receiveFromServer (int Clientfd, int Serverfd) {
-	std::string temp,in;
+	std::string temp;
 	int sizeBuffer = 5000;
 	int iRecv;
 	char buffer[sizeBuffer];
@@ -137,7 +136,6 @@ void Socket::receiveFromServer (int Clientfd, int Serverfd) {
 		// while de verificacao se o recebido e maior que 0 bits
 		// iRecv > 0 armazena o buffer e =0 terminou de enviar
 	std::cout<<"\n\n\e[0m A response está salva no arquivo \e[92mresponse\e[0m\n";
-	std::cin >> in;
 	std::cout<<"\n\e[92mResposta do servidor:\n";
 	while ((iRecv = recv(Serverfd, buffer, sizeBuffer, 0)) > 0) {
 		temp.append(buffer);
