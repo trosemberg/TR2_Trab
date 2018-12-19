@@ -10,7 +10,7 @@ Trabalho nota 9,0
 
 - [x] Proxy printando request e response
 - [x] Proxy passando tudo pro browser
-- [] Interface Gráfica
+- [ ] Interface Gráfica
 - [x] Spider
 - [x] Wget
 - [x] Editar o request
